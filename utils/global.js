@@ -1,11 +1,14 @@
 import Constants from "expo-constants";
 import "./Translation";
 export default {
+  AUTHTOKEN: "AUTH", // for auth in app and key for async storage
+  USER_DATA: "USER_DATA", //Key for storing data
+  API_TOKEN: "API_TOKEN",
   CONSTANT: {
     APPNAME: Constants.manifest.name,
   },
   USER: {},
-  Colors: {
+  COLOR: {
     AppColor: "#6ABC45",
     white: "#fff",
     gray: "gray",
