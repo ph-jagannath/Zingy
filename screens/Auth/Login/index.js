@@ -66,7 +66,7 @@ export default class Login extends Component {
     const { email, password } = this.state;
     return (
       <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
-        <ScrollView>
+        <ScrollView style={{ flex: 1 }}>
           {/* logo image */}
           <>
             <Image
@@ -143,7 +143,7 @@ export default class Login extends Component {
               theme={{ colors: { primary: global.COLOR.PRIMARY_DARK } }}
               underlineColor={global.COLOR.PRIMARY_LIGHT}
               value={email}
-              onChangeText={(email) => this.setState({ email })}
+              onChangeText={(v) => this.setState({ email: v })}
             />
             <TextInput
               label="Password *"
@@ -151,26 +151,31 @@ export default class Login extends Component {
               theme={{ colors: { primary: global.COLOR.PRIMARY_DARK } }}
               secureTextEntry
               underlineColor={global.COLOR.PRIMARY_LIGHT}
-              value={email}
-              onChangeText={(email) => this.setState({ email })}
+              value={password}
+              onChangeText={(v) => this.setState({ password: v })}
             />
           </View>
           <TouchableOpacity
-            style={styles.touchlogin}
-            // onPress={() => this.props.navigation.navigate("App")}>
+            activeOpacity={0.8}
+            style={styles.login_button}
             onPress={() => this.handleValidation()}
           >
-            <Text style={styles.loginText}>{t("login_login")}</Text>
+            <Text style={styles.loginText}>Log In</Text>
           </TouchableOpacity>
+          <View style={styles.dontAcView}>
+            <Text style={styles.dontAccount}>
+              Don't have an account?{" "}
+              <Text
+                style={styles.dontAccount}
+                onPress={() => {
+                  this.props.navigation.navigate("Signup");
+                }}
+              >
+                Sign Up
+              </Text>
+            </Text>
+          </View>
         </ScrollView>
-        <View style={styles.dontAcView}>
-          <Text style={styles.dontAccount}>{t("login_DontAccount")}</Text>
-          <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("Signup")}
-          >
-            <Text style={styles.dontAccount}>{t("login_signUP")}</Text>
-          </TouchableOpacity>
-        </View>
       </ImageBackground>
     );
   }
