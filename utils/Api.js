@@ -169,7 +169,7 @@ export async function StoreUserData(data) {
 }
 
 // login api
-export async function Signin(d) {
+export async function API_Login(d) {
   Loading.show();
   Axios({
     method: "post",
@@ -274,19 +274,17 @@ export async function FBAuth() {
         `https://graph.facebook.com/me?fields=id,name,email,friends,birthday,picture.type(large)&access_token=${token}`
       );
       let data = await response.json();
+      // SocialLogin({email:})
       return data;
     } else {
       return false;
       // type === 'cancel'
     }
   } catch ({ message }) {
-    Popup.show({
-      type: "Danger",
-      title: global.CONSTANT.APPNAME + " Alert❗",
-      button: false,
-      textBody: "We couldnt connect with Facebook.",
-      buttontext: "Ok",
-      callback: () => Popup.hide(),
+    showMessage({
+      message: "Oops",
+      description: message,
+      type: "danger",
     });
   }
 }

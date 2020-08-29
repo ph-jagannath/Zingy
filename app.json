@@ -7,15 +7,16 @@
     "icon": "./assets/icon.png",
     "splash": {
       "image": "./assets/splash.png",
-      "resizeMode": "contain",
+      "resizeMode": "cover",
       "backgroundColor": "#ffffff"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
+    "facebookAppId": "570696010280160",
+    "facebookDisplayName": "DacWash",
+    "facebookScheme": "fb570696010280160",
     "ios": {
       "supportsTablet": true
     },
@@ -24,6 +25,15 @@
     },
     "android": {
       "package": "com.hk_.Dacwash"
+    },
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#006937",
+      "translucent": true
+    },
+    "androidNavigationBar": {
+      "barStyle": "light-content",
+      "backgroundColor": "#006937"
     }
   }
 }

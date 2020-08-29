@@ -8,6 +8,7 @@ console.disableYellowBox = true;
 import Loading from "./components/Loading";
 import global from "./utils/global";
 import * as SplashScreen from "expo-splash-screen";
+import FlashMessage from "react-native-flash-message";
 export default class App extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +66,11 @@ export default class App extends Component {
       <>
         <MainNavigator />
         <Loading />
+        <FlashMessage
+          position="top"
+          floating
+          icon={{ icon: "auto", position: "left" }}
+        />
       </>
     );
   }

@@ -9,7 +9,6 @@ i18n.translations = {
     // side Menu
     side_menu_home: "Home",
     side_menu_MyVehicle: "My Vehicles",
-
     side_menu_MyBookings: "My Bookings",
     side_menu_Packages: "Packages",
     side_menu_Locations: "Locations",
@@ -21,15 +20,6 @@ i18n.translations = {
     // Login
     // validation
     plzEnterPhoneNumber: "Please enter phone-number",
-    NotANumber: "This is not a number",
-    login_continue_fb: "Continue with facebook",
-    login_alreadyUser_enterNumber:
-      "Already a user?Enter your registered mobile number below",
-    login_it: " IT +39",
-    login_phoneNumber: "Phone Number",
-    login_login: "Log In",
-    login_DontAccount: "Dont't have an account?",
-    login_signUP: "Sign Up",
     // signUp
     plzEnterYourName: "Please enter your name",
     nameShouldLess: "Name should be less than 30 characters. ",

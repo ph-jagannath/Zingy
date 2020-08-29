@@ -1,14 +1,33 @@
+import { Dimensions, Platform } from "react-native";
 import Constants from "expo-constants";
+
 import "./Translation";
+
+var { height, width } = Dimensions.get("window");
+
 export default {
   AUTHTOKEN: "AUTH", // for auth in app and key for async storage
   USER_DATA: "USER_DATA", //Key for storing data
   API_TOKEN: "API_TOKEN",
   CONSTANT: {
     APPNAME: Constants.manifest.name,
+    FB_APP_ID: Constants.manifest.facebookAppId,
+    APPVERSION: Constants.manifest.version,
+    STATUSBAR: Constants.statusBarHeight,
+    APPDESCRIPTION: "The best and trending Amnesty List.",
+    PLAYSTOREURL: "",
+    APPSTOREURL: "",
+    HEIGHT: height,
+    WIDTH: width,
+    DEVICETYPE: Platform.OS,
+    DEVICETOKEN: "",
+    INPUT_COUNTRY_CODE: "+44",
+    PLACESAPI: "AIzaSyCdIiqraik9uJkeLdoarnKms9voK1Q94pk",
   },
   USER: {},
   COLOR: {
+    PRIMARY_LIGHT: "#6ABC45",
+    PRIMARY_DARK: "#006937",
     AppColor: "#6ABC45",
     white: "#fff",
     gray: "gray",
@@ -27,6 +46,7 @@ export default {
   },
   ASSETS: {
     LOGO: require("../assets/LOGO.png"),
+    BGIMAGE: require("../assets/background_image.jpg"),
     FLAGE: require("../assets/italy.png"),
     ENGLISH: require("../assets/englishFlag.png"),
     BELL: require("../assets/bell.png"),
