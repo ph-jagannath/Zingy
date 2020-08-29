@@ -15,7 +15,7 @@ import * as Facebook from "expo-facebook";
 // Network listener
 
 // base url
-Axios.defaults.baseURL = "http://amnesty.zedejewelry.com/public/api/v1/";
+Axios.defaults.baseURL = "https://dacwash.com/Webservices/";
 
 // log request
 Axios.interceptors.request.use((request) => {
@@ -169,35 +169,30 @@ export async function StoreUserData(data) {
 }
 
 // login api
-export async function API_Login(d) {
+export async function api_login(d) {
   Loading.show();
   Axios({
     method: "post",
     url: "login",
     data: {
-      username: d.email,
+      email: d.email,
       password: d.password,
-      role_id: 3,
-      device_token: global.CONSTANT.DEVICETOKEN,
+      device_id: global.CONSTANT.DEVICETOKEN,
+      device_type: global.CONSTANT.DEVICETYPE,
     },
     validateStatus: () => {
       return true;
     },
   }).then(
     function (response) {
-      if (response.data.status_code == 200) {
-        StoreToken(response.data.data.api_token);
-        GetToken(response.data.data);
+      if (response.data.response.status) {
+        StoreToken(response.data.response.data[0].user_id);
+        GetToken(response.data.response.data[0]);
       } else {
         Loading.hide();
-
-        Popup.show({
-          type: "Danger",
-          title: global.CONSTANT.APPNAME + " Alert❗",
-          button: false,
-          textBody: response.data.error_message,
-          buttontext: "Ok",
-          callback: () => Popup.hide(),
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
         });
       }
     }.bind(this)

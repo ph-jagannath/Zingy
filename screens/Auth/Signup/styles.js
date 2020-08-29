@@ -3,8 +3,8 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import global from "../../../utils/global";
 // import global from "../../utils/global";
-import global from "../../utils/global";
 
 export default StyleSheet.create({
   //   signUp:
@@ -67,26 +67,28 @@ export default StyleSheet.create({
     fontWeight: "100",
   },
   nameView: {
-    marginTop: hp(2),
+    marginTop: hp(2.5),
     height: hp(8),
     marginHorizontal: wp(5),
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: global.COLOR.white,
-    borderRadius: 50,
+    // backgroundColor: global.COLOR.white,
+    borderRadius: 10,
+    borderColor: global.COLOR.PRIMARY_DARK,
+    borderWidth: 1,
   },
   sideIcon: {
     height: hp(5),
     width: wp(6),
-    tintColor: "#ccc",
+    tintColor: global.COLOR.PRIMARY_DARK,
     marginLeft: wp(5),
   },
   nameInputSignup: {
     width: wp(70),
-    height: hp(6),
+    height: hp(8),
     marginLeft: hp(2),
     borderBottomWidth: 0,
-    backgroundColor: global.COLOR.white,
+    backgroundColor: "transparent",
   },
   activeView: {
     marginHorizontal: wp(5),

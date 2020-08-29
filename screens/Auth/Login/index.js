@@ -3,17 +3,16 @@ import {
   ScrollView,
   Image,
   Text,
-  StatusBar,
   View,
   Alert,
   ImageBackground,
 } from "react-native";
 import styles from "./styles";
-import { Icon, SocialIcon } from "react-native-elements";
+import { Icon } from "react-native-elements";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { FBAuth, SocialLogin } from "../../../utils/Api";
+import { FBAuth, SocialLogin, api_login } from "../../../utils/Api";
 import * as AppleAuthentication from "expo-apple-authentication";
 import * as GoogleSignIn from "expo-google-sign-in";
 import jwtDecode from "jwt-decode";
@@ -39,7 +38,7 @@ export default class Login extends Component {
   GoogleAuth = async () => {
     try {
       await GoogleSignIn.askForPlayServicesAsync();
-      const { type, user } = await GoogleSignIn.signInAsync();
+      const { type } = await GoogleSignIn.signInAsync();
       if (type === "success") {
         const user = await GoogleSignIn.signInSilentlyAsync();
         SocialLogin(user);
@@ -53,13 +52,33 @@ export default class Login extends Component {
     }
   };
 
-  handleValidation = () => {
-    if (this.state.number === "")
-      Alert.alert(global.CONSTANT.APPNAME, t("plzEnterPhoneNumber"));
-    else if (isNaN(this.state.number))
-      Alert.alert(global.CONSTANT.APPNAME, t("NotANumber"));
-    // login(this.state)
-    else this.props.navigation.navigate("App");
+  // Validate
+  validate = () => {
+    if (this.state.email.trim() == "") {
+      showMessage({
+        message: "Please enter e-mail address.",
+        type: "warning",
+      });
+    } else if (
+      !this.state.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+    ) {
+      showMessage({
+        message: "Invalid e-mail address.",
+        type: "warning",
+      });
+    } else if (this.state.password.trim() == "") {
+      showMessage({
+        message: "Please enter password.",
+        type: "warning",
+      });
+    } else if (this.state.password.length < 6) {
+      showMessage({
+        message: "Password field should not be less than 6 characters.",
+        type: "warning",
+      });
+    } else {
+      api_login(this.state);
+    }
   };
 
   render() {
@@ -136,29 +155,68 @@ export default class Login extends Component {
           <Text style={styles.already}>
             Already a user? Enter your registered email & password below.
           </Text>
-          <View style={styles.input_container}>
-            <TextInput
-              label="Email *"
-              style={styles.input}
-              theme={{ colors: { primary: global.COLOR.PRIMARY_DARK } }}
-              underlineColor={global.COLOR.PRIMARY_LIGHT}
-              value={email}
-              onChangeText={(v) => this.setState({ email: v })}
+
+          {/* email */}
+          <View style={styles.nameView}>
+            <Image
+              source={global.ASSETS.EMAIL}
+              style={styles.sideIcon}
+              resizeMode={"contain"}
             />
             <TextInput
-              label="Password *"
-              style={styles.input}
-              theme={{ colors: { primary: global.COLOR.PRIMARY_DARK } }}
+              style={styles.nameInputSignup}
+              textContentType="emailAddress"
+              keyboardType="email-address"
+              label="Email"
+              ref={(ref) => {
+                this.email = ref;
+              }}
+              onSubmitEditing={() => {
+                this.password.focus();
+              }}
+              returnKeyType={"next"}
+              selectionColor={global.COLOR.PRIMARY_LIGHT}
+              theme={{
+                colors: { primary: global.COLOR.PRIMARY_DARK },
+              }}
+              underlineColor="transparent"
+              value={email}
+              onChangeText={(email) => this.setState({ email })}
+            />
+          </View>
+
+          {/* pass */}
+          <View style={styles.nameView}>
+            <Image
+              source={global.ASSETS.LOCK}
+              style={styles.sideIcon}
+              resizeMode={"contain"}
+            />
+            <TextInput
+              style={styles.nameInputSignup}
+              label="Password"
               secureTextEntry
-              underlineColor={global.COLOR.PRIMARY_LIGHT}
+              ref={(ref) => {
+                this.password = ref;
+              }}
+              onSubmitEditing={() => {
+                this.validate();
+              }}
+              returnKeyType="done"
+              selectionColor={global.COLOR.PRIMARY_LIGHT}
+              theme={{
+                colors: { primary: global.COLOR.PRIMARY_DARK },
+              }}
+              underlineColor="transparent"
               value={password}
               onChangeText={(v) => this.setState({ password: v })}
             />
           </View>
+
           <TouchableOpacity
             activeOpacity={0.8}
             style={styles.login_button}
-            onPress={() => this.handleValidation()}
+            onPress={() => this.validate()}
           >
             <Text style={styles.loginText}>Log In</Text>
           </TouchableOpacity>
