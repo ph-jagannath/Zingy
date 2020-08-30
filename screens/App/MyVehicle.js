@@ -90,13 +90,13 @@ export default class MyVehicle extends Component {
         <View style={styles.statusView}>
           <StatusBar
             translucent
-            backgroundColor={global.COLOR.AppColor}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
             barStyle="light-content"
           />
         </View>
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.AppColor}
+          backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             // onPress={() => { this.props.navigation.toggleDrawer() }}
             <TouchableOpacity

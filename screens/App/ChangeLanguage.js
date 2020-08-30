@@ -63,13 +63,13 @@ export default class ChangeLanguage extends Component {
         <View style={styles.statusView}>
           <StatusBar
             translucent
-            backgroundColor={global.COLOR.AppColor}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
             barStyle="light-content"
           />
         </View>
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.AppColor}
+          backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity
               style={styles.menuIcon}
@@ -97,7 +97,7 @@ export default class ChangeLanguage extends Component {
                   styles.langText,
                   {
                     color: radioDefault
-                      ? global.COLOR.AppColor
+                      ? global.COLOR.PRIMARY_LIGHT
                       : global.COLOR.black,
                   },
                 ]}
@@ -112,7 +112,7 @@ export default class ChangeLanguage extends Component {
                   styles.radio,
                   {
                     tintColor: radioDefault
-                      ? global.COLOR.AppColor
+                      ? global.COLOR.PRIMARY_LIGHT
                       : global.COLOR.black,
                   },
                 ]}
@@ -133,7 +133,7 @@ export default class ChangeLanguage extends Component {
                   {
                     color: radioDefault
                       ? global.COLOR.black
-                      : global.COLOR.AppColor,
+                      : global.COLOR.PRIMARY_LIGHT,
                   },
                 ]}
               >
@@ -148,7 +148,7 @@ export default class ChangeLanguage extends Component {
                   {
                     tintColor: radioDefault
                       ? global.COLOR.black
-                      : global.COLOR.AppColor,
+                      : global.COLOR.PRIMARY_LIGHT,
                   },
                 ]}
                 resizeMode={"contain"}

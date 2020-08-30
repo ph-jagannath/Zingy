@@ -4,18 +4,19 @@ import {
   Image,
   Text,
   Modal,
-  StyleSheet,
-  StatusBar,
   View,
   Alert,
+  ImageBackground,
+  TouchableOpacity,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { TextInput } from "react-native-paper";
-import { signUp } from "../../../utils/Api";
 import { t } from "i18n-js";
 import styles from "./styles";
 import { Icon, Header } from "react-native-elements";
 import global from "../../../utils/global";
+import CountryPicker from "react-native-country-picker-modal";
+import { showMessage } from "react-native-flash-message";
+import { api_register } from "../../../utils/Api";
 
 export default class SignUp extends Component {
   constructor(props) {
@@ -27,43 +28,71 @@ export default class SignUp extends Component {
       phoneNumber: "",
       modalVisible: false,
       isLoading: false,
+      country: "IT",
+      country_code: "39",
     };
   }
-  validation = () => {
-    const { name, email, password, phoneNumber, check } = this.state;
-    if (name == "") Alert.alert(global.CONSTANT.APPNAME, t("plzEnterYourName"));
-    else if (name.length > 25)
-      Alert.alert(global.CONSTANT.APPNAME, t("nameShouldLess"));
-    else if (email == "") {
-      Alert.alert(global.CONSTANT.APPNAME, t("plzEnterEmail"));
-    } else if (email !== "") {
-      let check = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-      if (check.test(email) === false)
-        Alert.alert(global.CONSTANT.APPNAME, t("invalidAddress"));
-      else if (phoneNumber == "")
-        Alert.alert(global.CONSTANT.APPNAME, t("plzEnterPhoneNumber"));
-      else if (isNaN(phoneNumber))
-        Alert.alert(global.CONSTANT.APPNAME, t("NotANumber"));
-      else if (password == "")
-        Alert.alert(global.CONSTANT.APPNAME, t("plzEnterPassword"));
-      else if (password < 6)
-        Alert.alert(global.CONSTANT.APPNAME, t("passShouldLess"));
-      // signUp(this.state)
-      else this.props.navigation.navigate("VerifyNumber");
+
+  // Validate
+  validate = () => {
+    if (this.state.name.trim() == "") {
+      showMessage({
+        message: "Please enter your name.",
+        type: "warning",
+      });
+    } else if (this.state.email.trim() == "") {
+      showMessage({
+        message: "Please enter e-mail address.",
+        type: "warning",
+      });
+    } else if (
+      !this.state.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
+    ) {
+      showMessage({
+        message: "Invalid e-mail address.",
+        type: "warning",
+      });
+    } else if (this.state.phoneNumber.trim() == "") {
+      showMessage({
+        message: "Please enter your phonr number.",
+        type: "warning",
+      });
+    } else if (this.state.password.trim() == "") {
+      showMessage({
+        message: "Please enter password.",
+        type: "warning",
+      });
+    } else if (this.state.password.length < 6) {
+      showMessage({
+        message: "Password field should not be less than 6 characters.",
+        type: "warning",
+      });
+    } else {
+      api_register(this.state);
     }
   };
+
   render() {
+    const {
+      name,
+      email,
+      password,
+      phoneNumber,
+      country,
+      country_code,
+    } = this.state;
     return (
-      <View style={styles.containerMybooking}>
+      <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
+        {/* <View style={styles.containerMybooking}> */}
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.newContainer}
+          backgroundColor={"transparent"}
           leftComponent={
             <TouchableOpacity
               onPress={() => this.props.navigation.goBack()}
               style={styles.leftIcon}
             >
-              <Icon name="chevron-left" size={34} color={global.COLOR.gray} />
+              <Icon name="chevron-left" size={36} color={global.COLOR.gray} />
             </TouchableOpacity>
           }
         />
@@ -76,8 +105,8 @@ export default class SignUp extends Component {
             />
           </View>
           <View style={styles.welcomeView}>
-            <Text style={styles.welcomeSignup}>{t("signup_welcome")}</Text>
-            <Text style={styles.pls}>{t("signup_plsSignUp")}</Text>
+            <Text style={styles.welcomeSignup}>Welcome</Text>
+            <Text style={styles.pls}>Please Sign Up To Continue</Text>
           </View>
           <>
             {/* name */}
@@ -88,17 +117,20 @@ export default class SignUp extends Component {
                 resizeMode={"contain"}
               />
               <TextInput
+                ref={(ref) => {
+                  this.name_input = ref;
+                }}
                 style={styles.nameInputSignup}
-                label={t("signup_name")}
+                label="Name"
                 underlineColor="transparent"
-                selectionColor={global.COLOR.darkGreen}
+                selectionColor={global.COLOR.PRIMARY_LIGHT}
                 theme={{
                   colors: { primary: global.COLOR.PRIMARY_DARK },
                 }}
                 returnKeyType={"next"}
-                onSubmitEditing={() => this.name.focus(this.setState)}
-                value={this.state.name}
-                onChangeText={(name) => this.setState({ name: name })}
+                onSubmitEditing={() => this.email_input.focus()}
+                value={name}
+                onChangeText={(name) => this.setState({ name })}
               />
             </View>
             {/* email */}
@@ -110,50 +142,53 @@ export default class SignUp extends Component {
               />
               <TextInput
                 style={styles.nameInputSignup}
-                label={t("signup_email")}
+                label="Email"
                 ref={(ref) => {
-                  this.name = ref;
+                  this.email_input = ref;
                 }}
                 onSubmitEditing={() => {
-                  this.email.focus();
+                  this.phone_input.focus();
                 }}
                 returnKeyType={"next"}
-                selectionColor={global.COLOR.darkGreen}
+                selectionColor={global.COLOR.PRIMARY_LIGHT}
                 theme={{
                   colors: { primary: global.COLOR.PRIMARY_DARK },
                 }}
                 underlineColor="transparent"
-                value={this.state.email}
-                onChangeText={(email) => this.setState({ email: email })}
+                value={email}
+                onChangeText={(email) => this.setState({ email })}
               />
             </View>
             {/* phone */}
             <View style={styles.nameView}>
-              <Image
-                source={global.ASSETS.FLAGE}
-                style={styles.flag}
-                resizeMode={"contain"}
-              />
-              <Text style={styles.it}>{t("login_it")}</Text>
-              <Icon
-                name={"arrow-drop-down"}
-                type={"mdiMenuDown"}
-                size={18}
-                color={global.COLOR.black}
+              <CountryPicker
+                countryCode={country}
+                withFilter
+                withFlag
+                withFlagButton
+                withCallingCode
+                withCallingCodeButton
+                withAlphaFilter
+                onSelect={(c) => {
+                  this.setState({
+                    country_code: c.callingCode[0],
+                    country: c.cca2,
+                  });
+                }}
               />
               <TextInput
-                style={styles.phoneInput}
+                style={styles.nameInputSignup}
                 ref={(ref) => {
-                  this.email = ref;
+                  this.phone_input = ref;
                 }}
-                onSubmitEditing={() => this.phone.focus()}
-                selectionColor={global.COLOR.darkGreen}
+                onSubmitEditing={() => this.pass_input.focus()}
+                selectionColor={global.COLOR.PRIMARY_LIGHT}
                 theme={{
                   colors: { primary: global.COLOR.PRIMARY_DARK },
                 }}
                 underlineColor="transparent"
-                label={t("login_phoneNumber")}
-                value={this.state.phoneNumber}
+                label="Phone Number"
+                value={phoneNumber}
                 onChangeText={(phoneNumber) => this.setState({ phoneNumber })}
                 maxLength={9}
                 returnKeyType={"next"}
@@ -170,26 +205,29 @@ export default class SignUp extends Component {
               <TextInput
                 style={styles.nameInputSignup}
                 ref={(ref) => {
-                  this.phone = ref;
+                  this.pass_input = ref;
                 }}
-                selectionColor={global.COLOR.darkGreen}
+                selectionColor={global.COLOR.PRIMARY_LIGHT}
                 theme={{
                   colors: { primary: global.COLOR.PRIMARY_DARK },
                 }}
-                label={t("signup_password")}
+                label="Password"
                 underlineColor="transparent"
                 secureTextEntry={true}
                 returnKeyType={"done"}
-                value={this.state.password}
-                onChangeText={(password) =>
-                  this.setState({ password: password })
-                }
+                value={password}
+                onSubmitEditing={() => {
+                  this.validate();
+                }}
+                onChangeText={(password) => this.setState({ password })}
                 // underlineColorAndroid="transparent"
               />
             </View>
 
             <View style={styles.bySign}>
-              <Text style={styles.bySignText}>{t("signup_bySignUp")}</Text>
+              <Text style={styles.bySignText}>
+                By signing up you agree to our
+              </Text>
               <TouchableOpacity
                 onPress={() => this.setState({ modalVisible: true })}
               >
@@ -198,11 +236,10 @@ export default class SignUp extends Component {
             </View>
           </>
           <TouchableOpacity
-            onPress={() => this.validation()}
-            // onPress={() => this.props.navigation.navigate("VerifyNumber")}
+            onPress={() => this.validate()}
             style={styles.touchlogin}
           >
-            <Text style={styles.loginText}>{t("login_signUP")}</Text>
+            <Text style={styles.loginText}>Sign Up</Text>
           </TouchableOpacity>
 
           <Modal
@@ -231,7 +268,7 @@ export default class SignUp extends Component {
             </View>
           </Modal>
         </ScrollView>
-      </View>
+      </ImageBackground>
     );
   }
 }

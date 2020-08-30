@@ -65,4 +65,9 @@ export default {
     PLACESAPI: "AIzaSyCdIiqraik9uJkeLdoarnKms9voK1Q94pk",
   },
   USER: {},
+
+  /**
+   * All Api response data storage varibles
+   */
+  MY_VEHICLES: [],
 };

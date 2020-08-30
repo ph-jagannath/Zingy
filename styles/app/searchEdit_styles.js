@@ -12,7 +12,7 @@ export default StyleSheet.create({
     backgroundColor: global.COLOR.newContainer,
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     height: Platform.OS === "ios" ? 20 : 0,
   },
   headerText: {

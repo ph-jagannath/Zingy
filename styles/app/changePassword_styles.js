@@ -12,7 +12,7 @@ export default StyleSheet.create({
     backgroundColor: global.COLOR.newContainer,
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     height: Platform.OS === "ios" ? 20 : 0,
   },
   headerText: {
@@ -24,7 +24,7 @@ export default StyleSheet.create({
     marginBottom: hp(6),
   },
   touchNext: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginBottom: hp(3),
     marginTop: hp(3),
     height: hp(7),

@@ -11,7 +11,7 @@ export default StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: global.COLOR.white,
+    backgroundColor: "#fff",
   },
 
   logoS: {
@@ -24,13 +24,7 @@ export default StyleSheet.create({
     alignSelf: "center",
     fontSize: wp(4),
     fontWeight: "bold",
-  },
-  contentTop: {
-    marginVertical: hp(2),
-    marginLeft: wp(5),
-    marginRight: wp(3),
-    justifyContent: "space-between",
-    flexDirection: "row",
+    textTransform: "capitalize",
   },
   TopViewDrawer: {
     marginTop: hp(2),
@@ -38,16 +32,14 @@ export default StyleSheet.create({
     justifyContent: "center",
     marginBottom: hp(3),
   },
+  contentTop: {
+    marginVertical: hp(2),
+    marginHorizontal: wp(3),
+    justifyContent: "space-between",
+    flexDirection: "row",
+    alignItems: "center",
+  },
   content: {
     fontSize: wp(3.5),
-  },
-  statusView: {
-    backgroundColor: global.COLOR.AppColor,
-    height: Platform.OS === "ios" ? 20 : 0,
-  },
-  iconStyle: {
-    height: hp(4),
-    width: wp(5),
-    marginRight: wp(3),
   },
 });

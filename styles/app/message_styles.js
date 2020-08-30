@@ -34,7 +34,7 @@ export default StyleSheet.create({
     fontSize: wp(4),
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     height: Platform.OS === "ios" ? 20 : 0,
   },
 
@@ -74,7 +74,7 @@ export default StyleSheet.create({
     borderRadius: wp(100),
     width: wp(2),
     height: wp(2),
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
   },
   rightViewMessage: {
     marginLeft: wp(4),

@@ -26,7 +26,7 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     height: Platform.OS === "ios" ? 20 : 0,
   },
   bellS: {
@@ -69,7 +69,7 @@ export default StyleSheet.create({
   },
   cancel: {
     fontSize: wp(3),
-    color: global.COLOR.AppColor,
+    color: global.COLOR.PRIMARY_LIGHT,
     marginBottom: 10,
   },
   mybook: {
@@ -118,7 +118,7 @@ export default StyleSheet.create({
     bottom: hp(5),
     borderRadius: 10,
     marginTop: hp(5),
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginHorizontal: wp(5),
     borderWidth: 1,
     borderColor: "#ddd",
@@ -162,6 +162,6 @@ export default StyleSheet.create({
   resch: {
     marginLeft: wp(6),
     fontSize: wp(3),
-    color: global.COLOR.AppColor,
+    color: global.COLOR.PRIMARY_LIGHT,
   },
 });

@@ -20,7 +20,7 @@ export default StyleSheet.create({
     fontSize: wp(4),
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
   },
   touchLeft: {
     marginTop: hp(1),
@@ -73,7 +73,7 @@ export default StyleSheet.create({
     justifyContent: "center",
     borderRadius: wp(100),
     borderWidth: 5,
-    borderColor: global.COLOR.AppColor,
+    borderColor: global.COLOR.PRIMARY_LIGHT,
   },
   msgImg: {
     alignSelf: "center",

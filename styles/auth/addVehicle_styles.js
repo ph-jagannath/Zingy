@@ -24,7 +24,7 @@ export default StyleSheet.create({
     backgroundColor: global.COLOR.white,
   },
   touchNext: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginBottom: hp(3),
     marginTop: hp(3),
     height: hp(7),

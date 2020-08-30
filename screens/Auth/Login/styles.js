@@ -10,7 +10,6 @@ export default StyleSheet.create({
     flex: 1,
     height: hp(110),
     width: wp(100),
-    paddingTop: global.CONSTANT.STATUSBAR + hp(5),
   },
 
   logo_image: {
@@ -57,7 +56,7 @@ export default StyleSheet.create({
     backgroundColor: "transparent",
   },
   login_button: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginVertical: hp(6),
     height: hp(7),
     width: wp(75),

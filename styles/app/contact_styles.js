@@ -21,7 +21,7 @@ export default StyleSheet.create({
     fontSize: wp(4),
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     height: Platform.OS === "ios" ? 20 : 0,
   },
   imgView: {
@@ -38,7 +38,7 @@ export default StyleSheet.create({
     marginTop: hp(4),
     borderWidth: wp(1.5),
     alignSelf: "center",
-    borderColor: global.COLOR.AppColor,
+    borderColor: global.COLOR.PRIMARY_LIGHT,
     height: wp(17),
     width: wp(17),
     borderRadius: wp(100),
@@ -65,7 +65,7 @@ export default StyleSheet.create({
     alignSelf: "center",
     height: hp(6),
     width: wp(6),
-    tintColor: global.COLOR.AppColor,
+    tintColor: global.COLOR.PRIMARY_LIGHT,
   },
   numberContact: {
     alignSelf: "center",

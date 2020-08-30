@@ -17,7 +17,7 @@ export default StyleSheet.create({
     borderBottomColor: global.COLOR.white,
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     height: Platform.OS === "ios" ? 20 : 0,
   },
   imgView: {
@@ -26,7 +26,7 @@ export default StyleSheet.create({
   },
 
   touchlogin: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginTop: hp(6),
     height: hp(7),
     marginHorizontal: wp(5),
@@ -101,7 +101,7 @@ export default StyleSheet.create({
     marginBottom: hp(6),
   },
   touchNext: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginBottom: hp(3),
     marginTop: hp(3),
     height: hp(7),
@@ -139,7 +139,7 @@ export default StyleSheet.create({
     height: hp(5.5),
     borderRadius: 5,
     borderWidth: 0.5,
-    borderColor: global.COLOR.AppColor,
+    borderColor: global.COLOR.PRIMARY_LIGHT,
     marginTop: 15,
     width: 200,
     flexDirection: "row",

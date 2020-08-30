@@ -8,16 +8,23 @@ import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   signUp:
-
+  container: {
+    flex: 1,
+    height: hp(110),
+    width: wp(100),
+    // paddingTop: global.CONSTANT.STATUSBAR + hp(5),
+  },
   containerMybooking: {
     flex: 1,
-    backgroundColor: global.COLOR.newContainer,
   },
   header: {
     borderBottomColor: global.COLOR.white,
   },
+  leftIcon: {
+    marginTop: hp(1),
+  },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     height: Platform.OS === "ios" ? 20 : 0,
   },
   img: {
@@ -40,7 +47,7 @@ export default StyleSheet.create({
     height: hp(7),
     bottom: hp(4),
     marginTop: hp(6),
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginHorizontal: wp(5),
   },
   modalView: {
@@ -123,21 +130,20 @@ export default StyleSheet.create({
     marginLeft: wp(3),
     fontSize: wp(3),
   },
-  leftIcon: {
-    marginTop: hp(1),
-  },
+
   touchlogin: {
-    backgroundColor: global.COLOR.AppColor,
-    marginTop: hp(6),
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    marginVertical: hp(6),
     height: hp(7),
-    marginHorizontal: wp(5),
+    width: wp(75),
+    alignSelf: "center",
     justifyContent: "center",
-    borderRadius: 10,
-    marginBottom: hp(1),
+    borderRadius: 8,
+    padding: 0,
   },
   loginText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
     fontWeight: "bold",
     alignSelf: "center",
   },

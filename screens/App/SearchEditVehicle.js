@@ -18,13 +18,13 @@ export default class SearchEditVehicle extends Component {
         <View style={styles.statusView}>
           <StatusBar
             translucent
-            backgroundColor={global.COLOR.AppColor}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
             barStyle="light-content"
           />
         </View>
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.AppColor}
+          backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
               <Icon name="chevron-left" size={32} color={global.COLOR.white} />
@@ -39,7 +39,7 @@ export default class SearchEditVehicle extends Component {
               type={"mdiMagnify"}
               style={styles.searchIcon}
               size={25}
-              color={global.COLOR.AppColor}
+              color={global.COLOR.PRIMARY_LIGHT}
             />
             <TextInput
               style={styles.inputEditV}

@@ -56,13 +56,13 @@ export default class ChangePassword extends Component {
         <View style={styles.statusView}>
           <StatusBar
             translucent
-            backgroundColor={global.COLOR.AppColor}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
             barStyle="light-content"
           />
         </View>
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.AppColor}
+          backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
               <Icon name="chevron-left" size={32} color={global.COLOR.white} />
@@ -82,7 +82,7 @@ export default class ChangePassword extends Component {
             />
             <TextInput
               style={styles.nameInputSignup}
-              selectionColor={global.COLOR.darkGreen}
+              selectionColor={global.COLOR.PRIMARY_LIGHT}
               theme={{ colors: { text: "#000", primary: "#fff" } }}
               placeholder={"Enter old Password"}
               underlineColor="#fff"
@@ -104,7 +104,7 @@ export default class ChangePassword extends Component {
             />
             <TextInput
               style={styles.nameInputSignup}
-              selectionColor={global.COLOR.darkGreen}
+              selectionColor={global.COLOR.PRIMARY_LIGHT}
               theme={{ colors: { text: "#000", primary: "#fff" } }}
               placeholder={"Enter New Password"}
               underlineColor="#fff"
@@ -124,7 +124,7 @@ export default class ChangePassword extends Component {
             />
             <TextInput
               style={styles.nameInputSignup}
-              selectionColor={global.COLOR.darkGreen}
+              selectionColor={global.COLOR.PRIMARY_LIGHT}
               theme={{ colors: { text: "#000", primary: "#fff" } }}
               placeholder={"Enter Confirm Password"}
               underlineColor="#fff"

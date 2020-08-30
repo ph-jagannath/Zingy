@@ -26,13 +26,13 @@ export default StyleSheet.create({
   roundView: {
     justifyContent: "center",
     borderWidth: 5,
-    borderColor: global.COLOR.AppColor,
+    borderColor: global.COLOR.PRIMARY_LIGHT,
     height: wp(25),
     width: wp(25),
     borderRadius: wp(100),
   },
   touchlogin: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginTop: hp(6),
     height: hp(7),
     marginHorizontal: wp(5),
@@ -51,7 +51,7 @@ export default StyleSheet.create({
     fontSize: wp(4),
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
   },
   touchLeft: {
     marginLeft: -10,
@@ -75,7 +75,7 @@ export default StyleSheet.create({
     marginVertical: hp(1.5),
   },
   radioStyle: {
-    tintColor: global.COLOR.AppColor,
+    tintColor: global.COLOR.PRIMARY_LIGHT,
     height: wp(3.3),
     width: wp(3.3),
     marginLeft: wp(2),

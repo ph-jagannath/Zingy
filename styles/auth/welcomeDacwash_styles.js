@@ -31,13 +31,13 @@ export default StyleSheet.create({
   dacWash: {
     marginTop: hp(5),
     fontSize: wp(4),
-    color: global.COLOR.AppColor,
+    color: global.COLOR.PRIMARY_LIGHT,
     alignSelf: "center",
   },
   welcome: {
     marginTop: hp(10),
     fontSize: wp(4),
-    color: global.COLOR.AppColor,
+    color: global.COLOR.PRIMARY_LIGHT,
     alignSelf: "center",
   },
   marTop: {
@@ -46,11 +46,11 @@ export default StyleSheet.create({
   },
   letsStart: {
     alignSelf: "center",
-    color: global.COLOR.AppColor,
+    color: global.COLOR.PRIMARY_LIGHT,
     fontSize: wp(3),
   },
   touchlogin: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginTop: hp(6),
     height: hp(7),
     marginHorizontal: wp(5),

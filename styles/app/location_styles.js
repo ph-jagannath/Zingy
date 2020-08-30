@@ -40,7 +40,7 @@ export default StyleSheet.create({
     fontSize: wp(4),
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     height: Platform.OS === "ios" ? 20 : 0,
   },
   toucTopLocation: {
@@ -98,7 +98,7 @@ export default StyleSheet.create({
     bottom: hp(5),
     borderRadius: 10,
     marginTop: hp(12),
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginHorizontal: wp(5),
     borderWidth: 1,
     borderColor: "#ddd",

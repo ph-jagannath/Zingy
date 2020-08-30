@@ -83,13 +83,13 @@ export default class AddLocation extends Component {
         <View style={styles.statusView}>
           <StatusBar
             translucent
-            backgroundColor={global.COLOR.AppColor}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
             barStyle="light-content"
           />
         </View>
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.AppColor}
+          backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity
               onPress={() => this.props.navigation.goBack()}
@@ -113,7 +113,7 @@ export default class AddLocation extends Component {
                 styles.homeAddLocation,
                 {
                   backgroundColor: colr
-                    ? global.COLOR.AppColor
+                    ? global.COLOR.PRIMARY_LIGHT
                     : global.COLOR.white,
                 },
               ]}
@@ -135,7 +135,7 @@ export default class AddLocation extends Component {
                 styles.homeAddLocation,
                 {
                   backgroundColor: work
-                    ? global.COLOR.AppColor
+                    ? global.COLOR.PRIMARY_LIGHT
                     : global.COLOR.white,
                 },
               ]}
@@ -157,7 +157,7 @@ export default class AddLocation extends Component {
                 styles.homeAddLocation,
                 {
                   backgroundColor: this.state.other
-                    ? global.COLOR.AppColor
+                    ? global.COLOR.PRIMARY_LIGHT
                     : global.COLOR.white,
                 },
               ]}

@@ -200,50 +200,37 @@ export async function api_login(d) {
 }
 
 // signup api
-export async function Signup(d) {
+export async function api_register(d) {
   Loading.show();
   Axios({
     method: "post",
-    url: "register",
+    url: "signup",
     data: {
-      first_name: d.first_name,
-      last_name: d.last_name,
-      username: d.email,
-      number: d.number,
+      email: d.email,
       password: d.password,
+      mobile: d.country_code + d.phoneNumber,
+      first_name: d.name,
+      last_name: " ",
+      language: "eng",
       device_type: global.CONSTANT.DEVICETYPE,
-      device_token: global.CONSTANT.DEVICETOKEN,
+      device_id: global.CONSTANT.DEVICETOKEN,
     },
     validateStatus: () => {
       return true; // I'm always returning true, you may want to do it depending on the status received
     },
   }).then(
     function (response) {
-      if (response.data.status_code == 200) {
-        Loading.hide();
-        Popup.show({
-          type: "Success",
-          title: "Congratulations 🎉🎉",
-          button: false,
-          textBody: response.data.success_message,
-          buttonText: "Welcome",
-          callback: () => {
-            Popup.hide();
-            StoreToken(response.data.data.api_token);
-            StoreUserData(response.data.data);
-
-            RootNavigation.navigate("Welcome");
-          },
+      Loading.hide();
+      if (response.data.response.status) {
+        RootNavigation.navigate("Login");
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
         });
       } else {
-        Loading.hide();
-        Popup.show({
-          type: "Danger",
-          title: global.CONSTANT.APPNAME + " Alert❗",
-          button: false,
-          textBody: response.data.error_message,
-          buttontext: "Ok",
-          callback: () => Popup.hide(),
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
         });
       }
     }.bind(this)
@@ -366,20 +353,53 @@ export async function ForgotPassword(d) {
 }
 
 // Logout api
-export async function Logout() {
+export async function api_logout() {
+  // Loading.show();
+  // const DATA = await Axios({
+  //   method: "get",
+  //   url: "users/logout",
+  //   headers: { Authorization: "Bearer " + global.AUTHTOKEN },
+  //   validateStatus: () => {
+  //     return true;
+  //   },
+  // }).then(
+  //   async function () {
+  //     await AsyncStorage.multiRemove([global.API_TOKEN, global.USER_DATA]);
+  //     Loading.hide();
+  //     RootNavigation.navigate("Auth");
+  //   }.bind(this)
+  // );
+  // return DATA;
+  await AsyncStorage.multiRemove([global.API_TOKEN, global.USER_DATA]);
+  RootNavigation.navigate("Auth");
+}
+
+/**
+ * Get USer Vehicles
+ */
+
+export async function api_get_vehicle(d) {
   Loading.show();
-  const DATA = await Axios({
-    method: "get",
-    url: "users/logout",
-    headers: { Authorization: "Bearer " + global.AUTHTOKEN },
-    validateStatus: () => {
-      return true;
+  const DATA = Axios({
+    method: "post",
+    url: "get_vehicle",
+    data: {
+      user_id: global.AUTHTOKEN,
     },
+    validateStatus: () => true,
   }).then(
-    async function () {
-      await AsyncStorage.multiRemove([global.API_TOKEN, global.USER_DATA]);
+    function (response) {
       Loading.hide();
-      RootNavigation.navigate("Auth");
+      if (response.data.response.status) {
+        global.MY_VEHICLES = response.data.response.data;
+        return global.MY_VEHICLES;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
     }.bind(this)
   );
   return DATA;

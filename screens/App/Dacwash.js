@@ -66,7 +66,7 @@ export default class Dacwash extends Component {
             styles.touchAppClrView,
             {
               backgroundColor:
-                index === 0 ? global.COLOR.AppColor : global.COLOR.white,
+                index === 0 ? global.COLOR.PRIMARY_LIGHT : global.COLOR.white,
             },
           ]}
         >
@@ -146,13 +146,13 @@ export default class Dacwash extends Component {
         <View style={styles.statusView}>
           <StatusBar
             translucent
-            backgroundColor={global.COLOR.AppColor}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
             barStyle="light-content"
           />
         </View>
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.AppColor}
+          backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity
               onPress={() => this.props.navigation.goBack()}

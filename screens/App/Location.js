@@ -29,13 +29,13 @@ export default class Location extends Component {
         <View style={styles.statusView}>
           <StatusBar
             translucent
-            backgroundColor={global.COLOR.AppColor}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
             barStyle="light-content"
           />
         </View>
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.AppColor}
+          backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity
               style={styles.leftIcon}
@@ -76,7 +76,7 @@ export default class Location extends Component {
                     {
                       tintColor: radioClr
                         ? global.COLOR.gray
-                        : global.COLOR.AppColor,
+                        : global.COLOR.PRIMARY_LIGHT,
                     },
                   ]}
                   resizeMode={"contain"}
@@ -96,7 +96,7 @@ export default class Location extends Component {
                   name="chevron-right"
                   size={32}
                   style={styles.rightIcontLocation}
-                  color={global.COLOR.AppColor}
+                  color={global.COLOR.PRIMARY_LIGHT}
                 />
               </TouchableOpacity>
             </View>
@@ -114,7 +114,7 @@ export default class Location extends Component {
                     styles.bigRadioLocation,
                     {
                       tintColor: radioClr
-                        ? global.COLOR.AppColor
+                        ? global.COLOR.PRIMARY_LIGHT
                         : global.COLOR.gray,
                     },
                   ]}
@@ -138,7 +138,7 @@ export default class Location extends Component {
                   name="chevron-right"
                   size={32}
                   style={styles.rightIcontLocation}
-                  color={global.COLOR.AppColor}
+                  color={global.COLOR.PRIMARY_LIGHT}
                 />
               </TouchableOpacity>
             </View>

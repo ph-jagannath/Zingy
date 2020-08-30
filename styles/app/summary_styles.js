@@ -23,12 +23,12 @@ export default StyleSheet.create({
     fontSize: wp(4),
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
   },
   roundView: {
     justifyContent: "center",
     borderWidth: 5,
-    borderColor: global.COLOR.AppColor,
+    borderColor: global.COLOR.PRIMARY_LIGHT,
     height: wp(25),
     width: wp(25),
     borderRadius: wp(100),
@@ -49,7 +49,7 @@ export default StyleSheet.create({
     marginHorizontal: wp(3),
   },
   touchlogin: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     marginTop: hp(6),
     height: hp(7),
     marginHorizontal: wp(5),

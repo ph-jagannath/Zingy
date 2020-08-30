@@ -4,14 +4,12 @@ import {
   Image,
   Text,
   View,
-  Alert,
+  TouchableOpacity,
   ImageBackground,
 } from "react-native";
 import styles from "./styles";
-import { Icon } from "react-native-elements";
+import { Icon, Header } from "react-native-elements";
 import global from "../../../utils/global";
-import { t } from "i18n-js";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { FBAuth, SocialLogin, api_login } from "../../../utils/Api";
 import * as AppleAuthentication from "expo-apple-authentication";
 import * as GoogleSignIn from "expo-google-sign-in";
@@ -85,6 +83,10 @@ export default class Login extends Component {
     const { email, password } = this.state;
     return (
       <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
+        <Header
+          backgroundColor={"transparent"}
+          statusBarProps={{ backgroundColor: global.COLOR.PRIMARY_LIGHT }}
+        />
         <ScrollView style={{ flex: 1 }}>
           {/* logo image */}
           <>

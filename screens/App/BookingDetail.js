@@ -30,13 +30,13 @@ export default class BookingDetail extends Component {
         <View style={styles.statusView}>
           <StatusBar
             translucent
-            backgroundColor={global.COLOR.AppColor}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
             barStyle="light-content"
           />
         </View>
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.AppColor}
+          backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity
               style={styles.touchLeft}
@@ -101,7 +101,11 @@ export default class BookingDetail extends Component {
                 onPress={() => this.setState({ preTab: true })}
                 style={[
                   styles.myBookTouc,
-                  { backgroundColor: preTab ? "#fff" : global.COLOR.AppColor },
+                  {
+                    backgroundColor: preTab
+                      ? "#fff"
+                      : global.COLOR.PRIMARY_LIGHT,
+                  },
                 ]}
               >
                 <Text
@@ -120,7 +124,11 @@ export default class BookingDetail extends Component {
                 onPress={() => this.setState({ preTab: false })}
                 style={[
                   styles.preTouc,
-                  { backgroundColor: preTab ? global.COLOR.AppColor : "#fff" },
+                  {
+                    backgroundColor: preTab
+                      ? global.COLOR.PRIMARY_LIGHT
+                      : "#fff",
+                  },
                 ]}
               >
                 <Text

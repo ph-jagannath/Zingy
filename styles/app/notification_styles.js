@@ -21,7 +21,7 @@ export default StyleSheet.create({
     marginTop: hp(2),
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
   },
   containerMybooking: {
     flex: 1,

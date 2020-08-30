@@ -5,5 +5,10 @@ dacwash customer app in react native
 # TODO
 
     - Remove unused libraries
+    - Terms and condition of Signup
 
 # DONE
+
+    - Sign Up Api
+    - Login Api
+    - Logout Api

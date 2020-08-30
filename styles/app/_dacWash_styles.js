@@ -126,7 +126,7 @@ export default StyleSheet.create({
   washNowView: {
     borderRadius: 7,
     borderWidth: 1,
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     justifyContent: "center",
     height: hp(7),
     width: wp(28),
@@ -141,12 +141,12 @@ export default StyleSheet.create({
   },
   pack: {
     alignSelf: "center",
-    color: global.COLOR.AppColor,
+    color: global.COLOR.PRIMARY_LIGHT,
     fontSize: wp(3),
   },
   washLText: {
     alignSelf: "center",
-    color: global.COLOR.AppColor,
+    color: global.COLOR.PRIMARY_LIGHT,
     fontSize: wp(3),
   },
 
@@ -159,7 +159,7 @@ export default StyleSheet.create({
     alignItems: "center",
     height: hp(4),
     borderRadius: 5,
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     flexDirection: "row",
   },
   touchAppClrView: {

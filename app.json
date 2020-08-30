@@ -26,10 +26,9 @@
     "android": {
       "package": "com.hk_.Dacwash"
     },
-
     "androidNavigationBar": {
-      "barStyle": "light-content",
-      "backgroundColor": "#006937"
+      "barStyle": "dark-content",
+      "backgroundColor": "#6ABC45"
     }
   }
 }

@@ -3,21 +3,21 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-// import global from "../../utils/global";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   vehicleStatus:
 
   container: {
     flex: 1,
-    backgroundColor: global.COLOR.white,
+    height: hp(110),
+    width: wp(100),
   },
   header: {
     borderBottomColor: global.COLOR.white,
   },
   statusView: {
-    backgroundColor: global.COLOR.AppColor,
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
     height: Platform.OS === "ios" ? 20 : 0,
   },
 
@@ -34,15 +34,14 @@ export default StyleSheet.create({
   flatListContainer: {
     marginTop: hp(2),
   },
-  containerMybooking: {
-    flex: 1,
-    backgroundColor: global.COLOR.newContainer,
-  },
+
   listContainerMyBook: {
     marginHorizontal: wp(5),
     borderRadius: 10,
     marginBottom: hp(2),
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
+    borderWidth: 0.8,
+    borderColor: global.COLOR.PRIMARY_DARK,
   },
 
   touchBtmView: {
@@ -51,8 +50,9 @@ export default StyleSheet.create({
     flexDirection: "row",
   },
   audiImgV: {
-    height: hp(5),
-    width: wp(8),
+    height: hp(6),
+    width: wp(12),
+    resizeMode: "contain",
   },
   rightViewStatus: {
     marginLeft: 20,
@@ -68,7 +68,7 @@ export default StyleSheet.create({
     marginTop: wp(5),
   },
   companyNames: {
-    fontSize: wp(3.5),
+    fontSize: wp(4),
     fontWeight: "bold",
   },
   locationTexts: {
@@ -78,14 +78,15 @@ export default StyleSheet.create({
     fontSize: wp(4),
   },
   modelName: {
-    fontSize: wp(3),
-    color: global.COLOR.AppColor,
+    fontSize: wp(3.5),
+    color: global.COLOR.PRIMARY_DARK,
+    textTransform: "uppercase",
   },
   rightIcon: {
     marginLeft: wp(1),
   },
   headerText: {
-    color: global.COLOR.white,
-    fontSize: wp(4),
+    color: "#fff",
+    fontSize: wp(5),
   },
 });

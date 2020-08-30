@@ -106,7 +106,7 @@ export default class Faqs extends Component {
             styles.listContainerFaq,
             {
               backgroundColor: icon
-                ? global.COLOR.AppColor
+                ? global.COLOR.PRIMARY_LIGHT
                 : global.COLOR.white,
             },
           ]}
@@ -152,13 +152,13 @@ export default class Faqs extends Component {
         <View style={styles.statusView}>
           <StatusBar
             translucent
-            backgroundColor={global.COLOR.AppColor}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
             barStyle="light-content"
           />
         </View>
         <Header
           containerStyle={styles.header}
-          backgroundColor={global.COLOR.AppColor}
+          backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity
               style={styles.leftIcon}
