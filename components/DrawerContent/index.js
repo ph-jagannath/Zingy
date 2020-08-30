@@ -1,18 +1,10 @@
 import React, { Component } from "react";
-import {
-  ScrollView,
-  Image,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { ScrollView, Image, Text, TouchableOpacity, View } from "react-native";
 import global from "../../utils/global";
 import { t } from "i18n-js";
 import styles from "./styles";
 import { Icon } from "react-native-elements";
 import { api_logout } from "../../utils/Api";
-const userName = "Hi,Nakul";
 export default class DrawerContent extends Component {
   constructor(props) {
     super(props);
@@ -21,9 +13,13 @@ export default class DrawerContent extends Component {
 
   render() {
     const { navigation } = this.props;
+    const active_route = this.props.state.routes[this.props.state.index].name;
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={() => navigation.navigate("Profile")}>
+        <TouchableOpacity
+          activeOpacity={0.8}
+          onPress={() => navigation.navigate("Profile")}
+        >
           <Image
             source={global.ASSETS.LOGO}
             style={styles.logoS}
@@ -37,70 +33,170 @@ export default class DrawerContent extends Component {
         >
           <View style={styles.TopViewDrawer}>
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("Home")}
-              style={styles.contentTop}
+              style={[
+                styles.contentTop,
+                active_route == "Home" && styles.active_tab,
+              ]}
             >
-              <Text style={styles.content}>{t("side_menu_home")}</Text>
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "Home" && styles.active_content,
+                ]}
+              >
+                {t("side_menu_home")}
+              </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("MyVehicle")}
-              style={styles.contentTop}
+              style={[
+                styles.contentTop,
+                active_route == "MyVehicle" && styles.active_tab,
+              ]}
             >
-              <Text style={styles.content}>{t("side_menu_MyVehicle")}</Text>
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "MyVehicle" && styles.active_content,
+                ]}
+              >
+                {t("side_menu_MyVehicle")}
+              </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("MyBookings")}
-              style={styles.contentTop}
+              style={[
+                styles.contentTop,
+                active_route == "MyBookings" && styles.active_tab,
+              ]}
             >
-              <Text style={styles.content}>{t("side_menu_MyBookings")}</Text>
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "MyBookings" && styles.active_content,
+                ]}
+              >
+                {t("side_menu_MyBookings")}
+              </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("Package")}
-              style={styles.contentTop}
+              style={[
+                styles.contentTop,
+                active_route == "Package" && styles.active_tab,
+              ]}
             >
-              <Text style={styles.content}>{t("side_menu_Packages")}</Text>
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "Package" && styles.active_content,
+                ]}
+              >
+                {t("side_menu_Packages")}
+              </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("Location")}
-              style={styles.contentTop}
+              style={[
+                styles.contentTop,
+                active_route == "Location" && styles.active_tab,
+              ]}
             >
-              <Text style={styles.content}>{t("side_menu_Locations")}</Text>
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "Location" && styles.active_content,
+                ]}
+              >
+                {t("side_menu_Locations")}
+              </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("Faqs")}
-              style={styles.contentTop}
+              style={[
+                styles.contentTop,
+                active_route == "Faqs" && styles.active_tab,
+              ]}
             >
-              <Text style={styles.content}>{t("side_menu_FAQs")}</Text>
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "Faqs" && styles.active_content,
+                ]}
+              >
+                {t("side_menu_FAQs")}
+              </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("Message")}
-              style={styles.contentTop}
+              style={[
+                styles.contentTop,
+                active_route == "Message" && styles.active_tab,
+              ]}
             >
-              <Text style={styles.content}>{t("side_menu_Messages")}</Text>
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "Message" && styles.active_content,
+                ]}
+              >
+                {t("side_menu_Messages")}
+              </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("Contact")}
-              style={styles.contentTop}
+              style={[
+                styles.contentTop,
+                active_route == "Contact" && styles.active_tab,
+              ]}
             >
-              <Text style={styles.content}>{t("side_menu_Contact")}</Text>
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "Contact" && styles.active_content,
+                ]}
+              >
+                {t("side_menu_Contact")}
+              </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("ChangeLanguage")}
-              style={styles.contentTop}
+              style={[
+                styles.contentTop,
+                active_route == "ChangeLanguage" && styles.active_tab,
+              ]}
             >
-              <Text style={styles.content}>{t("changeLanguage_header")}</Text>
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "ChangeLanguage" && styles.active_content,
+                ]}
+              >
+                {t("changeLanguage_header")}
+              </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
 
             <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => api_logout()}
               style={styles.contentTop}
             >

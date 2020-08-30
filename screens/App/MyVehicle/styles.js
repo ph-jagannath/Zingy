@@ -3,14 +3,15 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   myvehicle.js:
 
   container: {
     flex: 1,
-    backgroundColor: global.COLOR.white,
+    height: hp(110),
+    width: wp(100),
   },
   header: {
     borderBottomColor: global.COLOR.white,
@@ -22,7 +23,9 @@ export default StyleSheet.create({
     marginHorizontal: wp(5),
     borderRadius: 10,
     marginBottom: hp(2),
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
+    borderWidth: 0.8,
+    borderColor: global.COLOR.PRIMARY_DARK,
   },
   rendTouch: {
     marginHorizontal: wp(3),
@@ -35,8 +38,8 @@ export default StyleSheet.create({
     backgroundColor: global.COLOR.newContainer,
   },
   headerText: {
-    color: global.COLOR.white,
-    fontSize: wp(4),
+    color: "#fff",
+    fontSize: wp(5),
   },
   statusView: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
@@ -73,12 +76,14 @@ export default StyleSheet.create({
     fontWeight: "700",
   },
   audiImg: {
-    height: wp(8),
-    width: wp(8),
+    height: hp(6),
+    width: wp(12),
+    resizeMode: "contain",
   },
   modalName: {
-    fontSize: wp(3),
-    color: global.COLOR.PRIMARY_LIGHT,
+    fontSize: wp(3.3),
+    color: global.COLOR.PRIMARY_DARK,
+    textTransform: "uppercase",
   },
   delEdit: {
     flexDirection: "row",
@@ -93,5 +98,20 @@ export default StyleSheet.create({
   },
   rightIcon: {
     marginLeft: wp(1),
+  },
+  add_button: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    marginVertical: hp(3),
+    height: hp(7),
+    width: wp(75),
+    alignSelf: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+  },
+  addText: {
+    color: global.COLOR.white,
+    fontSize: wp(4.5),
+    fontWeight: "bold",
+    alignSelf: "center",
   },
 });

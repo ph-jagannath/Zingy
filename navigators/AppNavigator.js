@@ -3,7 +3,7 @@ import { createDrawerNavigator } from "@react-navigation/drawer";
 import { createStackNavigator } from "@react-navigation/stack";
 import DrawerComponent from "../components/DrawerContent";
 // drawer screens
-import MyVehicle from ".././screens/App/MyVehicle";
+import MyVehicle from "../screens/App/MyVehicle";
 import Faqs from ".././screens/App/Faqs";
 import Packages from ".././screens/App/Packages";
 import Message from ".././screens/App/Message";
@@ -26,6 +26,7 @@ import Contact from "../screens/App/Contact";
 import SearchEditVehicle from "../screens/App/SearchEditVehicle";
 import ChangePassword from "../screens/App/ChangePassword";
 import AddLocation from "../screens/App/AddLocation";
+import AddVehicle from "../screens/App/AddVehicle";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -36,9 +37,12 @@ export default function AppNavigator() {
       drawerContent={(props) => <DrawerComponent {...props} />}
       initialRouteName="Home"
       drawerType={"slide"}
+      screenOptions={{
+        unmountOnBlur: true,
+      }}
     >
       <Drawer.Screen name="Home" component={HomeStack} />
-      <Drawer.Screen name="MyVehicle" component={MyVehicle} />
+      <Drawer.Screen name="MyVehicle" component={MyVehicleStack} />
       <Drawer.Screen name="MyBookings" component={MyBookings} />
       <Drawer.Screen name="Message" component={Message} />
       <Drawer.Screen name="Contact" component={Contact} />
@@ -69,6 +73,20 @@ function HomeStack() {
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="Dacwash" component={Dacwash} />
       <Stack.Screen name="AddLocation" component={AddLocation} />
+    </Stack.Navigator>
+  );
+}
+
+function MyVehicleStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName={"myvehicle_home"}
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="myvehicle_home" component={MyVehicle} />
+      <Stack.Screen name="AddVehicle" component={AddVehicle} />
+      <Stack.Screen name="EditVehicle" component={EditVehicle} />
+      <Stack.Screen name="SearchVehicle" component={SearchEditVehicle} />
     </Stack.Navigator>
   );
 }

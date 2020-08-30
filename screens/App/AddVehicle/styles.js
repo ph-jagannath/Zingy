@@ -3,8 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-// import global from "../../utils/global";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   AddVehicle.js:
@@ -13,15 +12,16 @@ export default StyleSheet.create({
   },
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   containerMybooking: {
     flex: 1,
-    backgroundColor: global.COLOR.newContainer,
+    marginHorizontal: wp(2),
   },
   container: {
     flex: 1,
-    backgroundColor: global.COLOR.white,
+    height: hp(110),
+    width: wp(100),
   },
   touchNext: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
@@ -55,6 +55,8 @@ export default StyleSheet.create({
     height: hp(7),
     backgroundColor: global.COLOR.white,
     borderRadius: 10,
+    borderWidth: 0.6,
+    borderColor: global.COLOR.PRIMARY_DARK,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
@@ -78,8 +80,7 @@ export default StyleSheet.create({
   },
   addText: {
     alignSelf: "center",
-    fontSize: wp(3.2),
-    color: global.COLOR.black,
+    fontSize: wp(4),
   },
   loginText: {
     color: global.COLOR.white,
@@ -99,7 +100,7 @@ export default StyleSheet.create({
     marginHorizontal: wp(4),
   },
   outerText: {
-    color: global.COLOR.black,
-    fontSize: wp(3),
+    color: "gray",
+    fontSize: wp(3.5),
   },
 });

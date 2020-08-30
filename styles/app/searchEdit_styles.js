@@ -17,7 +17,7 @@ export default StyleSheet.create({
   },
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   SearchEditVehicle: {
     alignItems: "center",
@@ -38,5 +38,12 @@ export default StyleSheet.create({
     width: wp(88),
     fontSize: 18,
     marginLeft: 10,
+  },
+  list_item: {
+    paddingVertical: hp(1.5),
+    paddingHorizontal: wp(3),
+  },
+  list_item_text: {
+    fontSize: wp(5),
   },
 });

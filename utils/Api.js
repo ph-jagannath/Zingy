@@ -404,3 +404,32 @@ export async function api_get_vehicle(d) {
   );
   return DATA;
 }
+
+/**
+ * Get make and model
+ */
+
+export async function api_get_make(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "get",
+    url: "get_make_modal",
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.MAKE_COUNTRY = response.data.response.data.country;
+        global.MAKE_MODAL = response.data.response.data.makes;
+        return global.MAKE_COUNTRY, global.MAKE_MODAL;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

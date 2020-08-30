@@ -33,13 +33,19 @@ export default StyleSheet.create({
     marginBottom: hp(3),
   },
   contentTop: {
-    marginVertical: hp(2),
-    marginHorizontal: wp(3),
+    paddingVertical: hp(0.8),
+    paddingHorizontal: wp(3),
     justifyContent: "space-between",
     flexDirection: "row",
     alignItems: "center",
   },
+  active_tab: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+  },
   content: {
-    fontSize: wp(3.5),
+    fontSize: wp(4.2),
+  },
+  active_content: {
+    color: "#fff",
   },
 });

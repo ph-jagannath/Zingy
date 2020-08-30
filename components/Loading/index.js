@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Text, StyleSheet, View, Image } from "react-native";
 import { Overlay } from "react-native-elements";
-import global from "../utils/global";
-let visible = false;
-let v = [false];
+import * as Animatable from "react-native-animatable";
+import global from "../../utils/global";
 export default class Loading extends Component {
   static loadingInstance;
   // static myComponentInstance
@@ -42,8 +41,14 @@ export default class Loading extends Component {
         containerStyle={styles.overlay}
       >
         <View style={{ backgroundColor: "transparent" }}>
-          <Image source={global.ASSETS.LOGO_ICON} style={styles.image} />
-          <Text style={styles.loadingText}>Loading ...</Text>
+          <Animatable.Image
+            animation="rotate"
+            duration={2000}
+            iterationCount="infinite"
+            source={global.ASSETS.LOGO_ICON}
+            style={styles.image}
+          />
+          {/* <Text style={styles.loadingText}>Loading ...</Text> */}
         </View>
       </Overlay>
     );
@@ -53,17 +58,17 @@ export default class Loading extends Component {
 const styles = StyleSheet.create({
   overlay: {
     borderColor: global.COLOR.PRIMARY_DARK,
-    borderWidth: 2,
+    borderWidth: 1,
     opacity: 1,
-    height: 150,
-    width: 150,
-    borderRadius: 25,
+    height: 100,
+    width: 100,
+    borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
   },
   image: {
-    height: 100,
-    width: 100,
+    height: 80,
+    width: 80,
     resizeMode: "contain",
   },
   loadingText: {
