@@ -4,11 +4,10 @@ import {
   Image,
   Text,
   StyleSheet,
-  StatusBar,
+  TouchableOpacity,
   View,
   ImageBackground,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./styles";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
@@ -67,9 +66,35 @@ export default class AddVehicle extends Component {
 
   set_color = (d) => {
     this.setState({
-      color: d.name,
+      color: d.name.toLowerCase(),
     });
-    global.ADD_VEHICLE_DATA[5] = d.name;
+    global.ADD_VEHICLE_DATA[5] = d.name.toLowerCase();
+  };
+
+  validate = () => {
+    if (this.state.make == "") {
+      showMessage({
+        message: "Please choose Make.",
+        type: "warning",
+      });
+    } else if (this.state.model == "") {
+      showMessage({
+        message: "Please choose Model.",
+        type: "warning",
+      });
+    } else if (this.state.year == "") {
+      showMessage({
+        message: "Please choose Year.",
+        type: "warning",
+      });
+    } else if (this.state.color == "") {
+      showMessage({
+        message: "Please choose Color.",
+        type: "warning",
+      });
+    } else {
+      this.props.navigation.navigate("AddVehicle_1");
+    }
   };
 
   render() {
@@ -134,9 +159,12 @@ export default class AddVehicle extends Component {
                 activeOpacity={0.9}
                 style={styles.borderViewAddVehi}
                 onPress={() => {
-                  const list = global.MAKE_MODAL.filter(
-                    (i) => i.Make.id == global.ADD_VEHICLE_DATA[0]
-                  ).map((e) => e.VehicleModel)[0];
+                  const list =
+                    make == ""
+                      ? []
+                      : global.MAKE_MODAL.filter(
+                          (i) => i.Make.id == global.ADD_VEHICLE_DATA[0]
+                        ).map((e) => e.VehicleModel)[0];
 
                   if (list.length > 0) {
                     navigation.navigate("SearchVehicle", {
@@ -215,7 +243,7 @@ export default class AddVehicle extends Component {
                   <Icon
                     name="fiber-manual-record"
                     size={30}
-                    color={color == "" ? "transparent" : color.toLowerCase()}
+                    color={color == "" ? "transparent" : color}
                   />
                 </View>
                 <Image source={global.ASSETS.DOWN} style={styles.imgForword} />
@@ -226,10 +254,11 @@ export default class AddVehicle extends Component {
 
         <View style={styles.touchVIewAddVeh}>
           <TouchableOpacity
-            onPress={() => this.props.navigation.navigate("App")}
-            style={styles.touchNext}
+            activeOpacity={0.8}
+            onPress={() => this.validate()}
+            style={styles.add_button}
           >
-            <Text style={styles.loginText}>{t("addV_next")}</Text>
+            <Text style={styles.add_button_Text}>{t("addV_next")}</Text>
           </TouchableOpacity>
         </View>
       </ImageBackground>

@@ -103,4 +103,19 @@ export default StyleSheet.create({
     color: "gray",
     fontSize: wp(3.5),
   },
+  add_button: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    marginVertical: hp(3),
+    height: hp(7),
+    width: wp(75),
+    alignSelf: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+  },
+  add_button_Text: {
+    color: global.COLOR.white,
+    fontSize: wp(4.5),
+    fontWeight: "bold",
+    alignSelf: "center",
+  },
 });

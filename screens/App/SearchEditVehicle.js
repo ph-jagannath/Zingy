@@ -27,6 +27,7 @@ export default class SearchEditVehicle extends Component {
       onSelectModel,
       onSelectYear,
       onSelectColor,
+      onSelectCountry,
     } = this.props.route.params;
     const { navigation } = this.props;
     const { filter_text } = this.state;
@@ -85,6 +86,9 @@ export default class SearchEditVehicle extends Component {
                   }
                   if (header == "Color") {
                     onSelectColor(d);
+                  }
+                  if (header == "Country") {
+                    onSelectCountry(d);
                   }
                   navigation.goBack();
                 }}

@@ -27,6 +27,8 @@ import SearchEditVehicle from "../screens/App/SearchEditVehicle";
 import ChangePassword from "../screens/App/ChangePassword";
 import AddLocation from "../screens/App/AddLocation";
 import AddVehicle from "../screens/App/AddVehicle";
+import AddVehicle_1 from "../screens/App/AddVehicle_1";
+import AddVehicle_2 from "../screens/App/AddVehicle_2";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -85,6 +87,8 @@ function MyVehicleStack() {
     >
       <Stack.Screen name="myvehicle_home" component={MyVehicle} />
       <Stack.Screen name="AddVehicle" component={AddVehicle} />
+      <Stack.Screen name="AddVehicle_1" component={AddVehicle_1} />
+      <Stack.Screen name="AddVehicle_2" component={AddVehicle_2} />
       <Stack.Screen name="EditVehicle" component={EditVehicle} />
       <Stack.Screen name="SearchVehicle" component={SearchEditVehicle} />
     </Stack.Navigator>

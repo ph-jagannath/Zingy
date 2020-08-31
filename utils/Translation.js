@@ -53,6 +53,7 @@ i18n.translations = {
     VehicleStatus_header: "Vehicle Status",
     myVehilced_header: "MY VEHICLES",
     MyBooking_header: "MY BOOKINGS",
+    vehicle_details: "VEHICLE DETAILS",
     package_header: "PACKAGES",
     locatin_header: "LOCATIONS",
     faq_header: "FAQs",
@@ -119,7 +120,7 @@ i18n.translations = {
     NoData: "No Data Found",
     Notification: "NOTIFICATIONS",
     // EditVehicle.js
-    Emirate: "Emirate*",
+    Emirate: "Country*",
     plateCode: "Plate Code*",
     plateNumber: "Plate Number*",
     search: "Search",
