@@ -133,6 +133,7 @@ i18n.translations = {
     plzEnterCurrentPass: "Please enter current password.",
     plzEnterNewPass: "Please enter new password",
     passAndConPassNotMatch: "Password and confirm password does not match.",
+    choose_upload: "Choose Image Source",
   },
   es: {
     // side Menu

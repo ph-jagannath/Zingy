@@ -32,13 +32,14 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   flatListContainer: {
-    marginTop: hp(2),
+    flex: 1,
+    // marginVertical: hp(2),
   },
 
   listContainerMyBook: {
     marginHorizontal: wp(5),
     borderRadius: 10,
-    marginBottom: hp(2),
+    marginVertical: hp(1),
     // backgroundColor: "#fff",
     borderWidth: 0.8,
     borderColor: global.COLOR.PRIMARY_DARK,

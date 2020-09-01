@@ -42,6 +42,7 @@ export default StyleSheet.create({
   list_item: {
     paddingVertical: hp(1.5),
     paddingHorizontal: wp(3),
+    flexDirection: "row",
   },
   list_item_text: {
     fontSize: wp(5),

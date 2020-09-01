@@ -30,6 +30,9 @@ export default {
     CLEANING: require("../assets/interiorcleaning.png"),
     MESSAGE: require("../assets/message.png"),
     STAR: require("../assets/star.png"),
+    NO_IMAGE: require("../assets/no_image.jpg"),
+    SELECT_VEHICLE_IMAGE:
+      "http://placehold.jp/cccccc/404040/150x150.png?text=SELECT%20VEHICLE%20IMAGE",
   },
   COLOR: {
     PRIMARY_LIGHT: "#6ABC45",

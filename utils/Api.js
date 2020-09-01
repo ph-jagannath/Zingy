@@ -433,3 +433,50 @@ export async function api_get_make(d) {
   );
   return DATA;
 }
+
+/**
+ * Add new vehicle
+ */
+
+export async function api_add_vehicle(d) {
+  Loading.show();
+
+  var data = new FormData();
+  data.append("user_id", global.AUTHTOKEN);
+  data.append("make_id", global.ADD_VEHICLE_DATA[0]);
+  data.append("vehicle_model_id", global.ADD_VEHICLE_DATA[2]);
+  data.append("country_id", global.ADD_VEHICLE_DATA[7]);
+  data.append("plate_number", global.ADD_VEHICLE_DATA[8]);
+  data.append("plate_code", " ");
+  data.append("color", global.ADD_VEHICLE_DATA[5]);
+  data.append("year", global.ADD_VEHICLE_DATA[4]);
+  data.append("vehicle_picture", global.ADD_VEHICLE_DATA[9]);
+  data.append("modal_id", global.ADD_VEHICLE_DATA[2]);
+
+  const DATA = Axios({
+    method: "post",
+    url: "add_vehicle",
+    data,
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        RootNavigation.navigate("Home");
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
+        });
+        return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

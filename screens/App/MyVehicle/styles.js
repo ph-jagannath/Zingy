@@ -62,7 +62,7 @@ export default StyleSheet.create({
     alignItems: "center",
   },
   horizonView: {
-    marginVertical: hp(4),
+    marginVertical: hp(2),
     alignItems: "center",
     flexDirection: "row",
   },

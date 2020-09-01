@@ -131,8 +131,12 @@ export default StyleSheet.create({
     tintColor: global.COLOR.black,
   },
   empImg: {
+    marginTop: hp(2),
+    borderColor: global.COLOR.PRIMARY_DARK,
+    borderWidth: 0.8,
     height: hp(10),
-    width: wp(18),
+    width: wp(20),
+    resizeMode: "contain",
     alignSelf: "center",
   },
   borderViewEditV: {

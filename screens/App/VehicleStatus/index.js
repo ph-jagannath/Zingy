@@ -6,61 +6,14 @@ import {
   FlatList,
   TouchableOpacity,
   ImageBackground,
+  RefreshControl,
 } from "react-native";
 import { Header, Icon } from "react-native-elements";
 import styles from "./styles";
-import audi from "../../../assets/audi.png";
 import { t } from "i18n-js";
 import global from "../../../utils/global";
 import { api_get_vehicle } from "../../../utils/Api";
 
-const statusCode = [
-  {
-    companyLogo: "audi",
-    companyName: "Audi A6",
-    gadiModal: "111-222",
-  },
-  {
-    companyLogo: "Mah",
-    companyName: "Mahindra Pik-Up",
-    gadiModal: "YYY-258",
-  },
-  {
-    companyLogo: "sa",
-    companyName: "SsangYong Action Sports",
-    gadiModal: "6TT-855",
-  },
-  {
-    companyLogo: "audi",
-    companyName: "Audi A6",
-    gadiModal: "111-222",
-  },
-  {
-    companyLogo: "Mah",
-    companyName: "Mahindra Pik-Up",
-    gadiModal: "YYY-258",
-  },
-  {
-    companyLogo: "sa",
-    companyName: "SsangYong Action Sports",
-    gadiModal: "6TT-855",
-  },
-  {
-    companyLogo: "audi",
-    companyName: "Audi A6",
-    gadiModal: "111-222",
-  },
-  {
-    companyLogo: "Mah",
-    companyName: "Mahindra Pik-Up",
-    gadiModal: "YYY-258",
-  },
-  {
-    companyLogo: "sa",
-    companyName: "SsangYong Action Sports",
-    gadiModal: "6TT-855",
-  },
-];
 export default class VehicleStatus extends Component {
   constructor(props) {
     super(props);
@@ -103,13 +56,22 @@ export default class VehicleStatus extends Component {
           }
         />
         <FlatList
-          contentContainerStyle={styles.flatListContainer}
+          style={styles.flatListContainer}
           data={global.MY_VEHICLES}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={() => {
+                this.get_data();
+              }}
+            />
+          }
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item: d }) => {
             return (
               <View style={styles.listContainerMyBook}>
                 <TouchableOpacity
+                  activeOpacity={0.9}
                   style={styles.rendTouch}
                   onPress={() => navigation.navigate("Dacwash")}
                 >

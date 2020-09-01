@@ -4,10 +4,7 @@ import {
   Image,
   Text,
   TouchableOpacity,
-  StatusBar,
   View,
-  TextInput,
-  KeyboardAvoidingView,
   ImageBackground,
 } from "react-native";
 import down from "../../../assets/down.png";
@@ -15,34 +12,15 @@ import styles from "./styles";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
-import italy from "../../../assets/italy.png";
+import { api_add_vehicle } from "../../../utils/Api";
 
 export default class AddVehicle_2 extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      model: false,
-      make: false,
-      year: false,
-      color: false,
-      plateNumber: "686",
-      plateCode: "DHH",
-    };
+    this.state = {};
   }
 
-  search = (header) => {
-    this.props.navigation.navigate("SearchEditVehicle", {
-      header: header,
-    });
-  };
-
-  onSearch = () => {
-    console.warn("State");
-    this.setState();
-  };
   render() {
-    const { navigate } = this.props.navigation;
-    const { model, color, year, make } = this.state;
     return (
       <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
         <Header
@@ -65,9 +43,14 @@ export default class AddVehicle_2 extends Component {
         />
 
         <ScrollView style={styles.containerMybooking}>
-          <View style={styles.underScroll}>
+          <View>
             <Image
-              source={global.ASSETS.EMP}
+              source={{
+                uri:
+                  global.ADD_VEHICLE_DATA[9] !== ""
+                    ? global.ADD_VEHICLE_DATA[9]
+                    : global.ASSETS.SELECT_VEHICLE_IMAGE,
+              }}
               style={styles.empImg}
               resizeMode={"cover"}
             />
@@ -143,7 +126,8 @@ export default class AddVehicle_2 extends Component {
         </ScrollView>
         <View>
           <TouchableOpacity
-            onPress={() => this.props.navigation.goBack()}
+            activeOpacity={0.8}
+            onPress={() => api_add_vehicle()}
             style={styles.add_button}
           >
             <Text style={styles.add_button_Text}>{t("save")}</Text>

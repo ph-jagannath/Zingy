@@ -94,6 +94,13 @@ export default class SearchEditVehicle extends Component {
                 }}
                 style={styles.list_item}
               >
+                {header == "Color" && (
+                  <Icon
+                    name="fiber-manual-record"
+                    size={28}
+                    color={d.name.toLowerCase()}
+                  />
+                )}
                 <Text style={styles.list_item_text}>{d.name}</Text>
               </TouchableOpacity>
             );

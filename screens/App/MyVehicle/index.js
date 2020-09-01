@@ -6,50 +6,13 @@ import {
   TouchableOpacity,
   View,
   ImageBackground,
+  RefreshControl,
 } from "react-native";
 import styles from "./styles";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
-import audi from "../../../assets/audi.png";
 import global from "../../../utils/global";
 import { api_get_vehicle } from "../../../utils/Api";
-const vehicleCode = [
-  {
-    companyLogo: "audi",
-    companyName: "Audi A6",
-    gadiModal: "111-222",
-  },
-  {
-    companyLogo: "audi",
-    companyName: "Audi A6",
-    gadiModal: "111-222",
-  },
-  {
-    companyLogo: "audi",
-    companyName: "Audi A6",
-    gadiModal: "111-222",
-  },
-  {
-    companyLogo: "Mah",
-    companyName: "Mahindra Pik-Up",
-    gadiModal: "YYY-258",
-  },
-  {
-    companyLogo: "sa",
-    companyName: "SsangYong Action Sports",
-    gadiModal: "6TT-855",
-  },
-  {
-    companyLogo: "audi",
-    companyName: "Audi A6",
-    gadiModal: "111-222",
-  },
-  {
-    companyLogo: "Mah",
-    companyName: "Mahindra Pik-Up",
-    gadiModal: "YYY-258",
-  },
-];
 
 export default class MyVehicle extends Component {
   constructor(props) {
@@ -59,7 +22,7 @@ export default class MyVehicle extends Component {
   }
 
   get_data() {
-    api_get_vehicle().then((r) => {
+    api_get_vehicle().then(() => {
       this.update();
     });
   }
@@ -103,6 +66,14 @@ export default class MyVehicle extends Component {
         <FlatList
           contentContainerStyle={styles.flatListContainer}
           data={global.MY_VEHICLES}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={() => {
+                this.get_data();
+              }}
+            />
+          }
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item: d }) => {
             return (

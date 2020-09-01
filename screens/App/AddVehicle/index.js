@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   View,
   ImageBackground,
+  RefreshControl,
 } from "react-native";
 import styles from "./styles";
 import global from "../../../utils/global";
@@ -119,6 +120,14 @@ export default class AddVehicle extends Component {
         <ScrollView
           style={styles.containerMybooking}
           showsVerticalScrollIndicator={false}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={() => {
+                this.get_data();
+              }}
+            />
+          }
         >
           <View style={styles.container2}>
             <Text style={styles.addText}>Please Add Your Vehicle Details</Text>
