@@ -4,15 +4,17 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 // import global from "../../utils/global";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   editVehicle.js:
 
   container: {
     flex: 1,
-    backgroundColor: global.COLOR.white,
+    height: hp(110),
+    width: wp(100),
   },
+
   header: {
     borderBottomColor: global.COLOR.white,
   },
@@ -36,7 +38,6 @@ export default StyleSheet.create({
   },
   containerMybooking: {
     flex: 1,
-    backgroundColor: global.COLOR.newContainer,
   },
   loginText: {
     color: global.COLOR.white,
@@ -61,7 +62,7 @@ export default StyleSheet.create({
   },
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   container3: {
     marginTop: hp(0),
@@ -72,12 +73,13 @@ export default StyleSheet.create({
   },
   borderViewAddVehi: {
     height: hp(7),
-    backgroundColor: global.COLOR.white,
     borderRadius: 10,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginTop: hp(1),
+    borderColor: global.COLOR.PRIMARY_DARK,
+    borderWidth: 0.6,
   },
   category: {
     fontSize: wp(3),
@@ -129,21 +131,25 @@ export default StyleSheet.create({
     tintColor: global.COLOR.black,
   },
   empImg: {
+    marginTop: hp(2),
+    borderColor: global.COLOR.PRIMARY_DARK,
+    borderWidth: 0.8,
     height: hp(10),
-    width: wp(18),
+    width: wp(20),
+    resizeMode: "contain",
     alignSelf: "center",
   },
   borderViewEditV: {
-    marginHorizontal: wp(5),
+    paddingHorizontal: wp(5),
     alignSelf: "center",
     height: hp(5.5),
     borderRadius: 5,
     borderWidth: 0.5,
     borderColor: global.COLOR.PRIMARY_LIGHT,
     marginTop: 15,
-    width: 200,
-    flexDirection: "row",
-    justifyContent: "space-between",
+    // width: 200,
+    // flexDirection: "row",
+    justifyContent: "center",
     alignItems: "center",
   },
   SearchEditVehicle: {
@@ -169,10 +175,26 @@ export default StyleSheet.create({
     letterSpacing: 5,
     fontWeight: "bold",
     fontSize: 18,
-    marginRight: 15,
+    // marginRight: 15,
+    textAlign: "center",
   },
   inputSearchV: {
     width: wp(80),
     marginLeft: wp(3),
+  },
+  add_button: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    marginVertical: hp(3),
+    height: hp(7),
+    width: wp(75),
+    alignSelf: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+  },
+  add_button_Text: {
+    color: global.COLOR.white,
+    fontSize: wp(4.5),
+    fontWeight: "bold",
+    alignSelf: "center",
   },
 });

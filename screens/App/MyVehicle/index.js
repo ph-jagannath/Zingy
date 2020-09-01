@@ -12,7 +12,8 @@ import styles from "./styles";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
 import global from "../../../utils/global";
-import { api_get_vehicle } from "../../../utils/Api";
+import { api_get_vehicle, api_delete_vehicle } from "../../../utils/Api";
+import { showMessage } from "react-native-flash-message";
 
 export default class MyVehicle extends Component {
   constructor(props) {
@@ -93,7 +94,12 @@ export default class MyVehicle extends Component {
                   </View>
                   <View style={styles.delEdit}>
                     <TouchableOpacity
-                      onPress={() => navigation.navigate("EditVehicle")}
+                      activeOpacity={0.8}
+                      onPress={() =>
+                        navigation.navigate("EditVehicle", {
+                          details: d,
+                        })
+                      }
                     >
                       <Icon
                         name={"edit"}
@@ -102,21 +108,39 @@ export default class MyVehicle extends Component {
                         color="#8E0404"
                       />
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity
+                      activeOpacity={0.8}
+                      onPress={() => {
+                        if (
+                          d.is_booked.toString() == "1" ||
+                          d.is_package.toString() == "1"
+                        ) {
+                          showMessage({
+                            message:
+                              "This vehicle has an active service. Try again later.",
+                            type: "warning",
+                          });
+                        } else {
+                          api_delete_vehicle(d).then((r) => {
+                            r && this.get_data();
+                          });
+                        }
+                      }}
+                    >
                       <Image
                         source={global.ASSETS.DELETE}
                         resizeMode={"center"}
                         style={styles.deleteIcon}
                       />
                     </TouchableOpacity>
-                    <TouchableOpacity style={styles.marRight}>
+                    <View>
                       <Icon
                         name="chevron-right"
                         size={32}
                         color="#6ABC45"
                         style={styles.rightIcon}
                       />
-                    </TouchableOpacity>
+                    </View>
                   </View>
                 </View>
               </View>

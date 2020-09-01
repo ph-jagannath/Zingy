@@ -450,7 +450,11 @@ export async function api_add_vehicle(d) {
   data.append("plate_code", " ");
   data.append("color", global.ADD_VEHICLE_DATA[5]);
   data.append("year", global.ADD_VEHICLE_DATA[4]);
-  data.append("vehicle_picture", global.ADD_VEHICLE_DATA[9]);
+  data.append("vehicle_picture", {
+    uri: global.ADD_VEHICLE_DATA[9],
+    name: "vehicle_picture.jpg",
+    type: "image/jpg",
+  });
   data.append("modal_id", global.ADD_VEHICLE_DATA[2]);
 
   const DATA = Axios({
@@ -463,6 +467,95 @@ export async function api_add_vehicle(d) {
       Loading.hide();
       if (response.data.response.status) {
         RootNavigation.navigate("Home");
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
+        });
+        return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * Edit vehicle
+ */
+
+export async function api_edit_vehicle(d) {
+  Loading.show();
+  var data = new FormData();
+  data.append("user_id", global.AUTHTOKEN);
+  data.append("make", d.make_id);
+  data.append("type", d.vehicle_type);
+  data.append("country_id", d.country_id);
+  data.append("plate_number", d.plateNumber);
+  data.append("plate_code", " ");
+  data.append("color", d.color);
+  data.append("year", d.year);
+  data.append("model", d.model_id);
+  data.append("vehicle_id", d.vehicle_id);
+  data.append("vehicle_picture", {
+    uri: d.vehicle_image,
+    name: "vehicle_picture.jpg",
+    type: "image/jpg",
+  });
+
+  const DATA = Axios({
+    method: "post",
+    url: "edit_vehicle",
+    data,
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        RootNavigation.navigate("Home");
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
+        });
+        return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * Delete vehicle
+ */
+
+export async function api_delete_vehicle(d) {
+  Loading.show();
+
+  const DATA = Axios({
+    method: "post",
+    url: "delete_vehicle",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+      vehicle_id: d.id,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
         showMessage({
           message: response.data.response.message,
           type: "success",

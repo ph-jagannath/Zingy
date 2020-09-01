@@ -69,9 +69,7 @@ function HomeStack() {
       <Stack.Screen name="CreDebitCardDetail" component={CreDebitCardDetail} />
       <Stack.Screen name="BookingDetail" component={BookingDetail} />
       <Stack.Screen name="HomeLocation" component={HomeLocation} />
-      <Stack.Screen name="EditVehicle" component={EditVehicle} />
       <Stack.Screen name="Notification" component={Notification} />
-      <Stack.Screen name="SearchEditVehicle" component={SearchEditVehicle} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="Dacwash" component={Dacwash} />
       <Stack.Screen name="AddLocation" component={AddLocation} />

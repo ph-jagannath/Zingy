@@ -12,3 +12,6 @@ dacwash customer app in react native
     - Sign Up Api
     - Login Api
     - Logout Api
+    - Add Vehicle Api
+    - Edit Vehicle Api
+    - Delete Vehicle Api
