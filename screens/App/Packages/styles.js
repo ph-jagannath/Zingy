@@ -4,14 +4,15 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 // import global from "../../utils/global";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   myvehicle.js:
 
   container: {
     flex: 1,
-    backgroundColor: global.COLOR.white,
+    height: hp(110),
+    width: wp(100),
   },
   header: {
     borderBottomColor: global.COLOR.white,
@@ -36,8 +37,8 @@ export default StyleSheet.create({
     backgroundColor: global.COLOR.newContainer,
   },
   headerText: {
-    color: global.COLOR.white,
-    fontSize: wp(4),
+    color: "#fff",
+    fontSize: wp(5),
   },
   statusView: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
@@ -49,18 +50,19 @@ export default StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     height: hp(7),
-    backgroundColor: global.COLOR.darkGreen,
+    backgroundColor: global.COLOR.PRIMARY_DARK,
   },
   test: {
     width: wp(55),
     marginLeft: wp(3),
     color: global.COLOR.white,
-    fontSize: wp(3),
+    fontSize: wp(4),
+    textTransform: "capitalize",
   },
   standardPackage: {
     marginRight: wp(3),
     color: global.COLOR.white,
-    fontSize: 13,
+    fontSize: wp(4),
   },
   shadowViewPackage: {
     borderWidth: 1,
@@ -83,24 +85,27 @@ export default StyleSheet.create({
   imgCar: {
     height: hp(3),
     width: wp(5),
-    tintColor: global.COLOR.carClr,
+    tintColor: global.COLOR.PRIMARY_DARK,
+    resizeMode: "contain",
   },
   exteriorText: {
     fontWeight: "bold",
     marginLeft: 15,
-    fontSize: wp(3),
-    color: global.COLOR.darkGreen,
+    fontSize: wp(4),
+    color: global.COLOR.PRIMARY_DARK,
   },
   expDate: {
     marginHorizontal: wp(2),
     marginTop: hp(2),
-    fontSize: wp(3),
+    fontSize: wp(4),
     marginBottom: hp(1),
-    color: global.COLOR.darkGreen,
+    color: global.COLOR.PRIMARY_DARK,
     fontWeight: "bold",
   },
   imgClean: {
     height: hp(3),
     width: wp(5),
+    tintColor: global.COLOR.PRIMARY_DARK,
+    resizeMode: "contain",
   },
 });

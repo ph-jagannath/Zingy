@@ -573,3 +573,35 @@ export async function api_delete_vehicle(d) {
   );
   return DATA;
 }
+
+/**
+ * Get Packages
+ */
+
+export async function api_get_packages(d) {
+  Loading.show();
+
+  const DATA = Axios({
+    method: "post",
+    url: "user_package_list",
+    data: {
+      user_id: global.AUTHTOKEN,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.MY_PACKAGES = response.data.response.data;
+        return global.MY_PACKAGES;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

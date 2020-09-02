@@ -5,7 +5,7 @@ import DrawerComponent from "../components/DrawerContent";
 // drawer screens
 import MyVehicle from "../screens/App/MyVehicle";
 import Faqs from ".././screens/App/Faqs";
-import Packages from ".././screens/App/Packages";
+import Packages from "../screens/App/Packages";
 import Message from ".././screens/App/Message";
 import Dacwash from ".././screens/App/Dacwash";
 import MyBookings from ".././screens/App/MyBookings";

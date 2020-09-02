@@ -33,6 +33,9 @@ export default {
     NO_IMAGE: require("../assets/no_image.jpg"),
     SELECT_VEHICLE_IMAGE:
       "http://placehold.jp/cccccc/404040/150x150.png?text=SELECT%20VEHICLE%20IMAGE",
+    EXT_WASH: require("../assets/ext-wash.png"),
+    INT_WASH: require("../assets/interiorcleaning.png"),
+    ENG_WASH: require("../assets/enginedetailing.png"),
   },
   COLOR: {
     PRIMARY_LIGHT: "#6ABC45",
@@ -233,6 +236,7 @@ export default {
   MY_VEHICLES: [],
   MAKE_MODAL: [],
   MAKE_COUNTRY: [],
+  MY_PACKAGES: [],
 
   // Add vehicle data
   ADD_VEHICLE_DATA: [
