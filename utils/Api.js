@@ -678,3 +678,36 @@ export async function api_add_location(d) {
   );
   return DATA;
 }
+
+/**
+ * Get FAQ
+ */
+
+export async function api_get_faq(d) {
+  Loading.show();
+
+  const DATA = Axios({
+    method: "post",
+    url: "faq",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.FAQ = response.data.response.data;
+        return global.FAQ;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

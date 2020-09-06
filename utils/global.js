@@ -240,6 +240,7 @@ export default {
   MAKE_COUNTRY: [],
   MY_PACKAGES: [],
   MY_LOCATIONS: [],
+  FAQ: [],
 
   // Add vehicle data
   ADD_VEHICLE_DATA: [

@@ -19,3 +19,4 @@ dacwash customer app in react native
     - MY Packages
     - Location Add
     - Location Edit
+    - FAQ

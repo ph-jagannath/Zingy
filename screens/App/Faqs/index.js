@@ -5,89 +5,15 @@ import {
   Image,
   Text,
   StyleSheet,
-  StatusBar,
+  TouchableOpacity,
   View,
+  RefreshControl,
 } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import styles from "./styles";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
-
-const data = [
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-  {
-    one: `Before booking Do i need to be present before,during,or after the service?`,
-    two: `Not necessarily\nThe app will notify you one the washer arrives.You can also add specific instructions for the washer to follow on arrival within the booking notes,any questions and can be communication by the app message or call.`,
-  },
-];
+import { api_get_faq } from "../../../utils/Api";
 
 export default class Faqs extends Component {
   constructor(props) {
@@ -95,69 +21,33 @@ export default class Faqs extends Component {
     this.state = {
       icon: false,
       content: false,
+      active_id: "",
     };
   }
-  renderList = ({ item }) => {
-    const { icon } = this.state;
-    return (
-      <View>
-        <View
-          style={[
-            styles.listContainerFaq,
-            {
-              backgroundColor: icon
-                ? global.COLOR.PRIMARY_LIGHT
-                : global.COLOR.white,
-            },
-          ]}
-        >
-          <View style={styles.betweenView}>
-            {/* <Text style={styles.oneText}> */}
-            <Text
-              style={[
-                styles.oneText,
-                { color: icon ? "#fff" : global.COLOR.black },
-              ]}
-            >
-              {item.one}
-            </Text>
-            <TouchableOpacity
-              onPress={() => this.setState({ icon: !this.state.icon })}
-            >
-              {
-                <Image
-                  source={icon ? global.ASSETS.UP : global.ASSETS.DOWN}
-                  style={[
-                    styles.iconStyleFaq,
-                    {
-                      tintColor: icon ? global.COLOR.white : global.COLOR.black,
-                    },
-                  ]}
-                />
-              }
-            </TouchableOpacity>
-          </View>
-        </View>
-        {this.state.icon && (
-          <View style={styles.shadowViewFaq}>
-            <Text style={styles.textTwo}>{item.two}</Text>
-          </View>
-        )}
-      </View>
-    );
+
+  componentDidMount() {
+    this.get_data();
+  }
+
+  get_data = () => {
+    api_get_faq().then(() => {
+      this.update();
+    });
   };
+
+  update() {
+    this.setState({
+      update: Date.now(),
+    });
+  }
+
   render() {
+    const { active_id } = this.state;
     return (
       <View style={styles.containerMybooking}>
-        <View style={styles.statusView}>
-          <StatusBar
-            translucent
-            backgroundColor={global.COLOR.PRIMARY_LIGHT}
-            barStyle="light-content"
-          />
-        </View>
         <Header
           containerStyle={styles.header}
+          statusBarProps={{ backgroundColor: global.COLOR.PRIMARY_LIGHT }}
           backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity
@@ -194,8 +84,76 @@ export default class Faqs extends Component {
         <View style={styles.containerMybooking}>
           <FlatList
             contentContainerStyle={styles.flatView2}
-            data={data}
-            renderItem={({ item, index }) => this.renderList({ item, index })}
+            refreshControl={
+              <RefreshControl
+                refreshing={false}
+                onRefresh={() => {
+                  this.get_data();
+                }}
+              />
+            }
+            data={global.FAQ}
+            renderItem={({ item: d }) => {
+              return (
+                <View>
+                  <TouchableOpacity
+                    activeOpacity={0.8}
+                    onPress={() => {
+                      this.setState({
+                        active_id: active_id === d.id ? "" : d.id,
+                      });
+                    }}
+                    style={[
+                      styles.listContainerFaq,
+                      {
+                        backgroundColor:
+                          active_id === d.id
+                            ? global.COLOR.PRIMARY_LIGHT
+                            : global.COLOR.white,
+                      },
+                    ]}
+                  >
+                    <View style={styles.betweenView}>
+                      <Text
+                        style={[
+                          styles.oneText,
+                          {
+                            color:
+                              active_id === d.id ? "#fff" : global.COLOR.black,
+                          },
+                        ]}
+                      >
+                        {d.question}
+                      </Text>
+
+                      <Image
+                        source={
+                          active_id === d.id
+                            ? global.ASSETS.UP
+                            : global.ASSETS.DOWN
+                        }
+                        style={[
+                          styles.iconStyleFaq,
+                          {
+                            tintColor:
+                              active_id === d.id
+                                ? global.COLOR.white
+                                : global.COLOR.black,
+                          },
+                        ]}
+                      />
+                    </View>
+                  </TouchableOpacity>
+                  {active_id === d.id && (
+                    <View style={styles.shadowViewFaq}>
+                      <Text style={styles.textTwo}>
+                        {d.answer.replace(/<\/?[^>]+(>|$)/g, "")}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              );
+            }}
             keyExtractor={(item, index) => index.toString()}
             extraData={this.state}
           />

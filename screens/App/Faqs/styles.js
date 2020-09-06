@@ -37,7 +37,7 @@ export default StyleSheet.create({
   },
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   statusView: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
