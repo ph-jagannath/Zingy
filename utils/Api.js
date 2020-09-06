@@ -605,3 +605,76 @@ export async function api_get_packages(d) {
   );
   return DATA;
 }
+
+/**
+ * Get Locations
+ */
+
+export async function api_get_locations(d) {
+  Loading.show();
+
+  const DATA = Axios({
+    method: "post",
+    url: "get_location",
+    data: {
+      user_id: global.AUTHTOKEN,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.MY_LOCATIONS = response.data.response.data;
+        return global.MY_LOCATIONS;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * Add Locations
+ */
+
+export async function api_add_location(d) {
+  Loading.show();
+
+  const DATA = Axios({
+    method: "post",
+    url: "add_location",
+    data: {
+      user_id: global.AUTHTOKEN,
+      latitude: d.lat,
+      longitude: d.lng,
+      address: d.address,
+      id: "",
+      type: d.type,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
+        });
+        return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

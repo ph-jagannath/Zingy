@@ -114,6 +114,7 @@ i18n.translations = {
     myBooking_pre: "Previous",
     profile_changePassword: "Change Password",
     // Addlocation.js
+    addLocation_home: "Home",
     addLocation_work: "Work",
     addLocation_other: "Other",
     save: "Save",

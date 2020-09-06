@@ -29,6 +29,7 @@ import AddLocation from "../screens/App/AddLocation";
 import AddVehicle from "../screens/App/AddVehicle";
 import AddVehicle_1 from "../screens/App/AddVehicle_1";
 import AddVehicle_2 from "../screens/App/AddVehicle_2";
+import PlacesSearch from "../screens/App/PlacesSearch";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -38,6 +39,7 @@ export default function AppNavigator() {
     <Drawer.Navigator
       drawerContent={(props) => <DrawerComponent {...props} />}
       initialRouteName="Home"
+      backBehavior="initialRoute"
       drawerType={"slide"}
       screenOptions={{
         unmountOnBlur: true,
@@ -45,6 +47,7 @@ export default function AppNavigator() {
     >
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="MyVehicle" component={MyVehicleStack} />
+      <Drawer.Screen name="Location" component={MyLocationStack} />
       <Drawer.Screen name="MyBookings" component={MyBookings} />
       <Drawer.Screen name="Message" component={Message} />
       <Drawer.Screen name="Contact" component={Contact} />
@@ -52,7 +55,6 @@ export default function AppNavigator() {
       <Drawer.Screen name="ChangeLanguage" component={ChangeLanguage} />
       <Drawer.Screen name="Package" component={Packages} />
       <Stack.Screen name="Profile" component={Profile} />
-      <Stack.Screen name="Location" component={Location} />
     </Drawer.Navigator>
   );
 }
@@ -72,7 +74,6 @@ function HomeStack() {
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       <Stack.Screen name="Dacwash" component={Dacwash} />
-      <Stack.Screen name="AddLocation" component={AddLocation} />
     </Stack.Navigator>
   );
 }
@@ -89,6 +90,19 @@ function MyVehicleStack() {
       <Stack.Screen name="AddVehicle_2" component={AddVehicle_2} />
       <Stack.Screen name="EditVehicle" component={EditVehicle} />
       <Stack.Screen name="SearchVehicle" component={SearchEditVehicle} />
+    </Stack.Navigator>
+  );
+}
+
+function MyLocationStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="my_location"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="my_location" component={Location} />
+      <Stack.Screen name="AddLocation" component={AddLocation} />
+      <Stack.Screen name="add_location_search" component={PlacesSearch} />
     </Stack.Navigator>
   );
 }

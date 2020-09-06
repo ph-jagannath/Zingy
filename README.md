@@ -6,6 +6,7 @@ dacwash customer app in react native
 
     - Remove unused libraries
     - Terms and condition of Signup
+    - List empty messages
 
 # DONE
 
@@ -16,3 +17,5 @@ dacwash customer app in react native
     - Edit Vehicle Api
     - Delete Vehicle Api
     - MY Packages
+    - Location Add
+    - Location Edit

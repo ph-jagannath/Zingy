@@ -36,6 +36,8 @@ export default {
     EXT_WASH: require("../assets/ext-wash.png"),
     INT_WASH: require("../assets/interiorcleaning.png"),
     ENG_WASH: require("../assets/enginedetailing.png"),
+    MAP_PIN: require("../assets/map_pin.png"),
+    BACK_ARROW: require("../assets/back_arrow.png"),
   },
   COLOR: {
     PRIMARY_LIGHT: "#6ABC45",
@@ -237,6 +239,7 @@ export default {
   MAKE_MODAL: [],
   MAKE_COUNTRY: [],
   MY_PACKAGES: [],
+  MY_LOCATIONS: [],
 
   // Add vehicle data
   ADD_VEHICLE_DATA: [
