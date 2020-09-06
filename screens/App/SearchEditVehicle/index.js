@@ -7,8 +7,8 @@ import {
   TextInput,
   FlatList,
 } from "react-native";
-import styles from "../../styles/app/searchEdit_styles";
-import global from "../../utils/global";
+import styles from "./styles";
+import global from "../../../utils/global";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
 export default class SearchEditVehicle extends Component {

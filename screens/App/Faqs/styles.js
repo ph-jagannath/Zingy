@@ -4,7 +4,7 @@ import {
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
 // import global from "../../utils/global";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   myvehicle.js:

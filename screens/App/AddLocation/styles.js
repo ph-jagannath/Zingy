@@ -164,4 +164,21 @@ export default StyleSheet.create({
     resizeMode: "contain",
     tintColor: global.COLOR.PRIMARY_DARK,
   },
+  map_my_location: {
+    zIndex: 9,
+    position: "absolute",
+    // marginTop: hp(35),
+    // alignSelf: "center",
+    right: wp(7),
+    bottom: hp(15),
+    backgroundColor: global.COLOR.PRIMARY_DARK,
+    padding: 7,
+    borderRadius: 30,
+  },
+  map_my_location_image: {
+    height: 35,
+    width: 35,
+    resizeMode: "contain",
+    tintColor: global.COLOR.PRIMARY_DARK,
+  },
 });

@@ -57,6 +57,13 @@ export default class AddLocation extends Component {
       reRender: false,
       marginBottom: 1,
     });
+    const region = {
+      latitude: d.geometry.location.lat,
+      longitude: d.geometry.location.lng,
+      latitudeDelta: 0.012,
+      longitudeDelta: 0.01,
+    };
+    this.map.animateToRegion(region, 500);
     setTimeout(() => {
       this.setState({ reRender: true });
     }, 1000);
@@ -73,6 +80,13 @@ export default class AddLocation extends Component {
           lng,
           address: response.results[0].formatted_address,
         });
+        const region = {
+          latitude: lat,
+          longitude: lng,
+          latitudeDelta: 0.012,
+          longitudeDelta: 0.01,
+        };
+        this.map.animateToRegion(region, 500);
       },
       (error) => {
         console.error(error);
@@ -145,21 +159,22 @@ export default class AddLocation extends Component {
           {/* map  */}
           <>
             <MapView
+              ref={(map) => (this.map = map)}
               style={{
                 flex: 1,
-                marginBottom: marginBottom,
+                // marginBottom: marginBottom,
               }}
-              key={key}
-              onMapReady={this._onMapReady}
-              showsUserLocation={true}
+              // key={key}
+              // onMapReady={this._onMapReady}
+              showsUserLocation={false}
               showsCompass={false}
-              scrollEnabled={true}
-              cacheEnabled={false}
               moveOnMarkerPress={false}
+              cacheEnabled={false}
+              showsMyLocationButton={false}
+              liteMode={false}
+              scrollEnabled={true}
               zoomEnabled={true}
               zoomTapEnabled={true}
-              showsMyLocationButton={true}
-              liteMode={false}
               pitchEnabled={true}
               provider="google"
               initialRegion={{
@@ -187,9 +202,25 @@ export default class AddLocation extends Component {
               />
             </View>
           </>
+          {/* my location icon */}
+          <>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => {
+                this._getLocationAsync();
+              }}
+              style={styles.map_my_location}
+            >
+              <Icon
+                size={28}
+                name="crosshairs-gps"
+                type="material-community"
+                color="#fff"
+              />
+            </TouchableOpacity>
+          </>
 
           {/* location type */}
-
           <>
             {action_type == "add" && (
               <View style={styles.catAddLocation}>
