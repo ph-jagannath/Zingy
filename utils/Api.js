@@ -711,3 +711,39 @@ export async function api_get_faq(d) {
   );
   return DATA;
 }
+
+/**
+ * Get Bookings
+ *
+ */
+
+export async function api_get_bookings(d) {
+  Loading.show();
+
+  const DATA = Axios({
+    method: "post",
+    url: "my_bookings",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+      type: d,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.MY_BOOKINGS = response.data.response.data;
+        return global.MY_BOOKINGS;
+      } else {
+        global.MY_BOOKINGS = [];
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

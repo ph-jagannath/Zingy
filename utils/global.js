@@ -27,6 +27,7 @@ export default {
     DOWN: require("../assets/down.png"),
     UP: require("../assets/uparrow.png"),
     CAR: require("../assets/exteriorewash.png"),
+    BIKE: require("../assets/bike.png"),
     CLEANING: require("../assets/interiorcleaning.png"),
     MESSAGE: require("../assets/message.png"),
     STAR: require("../assets/star.png"),
@@ -70,7 +71,7 @@ export default {
     WIDTH: width,
     DEVICETYPE: Platform.OS,
     DEVICETOKEN: "",
-    INPUT_COUNTRY_CODE: "+44",
+    CURRENCY: "€",
     PLACESAPI: "AIzaSyCdIiqraik9uJkeLdoarnKms9voK1Q94pk",
   },
   USER: {},
@@ -240,6 +241,7 @@ export default {
   MAKE_COUNTRY: [],
   MY_PACKAGES: [],
   MY_LOCATIONS: [],
+  MY_BOOKINGS: [],
   FAQ: [],
 
   // Add vehicle data

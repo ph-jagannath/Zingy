@@ -3,7 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   myBooking.js:
@@ -14,10 +14,15 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: global.COLOR.newContainer,
   },
+  container: {
+    flex: 1,
+    height: hp(110),
+    width: wp(100),
+  },
 
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   preTouc: {
     height: hp(7),
@@ -25,10 +30,7 @@ export default StyleSheet.create({
     width: wp(46),
     justifyContent: "center",
   },
-  statusView: {
-    backgroundColor: global.COLOR.PRIMARY_LIGHT,
-    height: Platform.OS === "ios" ? 20 : 0,
-  },
+
   bellS: {
     tintColor: global.COLOR.white,
     height: hp(5),
@@ -42,8 +44,10 @@ export default StyleSheet.create({
     marginHorizontal: wp(3),
   },
   dates: {
-    fontSize: 14,
-    color: global.COLOR.lightGray,
+    fontSize: wp(3.5),
+    // width: wp(15),
+    color: "#808080",
+    textAlign: "center",
   },
   rowViewMyBooking: {
     flexDirection: "row",
@@ -66,34 +70,41 @@ export default StyleSheet.create({
     borderRadius: 15,
     width: wp(46),
     justifyContent: "center",
+    borderWidth: 1,
+    borderColor: global.COLOR.PRIMARY_LIGHT,
   },
   cancel: {
-    fontSize: wp(3),
+    fontSize: wp(3.7),
+    color: "red",
+  },
+  resch: {
+    marginLeft: wp(6),
+    fontSize: wp(3.7),
     color: global.COLOR.PRIMARY_LIGHT,
-    marginBottom: 10,
   },
   mybook: {
     alignSelf: "center",
   },
   leftView: {
-    marginLeft: 55,
+    marginTop: hp(2),
     flexDirection: "row",
   },
-  preTouc: {
-    height: hp(7),
-    borderRadius: 15,
-    width: wp(46),
-    justifyContent: "center",
-  },
+
   containerMybooking: {
     flex: 1,
     backgroundColor: global.COLOR.newContainer,
   },
   listContainerMyBook: {
-    marginHorizontal: wp(5),
+    marginHorizontal: wp(4),
     borderRadius: 10,
-    marginBottom: hp(2),
-    backgroundColor: "#fff",
+    marginVertical: hp(1),
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    borderWidth: 0.8,
+    borderColor: global.COLOR.PRIMARY_DARK,
+    padding: wp(3),
+    // height: hp(18),
   },
   standView: {
     marginTop: hp(2),
@@ -142,7 +153,7 @@ export default StyleSheet.create({
     width: wp(11),
   },
   stand: {
-    width: wp(55),
+    width: wp(40),
     color: global.COLOR.darkGreen,
     fontWeight: "bold",
     fontSize: 14,
@@ -151,17 +162,18 @@ export default StyleSheet.create({
     alignSelf: "center",
     height: hp(5),
     width: wp(9),
-    tintColor: global.COLOR.darkGreen,
+    tintColor: global.COLOR.PRIMARY_DARK,
+    resizeMode: "contain",
   },
   locationMyBook: {
     width: wp(55),
     color: global.COLOR.black,
-    fontWeight: "bold",
-    fontSize: 14,
+    // fontWeight: "bold",
+    fontSize: wp(4),
   },
-  resch: {
-    marginLeft: wp(6),
-    fontSize: wp(3),
-    color: global.COLOR.PRIMARY_LIGHT,
+  list_empty_text: {
+    fontWeight: "bold",
+    alignSelf: "center",
+    marginTop: hp(27),
   },
 });

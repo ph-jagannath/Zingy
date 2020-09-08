@@ -48,7 +48,7 @@ export default function AppNavigator() {
       <Drawer.Screen name="Home" component={HomeStack} />
       <Drawer.Screen name="MyVehicle" component={MyVehicleStack} />
       <Drawer.Screen name="Location" component={MyLocationStack} />
-      <Drawer.Screen name="MyBookings" component={MyBookings} />
+      <Drawer.Screen name="MyBookings" component={MyBookingStack} />
       <Drawer.Screen name="Message" component={Message} />
       <Drawer.Screen name="Contact" component={Contact} />
       <Drawer.Screen name="Faqs" component={Faqs} />
@@ -103,6 +103,18 @@ function MyLocationStack() {
       <Stack.Screen name="my_location" component={Location} />
       <Stack.Screen name="AddLocation" component={AddLocation} />
       <Stack.Screen name="add_location_search" component={PlacesSearch} />
+    </Stack.Navigator>
+  );
+}
+
+function MyBookingStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="booking_list"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="booking_list" component={MyBookings} />
+      <Stack.Screen name="booking_detail" component={HomeLocation} />
     </Stack.Navigator>
   );
 }
