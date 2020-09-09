@@ -7,7 +7,6 @@ import MyVehicle from "../screens/App/MyVehicle";
 import Faqs from ".././screens/App/Faqs";
 import Packages from "../screens/App/Packages";
 import Message from ".././screens/App/Message";
-import Dacwash from ".././screens/App/Dacwash";
 import MyBookings from ".././screens/App/MyBookings";
 import Location from ".././screens/App/Location";
 import ChangeLanguage from ".././screens/App/ChangeLanguage";
@@ -30,6 +29,7 @@ import AddVehicle from "../screens/App/AddVehicle";
 import AddVehicle_1 from "../screens/App/AddVehicle_1";
 import AddVehicle_2 from "../screens/App/AddVehicle_2";
 import PlacesSearch from "../screens/App/PlacesSearch";
+import SelectPlans from "../screens/App/SelectPlans";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -65,6 +65,7 @@ function HomeStack() {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="Home" component={VehicleStatus} />
+      <Stack.Screen name="select_plans" component={SelectPlans} />
       {/* <Stack.Screen name="MyBookings" component={MyBookings} /> */}
       <Stack.Screen name="Summary" component={Summary} />
       <Stack.Screen name="Payment" component={Payment} />
@@ -73,7 +74,7 @@ function HomeStack() {
       <Stack.Screen name="HomeLocation" component={HomeLocation} />
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
-      <Stack.Screen name="Dacwash" component={Dacwash} />
+      {/* <Stack.Screen name="Dacwash" component={Dacwash} /> */}
     </Stack.Navigator>
   );
 }

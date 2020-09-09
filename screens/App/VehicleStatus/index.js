@@ -73,7 +73,7 @@ export default class VehicleStatus extends Component {
                 <TouchableOpacity
                   activeOpacity={0.9}
                   style={styles.rendTouch}
-                  onPress={() => navigation.navigate("Dacwash")}
+                  onPress={() => navigation.navigate("select_plans")}
                 >
                   <View style={styles.touchBtmView}>
                     <Image
@@ -84,6 +84,7 @@ export default class VehicleStatus extends Component {
                       <Text style={styles.companyNames}>{d.modal_name}</Text>
                       <Text style={styles.modelName}>{d.plate_number}</Text>
                       <Text style={styles.modelName}>{d.type}</Text>
+                      <Text style={styles.modelName}>{d.country_name}</Text>
                     </View>
                   </View>
                   <Icon

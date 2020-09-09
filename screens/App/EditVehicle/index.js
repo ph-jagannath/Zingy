@@ -54,7 +54,7 @@ export default class EditVehicle extends Component {
       plateNumber: d.plate_number,
       year: d.year,
       vehicle_image: d.vehicle_picture,
-      vehicle_id: d.vehicle_id,
+      vehicle_id: d.id,
       vehicle_type: d.type,
     });
   }

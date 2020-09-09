@@ -380,6 +380,7 @@ export async function api_logout() {
 
 export async function api_get_vehicle(d) {
   Loading.show();
+  global.MY_VEHICLES = [];
   const DATA = Axios({
     method: "post",
     url: "get_vehicle",
@@ -450,16 +451,18 @@ export async function api_add_vehicle(d) {
   data.append("plate_code", " ");
   data.append("color", global.ADD_VEHICLE_DATA[5]);
   data.append("year", global.ADD_VEHICLE_DATA[4]);
-  data.append("vehicle_picture", {
-    uri: global.ADD_VEHICLE_DATA[9],
-    name: "vehicle_picture.jpg",
-    type: "image/jpg",
-  });
   data.append("modal_id", global.ADD_VEHICLE_DATA[2]);
+  if (global.ADD_VEHICLE_DATA[9].length > 0) {
+    data.append("vehicle_picture", {
+      uri: global.ADD_VEHICLE_DATA[9],
+      name: "vehicle_picture.jpg",
+      type: "image/jpg",
+    });
+  }
 
   const DATA = Axios({
     method: "post",
-    url: "add_vehicle",
+    url: "add_vehicle_postmen",
     data,
     validateStatus: () => true,
   }).then(
@@ -510,7 +513,7 @@ export async function api_edit_vehicle(d) {
 
   const DATA = Axios({
     method: "post",
-    url: "edit_vehicle",
+    url: "edit_vehicle_postmen",
     data,
     validateStatus: () => true,
   }).then(

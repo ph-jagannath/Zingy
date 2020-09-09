@@ -9,8 +9,7 @@ import {
   StatusBar,
   View,
 } from "react-native";
-import styles from "../../styles/app/_dacWash_styles";
-import global from "../../utils/global";
+import styles from "./styles";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
@@ -19,6 +18,7 @@ import * as Permissions from "expo-permissions";
 import Geocode from "react-geocode";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
+import global from "../../../utils/global";
 const data = [
   {
     standard: `Standard Cars`,
@@ -45,7 +45,7 @@ const data = [
     price: `52.00AUD`,
   },
 ];
-export default class Dacwash extends Component {
+export default class SelectPlans extends Component {
   constructor(props) {
     super(props);
     this.state = {
