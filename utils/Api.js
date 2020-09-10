@@ -750,3 +750,74 @@ export async function api_get_bookings(d) {
   );
   return DATA;
 }
+
+/**
+ * Get plans list
+ *
+ */
+
+export async function api_get_plan_list(d) {
+  Loading.show();
+  global.PLANS_LIST = [];
+  const DATA = Axios({
+    method: "post",
+    url: "plan_list",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.PLANS_LIST = response.data.response.Data;
+        return global.PLANS_LIST;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * Get plans list zone
+ *
+ */
+
+export async function api_get_plan_list_zone(d) {
+  Loading.show();
+  global.PLANS_LIST_ZONE = [];
+  const DATA = Axios({
+    method: "post",
+    url: "plan_list_zone",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+      vechicle_type: d.type,
+      latitude: d.lat,
+      longitude: d.lng,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.PLANS_LIST_ZONE = response.data.response.Data;
+        return global.PLANS_LIST_ZONE;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

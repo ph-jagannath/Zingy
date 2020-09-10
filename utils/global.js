@@ -242,6 +242,8 @@ export default {
   MY_PACKAGES: [],
   MY_LOCATIONS: [],
   MY_BOOKINGS: [],
+  PLANS_LIST_ZONE: [],
+  PLANS_LIST: [],
   FAQ: [],
 
   // Add vehicle data
@@ -256,5 +258,19 @@ export default {
     "", // 7 country id
     "", // 8 plate number
     "", // 9 image
+  ],
+
+  // add booking data 4 wheeler
+  ADD_BOOKING_4_DATA: [
+    "", // 0 vehicle data
+    "", // 1 plan data
+    "", // 2 address
+    "", // 3 lat
+    "", // 4 lng
+    "", // 5 booking type
+    "", // 6 remark
+    // "", // 7 country id
+    // "", // 8 plate number
+    // "", // 9 image
   ],
 };

@@ -73,7 +73,10 @@ export default class VehicleStatus extends Component {
                 <TouchableOpacity
                   activeOpacity={0.9}
                   style={styles.rendTouch}
-                  onPress={() => navigation.navigate("select_plans")}
+                  onPress={() => {
+                    global.ADD_BOOKING_4_DATA[0] = d;
+                    navigation.navigate("select_plans");
+                  }}
                 >
                   <View style={styles.touchBtmView}>
                     <Image

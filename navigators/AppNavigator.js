@@ -66,6 +66,7 @@ function HomeStack() {
     >
       <Stack.Screen name="Home" component={VehicleStatus} />
       <Stack.Screen name="select_plans" component={SelectPlans} />
+      <Stack.Screen name="location_search" component={PlacesSearch} />
       {/* <Stack.Screen name="MyBookings" component={MyBookings} /> */}
       <Stack.Screen name="Summary" component={Summary} />
       <Stack.Screen name="Payment" component={Payment} />

@@ -8,17 +8,22 @@ import {
   StyleSheet,
   StatusBar,
   View,
+  TouchableOpacity,
 } from "react-native";
 import styles from "./styles";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import * as Permissions from "expo-permissions";
 import Geocode from "react-geocode";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import global from "../../../utils/global";
+import {
+  api_get_plan_list,
+  api_get_locations,
+  api_get_plan_list_zone,
+} from "../../../utils/Api";
 const data = [
   {
     standard: `Standard Cars`,
@@ -55,41 +60,21 @@ export default class SelectPlans extends Component {
       hasLocationPermissions: false,
       locationResult: null,
       textAddress: null,
+
+      marginBottom: 1,
+      loading: false,
+      reRender: true,
+      key: 0,
+      tracksViewChanges: true,
+      type: "home",
+      lat: "",
+      lng: "",
+      lat_delta: 0.006,
+      lng_delta: 0.003,
+      address: "",
     };
   }
-  renderList = ({ item, index }) => {
-    return (
-      <View>
-        <TouchableOpacity
-          // onPress={() => this.props.navigation.navigate("Summary")}
-          style={[
-            styles.touchAppClrView,
-            {
-              backgroundColor:
-                index === 0 ? global.COLOR.PRIMARY_LIGHT : global.COLOR.white,
-            },
-          ]}
-        >
-          <Text
-            style={[
-              styles.standrd,
-              { color: index === 0 ? global.COLOR.white : global.COLOR.black },
-            ]}
-          >
-            {item.standard}
-          </Text>
-          <Text
-            style={[
-              styles.priceDacwash,
-              { color: index === 0 ? global.COLOR.white : global.COLOR.black },
-            ]}
-          >
-            {item.price}
-          </Text>
-        </TouchableOpacity>
-      </View>
-    );
-  };
+
   setLoc = (data, details) => {
     this.setState({
       loc: data.description,
@@ -99,6 +84,7 @@ export default class SelectPlans extends Component {
   };
   componentDidMount() {
     this._getLocationAsync();
+    api_get_locations();
   }
 
   _getLocationAsync = async () => {
@@ -111,26 +97,54 @@ export default class SelectPlans extends Component {
       this.setState({ hasLocationPermissions: true });
     }
     let location = await Location.getCurrentPositionAsync();
-    // this.setState({ locationResult: JSON.stringify(location)});
+    this.get_address(location.coords.latitude, location.coords.longitude);
+  };
+
+  handleOnNavigateBack = (d) => {
     this.setState({
-      mapRegion: {
-        latitude: location.coords.latitude,
-        longitude: location.coords.longitude,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      },
+      address: d.name + ", " + d.formatted_address,
+      lat: d.geometry.location.lat,
+      lng: d.geometry.location.lng,
+      key: Date.now(),
+      reRender: false,
+      marginBottom: 1,
     });
-    Geocode.setApiKey("AIzaSyCdIiqraik9uJkeLdoarnKms9voK1Q94pk");
+    const region = {
+      latitude: d.geometry.location.lat,
+      longitude: d.geometry.location.lng,
+      latitudeDelta: 0.012,
+      longitudeDelta: 0.01,
+    };
+    this.map.animateToRegion(region, 500);
+    setTimeout(() => {
+      this.setState({ reRender: true });
+    }, 1000);
+  };
+
+  get_address = (lat, lng) => {
+    Geocode.setApiKey(global.CONSTANT.PLACESAPI);
     Geocode.setLanguage("en");
-    Geocode.enableDebug();
-    Geocode.fromLatLng(
-      location.coords.latitude,
-      location.coords.longitude
-    ).then(
+    Geocode.fromLatLng(lat, lng).then(
       (response) => {
-        const address = response.results[0].formatted_address;
-        console.log(address);
-        this.setState({ textAddress: address });
+        // console.log("address", response.results[0].formatted_address);
+        this.setState({
+          lat,
+          lng,
+          address: response.results[0].formatted_address,
+        });
+        const region = {
+          latitude: lat,
+          longitude: lng,
+          latitudeDelta: 0.012,
+          longitudeDelta: 0.01,
+        };
+        this.map.animateToRegion(region, 500);
+        // console.log(global.ADD_BOOKING_4_DATA[0]);
+        api_get_plan_list_zone({
+          lat,
+          lng,
+          type: global.ADD_BOOKING_4_DATA[0].type,
+        });
       },
       (error) => {
         console.error(error);
@@ -138,24 +152,32 @@ export default class SelectPlans extends Component {
     );
   };
 
+  _onMapReady = () => this.setState({ marginBottom: 0 });
+
   render() {
-    const { textAddress, loc } = this.state;
-    const { navigate } = this.props.navigation;
+    const {
+      textAddress,
+      loc,
+      lat,
+      lat_delta,
+      lng,
+      lng_delta,
+      marginBottom,
+      loading,
+      reRender,
+      tracksViewChanges,
+      address,
+    } = this.state;
+    const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <View style={styles.statusView}>
-          <StatusBar
-            translucent
-            backgroundColor={global.COLOR.PRIMARY_LIGHT}
-            barStyle="light-content"
-          />
-        </View>
         <Header
           containerStyle={styles.header}
+          statusBarProps={{ backgroundColor: global.COLOR.PRIMARY_LIGHT }}
           backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity
-              onPress={() => this.props.navigation.goBack()}
+              onPress={() => navigation.goBack()}
               style={styles.leftIcon}
             >
               <Icon name="chevron-left" size={30} color={global.COLOR.white} />
@@ -166,13 +188,74 @@ export default class SelectPlans extends Component {
           }
         />
         <View style={styles.container}>
-          <MapView region={this.state.mapRegion} style={styles.container} />
+          {/* map  */}
+          <>
+            <MapView
+              ref={(map) => (this.map = map)}
+              style={{
+                flex: 1,
+                // marginBottom: marginBottom,
+              }}
+              // key={key}
+              // onMapReady={this._onMapReady}
+              showsUserLocation={false}
+              showsCompass={false}
+              moveOnMarkerPress={false}
+              cacheEnabled={false}
+              showsMyLocationButton={false}
+              liteMode={false}
+              scrollEnabled={true}
+              zoomEnabled={true}
+              zoomTapEnabled={true}
+              pitchEnabled={true}
+              provider="google"
+              initialRegion={{
+                latitude: lat,
+                longitude: lng,
+                latitudeDelta: lat_delta,
+                longitudeDelta: lng_delta,
+              }}
+              // onRegionChangeComplete={(region) => {
+              //   reRender && this.get_address(region.latitude, region.longitude);
+              // }}
+            />
+          </>
+          {/* map pin */}
+          <>
+            {/* Map Marker location picker */}
+            <View style={styles.map_pin_marker}>
+              <Image
+                source={global.ASSETS.MAP_PIN}
+                onLoad={this.stopTrackingViewChanges}
+                fadeDuration={0}
+                style={styles.map_pin_marker_image}
+              />
+            </View>
+          </>
+          {/* my location icon */}
+          {/* <>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => {
+                this._getLocationAsync();
+              }}
+              style={styles.map_my_location}
+            >
+              <Icon
+                size={28}
+                name="crosshairs-gps"
+                type="material-community"
+                color="#fff"
+              />
+            </TouchableOpacity>
+          </> */}
+
+          {/* search bar */}
           <View style={styles.locationTView}>
             <TouchableOpacity
               onPress={() => {
-                this.setState({
-                  check: true,
-                  modalVisible: !this.state.modalVisible,
+                navigation.navigate("location_search", {
+                  onNavigateBack: this.handleOnNavigateBack,
                 });
               }}
               style={styles.touchRow}
@@ -184,12 +267,11 @@ export default class SelectPlans extends Component {
                 size={16}
                 color="#000"
               />
-              <Text style={styles.locationT}>
-                {loc !== "" ? loc : textAddress}
-              </Text>
+              <Text style={styles.locationT}>{address}</Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.btmViewDacWashLocation}>
+          {/* service bar */}
+          {/* <View style={styles.btmViewDacWashLocation}>
             <View style={styles.apClrView}>
               <Image
                 source={global.ASSETS.CAR}
@@ -203,13 +285,57 @@ export default class SelectPlans extends Component {
               />
               <Text style={styles.inOutText}>{t("dacwash_insideOutSide")}</Text>
             </View>
-          </View>
+          </View> */}
           <View style={styles.listView}>
             <FlatList
               horizontal={true}
               showsHorizontalScrollIndicator={false}
-              data={data}
-              renderItem={({ item, index }) => this.renderList({ item, index })}
+              data={global.PLANS_LIST_ZONE}
+              renderItem={({ item, index }) => {
+                return (
+                  <View>
+                    <TouchableOpacity
+                      // onPress={() => this.props.navigation.navigate("Summary")}
+                      style={[
+                        styles.touchAppClrView,
+                        {
+                          backgroundColor:
+                            index === 0
+                              ? global.COLOR.PRIMARY_LIGHT
+                              : global.COLOR.white,
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.standrd,
+                          {
+                            color:
+                              index === 0
+                                ? global.COLOR.white
+                                : global.COLOR.black,
+                          },
+                        ]}
+                      >
+                        {item.standard}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.priceDacwash,
+                          {
+                            color:
+                              index === 0
+                                ? global.COLOR.white
+                                : global.COLOR.black,
+                          },
+                        ]}
+                      >
+                        {item.price}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                );
+              }}
               keyExtractor={(item, index) => index.toString()}
             />
             <View style={styles.rowView1}>
@@ -233,74 +359,6 @@ export default class SelectPlans extends Component {
               </TouchableOpacity>
             </View>
           </View>
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={this.state.modalVisible}
-          >
-            <View style={styles.container}>
-              <View style={styles.searchModal}>
-                <View style={styles.searchLeftIcon}>
-                  <Icon
-                    onPress={() =>
-                      this.setState({
-                        modalVisible: false,
-                        loc: "",
-                      })
-                    }
-                    type={"mdiArrowLeft"}
-                    name="arrow-back"
-                    size={25}
-                    color="#000"
-                  />
-                </View>
-                <View style={styles.searchRightIcon}>
-                  {loc.length !== 0 ? (
-                    <Icon
-                      onPress={() => {
-                        this.setState({ loc: "" });
-                        this.textInput.clear();
-                      }}
-                      type={"midClose"}
-                      name="clear"
-                      size={25}
-                      color="#000"
-                    />
-                  ) : null}
-                </View>
-              </View>
-              <GooglePlacesAutocomplete
-                minLength={2}
-                listViewDisplayed="auto"
-                autoFocus={true}
-                returnKeyType={"search"}
-                fetchDetails={true}
-                query={{
-                  key: "AIzaSyCdIiqraik9uJkeLdoarnKms9voK1Q94pk",
-                  language: "en",
-                }}
-                textInputProps={{
-                  onChangeText: (loc) => this.setState({ loc: loc }),
-                  clearButtonMode: "never",
-                  ref: (input) => {
-                    this.textInput = input;
-                  },
-                }}
-                onPress={(data, details = null) => {
-                  console.log("data from vsdfsfdssf", data);
-                  this.setLoc(data, details);
-                  console.log("Details   : ", data.description);
-                }}
-                styles={{
-                  textInputContainer: styles.geoPlacetextInputContainer,
-                  textInput: styles.geoPlaceTextInput,
-                  predefinedPlacesDescription: styles.geoPlaceDescrip,
-                  description: styles.geoPlaceDescription,
-                  listView: styles.geoPlacelistView,
-                }}
-              />
-            </View>
-          </Modal>
         </View>
       </View>
     );
