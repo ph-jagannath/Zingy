@@ -791,8 +791,7 @@ export async function api_get_plan_list(d) {
  */
 
 export async function api_get_plan_list_zone(d) {
-  Loading.show();
-  global.PLANS_LIST_ZONE = [];
+  // Loading.show();
   const DATA = Axios({
     method: "post",
     url: "plan_list_zone",
@@ -811,10 +810,47 @@ export async function api_get_plan_list_zone(d) {
         global.PLANS_LIST_ZONE = response.data.response.Data;
         return global.PLANS_LIST_ZONE;
       } else {
+        global.PLANS_LIST_ZONE = [];
         showMessage({
           message: response.data.response.message,
           type: "danger",
         });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * Get nearby service providers
+ *
+ */
+
+export async function api_get_nearby_sp(d) {
+  // Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "get_nearest_sp",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+      latitude: d.lat,
+      longitude: d.lng,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.NEARBY_SP = response.data.response.data;
+        return global.NEARBY_SP;
+      } else {
+        global.NEARBY_SP = [];
+        // showMessage({
+        //   message: response.data.response.message,
+        //   type: "danger",
+        // });
         return false;
       }
     }.bind(this)

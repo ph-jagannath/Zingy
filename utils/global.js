@@ -243,6 +243,7 @@ export default {
   MY_LOCATIONS: [],
   MY_BOOKINGS: [],
   PLANS_LIST_ZONE: [],
+  NEARBY_SP: [],
   PLANS_LIST: [],
   FAQ: [],
 

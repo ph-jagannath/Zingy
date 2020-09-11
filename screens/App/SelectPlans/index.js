@@ -1,65 +1,24 @@
 import React, { Component } from "react";
-import {
-  ScrollView,
-  Modal,
-  FlatList,
-  Image,
-  Text,
-  StyleSheet,
-  StatusBar,
-  View,
-  TouchableOpacity,
-} from "react-native";
+import { FlatList, Image, Text, View, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
-import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 import * as Permissions from "expo-permissions";
 import Geocode from "react-geocode";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import global from "../../../utils/global";
 import {
-  api_get_plan_list,
   api_get_locations,
   api_get_plan_list_zone,
+  api_get_nearby_sp,
 } from "../../../utils/Api";
-const data = [
-  {
-    standard: `Standard Cars`,
-    price: `52.00AUD`,
-  },
-  {
-    standard: `Standard Cars`,
-    price: `52.00AUD`,
-  },
-  {
-    standard: `Standard Cars`,
-    price: `52.00AUD`,
-  },
-  {
-    standard: `Standard Cars`,
-    price: `52.00AUD`,
-  },
-  {
-    standard: `Standard Cars`,
-    price: `52.00AUD`,
-  },
-  {
-    standard: `Standard Cars`,
-    price: `52.00AUD`,
-  },
-];
 export default class SelectPlans extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalVisible: false,
-      loc: "",
-      mapRegion: null,
       hasLocationPermissions: false,
       locationResult: null,
-      textAddress: null,
 
       marginBottom: 1,
       loading: false,
@@ -72,16 +31,10 @@ export default class SelectPlans extends Component {
       lat_delta: 0.006,
       lng_delta: 0.003,
       address: "",
+      selected_plan: "",
     };
   }
 
-  setLoc = (data, details) => {
-    this.setState({
-      loc: data.description,
-      modalVisible: !this.state.modalVisible,
-    });
-    console.log("Data and details ", data, details);
-  };
   componentDidMount() {
     this._getLocationAsync();
     api_get_locations();
@@ -101,6 +54,11 @@ export default class SelectPlans extends Component {
   };
 
   handleOnNavigateBack = (d) => {
+    api_get_plan_list_zone({
+      lat: d.geometry.location.lat,
+      lng: d.geometry.location.lng,
+      type: global.ADD_BOOKING_4_DATA[0].type,
+    });
     this.setState({
       address: d.name + ", " + d.formatted_address,
       lat: d.geometry.location.lat,
@@ -116,12 +74,22 @@ export default class SelectPlans extends Component {
       longitudeDelta: 0.01,
     };
     this.map.animateToRegion(region, 500);
+
     setTimeout(() => {
       this.setState({ reRender: true });
     }, 1000);
   };
 
-  get_address = (lat, lng) => {
+  get_address = async (lat, lng) => {
+    api_get_plan_list_zone({
+      lat,
+      lng,
+      type: global.ADD_BOOKING_4_DATA[0].type,
+    }).then(() => this.update());
+    api_get_nearby_sp({
+      lat,
+      lng,
+    }).then(() => this.update());
     Geocode.setApiKey(global.CONSTANT.PLACESAPI);
     Geocode.setLanguage("en");
     Geocode.fromLatLng(lat, lng).then(
@@ -132,19 +100,14 @@ export default class SelectPlans extends Component {
           lng,
           address: response.results[0].formatted_address,
         });
-        const region = {
-          latitude: lat,
-          longitude: lng,
-          latitudeDelta: 0.012,
-          longitudeDelta: 0.01,
-        };
-        this.map.animateToRegion(region, 500);
+        // const region = {
+        //   latitude: lat,
+        //   longitude: lng,
+        //   latitudeDelta: 0.012,
+        //   longitudeDelta: 0.01,
+        // };
+        // this.map.animateToRegion(region, 500);
         // console.log(global.ADD_BOOKING_4_DATA[0]);
-        api_get_plan_list_zone({
-          lat,
-          lng,
-          type: global.ADD_BOOKING_4_DATA[0].type,
-        });
       },
       (error) => {
         console.error(error);
@@ -154,39 +117,48 @@ export default class SelectPlans extends Component {
 
   _onMapReady = () => this.setState({ marginBottom: 0 });
 
+  update() {
+    this.setState({
+      update: Date.now(),
+    });
+  }
+
   render() {
     const {
-      textAddress,
-      loc,
       lat,
       lat_delta,
       lng,
       lng_delta,
-      marginBottom,
-      loading,
       reRender,
-      tracksViewChanges,
       address,
+      selected_plan,
     } = this.state;
     const { navigation } = this.props;
     return (
       <View style={styles.container}>
-        <Header
-          containerStyle={styles.header}
-          statusBarProps={{ backgroundColor: global.COLOR.PRIMARY_LIGHT }}
-          backgroundColor={global.COLOR.PRIMARY_LIGHT}
-          leftComponent={
-            <TouchableOpacity
-              onPress={() => navigation.goBack()}
-              style={styles.leftIcon}
-            >
-              <Icon name="chevron-left" size={30} color={global.COLOR.white} />
-            </TouchableOpacity>
-          }
-          centerComponent={
-            <Text style={styles.headerText}>{t("dacwash_header")}</Text>
-          }
-        />
+        {/* header */}
+        <>
+          <Header
+            containerStyle={styles.header}
+            statusBarProps={{ backgroundColor: global.COLOR.PRIMARY_LIGHT }}
+            backgroundColor={global.COLOR.PRIMARY_LIGHT}
+            leftComponent={
+              <TouchableOpacity
+                onPress={() => navigation.goBack()}
+                style={styles.leftIcon}
+              >
+                <Icon
+                  name="chevron-left"
+                  size={30}
+                  color={global.COLOR.white}
+                />
+              </TouchableOpacity>
+            }
+            centerComponent={
+              <Text style={styles.headerText}>{t("dacwash_header")}</Text>
+            }
+          />
+        </>
         <View style={styles.container}>
           {/* map  */}
           <>
@@ -215,10 +187,31 @@ export default class SelectPlans extends Component {
                 latitudeDelta: lat_delta,
                 longitudeDelta: lng_delta,
               }}
-              // onRegionChangeComplete={(region) => {
-              //   reRender && this.get_address(region.latitude, region.longitude);
-              // }}
-            />
+              onRegionChangeComplete={(region) => {
+                reRender && this.get_address(region.latitude, region.longitude);
+              }}
+            >
+              {global.NEARBY_SP.length > 0 &&
+                global.NEARBY_SP.map((i) => (
+                  <MapView.Marker
+                    coordinate={{
+                      latitude: Number(i.latitude),
+                      longitude: Number(i.longitude),
+                    }}
+                    tracksViewChanges={this.state.tracksViewChanges}
+                    // zIndex={i++}
+                  >
+                    <View>
+                      <Image
+                        source={global.ASSETS.MAP_PIN}
+                        onLoad={this.stopTrackingViewChanges}
+                        fadeDuration={0}
+                        style={styles.map_pin_marker_image_sp}
+                      />
+                    </View>
+                  </MapView.Marker>
+                ))}
+            </MapView>
           </>
           {/* map pin */}
           <>
@@ -233,8 +226,8 @@ export default class SelectPlans extends Component {
             </View>
           </>
           {/* my location icon */}
-          {/* <>
-            <TouchableOpacity
+          <>
+            {/* <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => {
                 this._getLocationAsync();
@@ -247,31 +240,101 @@ export default class SelectPlans extends Component {
                 type="material-community"
                 color="#fff"
               />
-            </TouchableOpacity>
-          </> */}
+            </TouchableOpacity> */}
+          </>
 
-          {/* search bar */}
-          <View style={styles.locationTView}>
-            <TouchableOpacity
-              onPress={() => {
-                navigation.navigate("location_search", {
-                  onNavigateBack: this.handleOnNavigateBack,
-                });
-              }}
-              style={styles.touchRow}
-            >
-              <Icon
-                name={"search"}
-                type={"mdiMagnify"}
-                style={styles.searchIcon}
-                size={16}
-                color="#000"
-              />
-              <Text style={styles.locationT}>{address}</Text>
-            </TouchableOpacity>
-          </View>
+          {/* maps top items */}
+          <>
+            <View style={styles.locationTView}>
+              {/* search bar */}
+              <>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate("location_search", {
+                      onNavigateBack: this.handleOnNavigateBack,
+                    });
+                  }}
+                  style={styles.search_bar}
+                >
+                  <Icon
+                    name={"search"}
+                    type={"mdiMagnify"}
+                    style={styles.searchIcon}
+                    size={16}
+                    color="#000"
+                  />
+                  <Text style={styles.locationT}>{address}</Text>
+                </TouchableOpacity>
+              </>
+
+              {/* my locations */}
+              <>
+                <View style={styles.map_address_icon_container}>
+                  <Icon
+                    name="home"
+                    raised
+                    size={16}
+                    color={global.COLOR.PRIMARY_DARK}
+                    onPress={() => {
+                      if (
+                        global.MY_LOCATIONS.length > 0 &&
+                        global.MY_LOCATIONS.filter(
+                          (e) => e.UserLocation.type == "home"
+                        ).length > 0
+                      ) {
+                        const home = global.MY_LOCATIONS.filter(
+                          (e) => e.UserLocation.type == "home"
+                        )[0].UserLocation;
+                        this.map.animateToRegion(
+                          {
+                            latitude: Number(home.latitude),
+                            longitude: Number(home.longitude),
+                            latitudeDelta: 0.012,
+                            longitudeDelta: 0.01,
+                          },
+                          500
+                        );
+                      } else {
+                        console.log("no home address found");
+                      }
+                    }}
+                  />
+                  <Icon
+                    name="work"
+                    raised
+                    size={16}
+                    color={global.COLOR.PRIMARY_DARK}
+                    onPress={() => {
+                      if (
+                        global.MY_LOCATIONS.length > 0 &&
+                        global.MY_LOCATIONS.filter(
+                          (e) => e.UserLocation.type == "work"
+                        ).length > 0
+                      ) {
+                        const work = global.MY_LOCATIONS.filter(
+                          (e) => e.UserLocation.type == "work"
+                        )[0].UserLocation;
+                        this.map.animateToRegion(
+                          {
+                            latitude: Number(work.latitude),
+                            longitude: Number(work.longitude),
+                            latitudeDelta: 0.012,
+                            longitudeDelta: 0.01,
+                          },
+                          500
+                        );
+                      } else {
+                        console.log("no work address found");
+                      }
+                    }}
+                  />
+                </View>
+              </>
+            </View>
+          </>
           {/* service bar */}
-          {/* <View style={styles.btmViewDacWashLocation}>
+          <>
+            {/* <View style={styles.btmViewDacWashLocation}>
             <View style={styles.apClrView}>
               <Image
                 source={global.ASSETS.CAR}
@@ -286,79 +349,94 @@ export default class SelectPlans extends Component {
               <Text style={styles.inOutText}>{t("dacwash_insideOutSide")}</Text>
             </View>
           </View> */}
-          <View style={styles.listView}>
-            <FlatList
-              horizontal={true}
-              showsHorizontalScrollIndicator={false}
-              data={global.PLANS_LIST_ZONE}
-              renderItem={({ item, index }) => {
-                return (
-                  <View>
-                    <TouchableOpacity
-                      // onPress={() => this.props.navigation.navigate("Summary")}
-                      style={[
-                        styles.touchAppClrView,
-                        {
-                          backgroundColor:
-                            index === 0
-                              ? global.COLOR.PRIMARY_LIGHT
-                              : global.COLOR.white,
-                        },
-                      ]}
-                    >
-                      <Text
-                        style={[
-                          styles.standrd,
-                          {
-                            color:
-                              index === 0
-                                ? global.COLOR.white
-                                : global.COLOR.black,
-                          },
-                        ]}
-                      >
-                        {item.standard}
-                      </Text>
-                      <Text
-                        style={[
-                          styles.priceDacwash,
-                          {
-                            color:
-                              index === 0
-                                ? global.COLOR.white
-                                : global.COLOR.black,
-                          },
-                        ]}
-                      >
-                        {item.price}
-                      </Text>
-                    </TouchableOpacity>
+          </>
+          {/* plans list */}
+          <>
+            <View style={styles.listView}>
+              <FlatList
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}
+                ListEmptyComponent={
+                  <View style={styles.list_empty_container}>
+                    <Text style={styles.list_empty_text}>
+                      No Plans Found. Try changing the location.
+                    </Text>
                   </View>
-                );
-              }}
-              keyExtractor={(item, index) => index.toString()}
-            />
-            <View style={styles.rowView1}>
-              <TouchableOpacity
-                onPress={() => navigate("Summary")}
-                style={styles.washNowView}
-              >
-                <Text style={styles.washNow}>{t("dacwash_washNow")}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigate("Summary")}
-                style={styles.washLaterView}
-              >
-                <Text style={styles.washLText}>{t("dacwash_washlater")}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={() => navigate("Summary")}
-                style={styles.washLaterView}
-              >
-                <Text style={styles.pack}>{t("side_menu_Packages")}</Text>
-              </TouchableOpacity>
+                }
+                data={global.PLANS_LIST_ZONE}
+                renderItem={({ item: p, index }) => {
+                  return (
+                    <View>
+                      <TouchableOpacity
+                        onPress={() =>
+                          this.setState({
+                            selected_plan: p,
+                          })
+                        }
+                        style={[
+                          styles.touchAppClrView,
+                          {
+                            backgroundColor:
+                              selected_plan.id === p.id
+                                ? global.COLOR.PRIMARY_LIGHT
+                                : global.COLOR.white,
+                          },
+                        ]}
+                      >
+                        <Text
+                          style={[
+                            styles.standrd,
+                            {
+                              color:
+                                selected_plan.id === p.id
+                                  ? global.COLOR.white
+                                  : global.COLOR.black,
+                            },
+                          ]}
+                        >
+                          {p.name}
+                        </Text>
+                        <Text
+                          style={[
+                            styles.priceDacwash,
+                            {
+                              color:
+                                selected_plan.id === p.id
+                                  ? global.COLOR.white
+                                  : global.COLOR.black,
+                            },
+                          ]}
+                        >
+                          {global.CONSTANT.CURRENCY} {p.amount}
+                        </Text>
+                      </TouchableOpacity>
+                    </View>
+                  );
+                }}
+                keyExtractor={(item, index) => index.toString()}
+              />
+              <View style={styles.rowView1}>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Summary")}
+                  style={styles.washNowView}
+                >
+                  <Text style={styles.washNow}>{t("dacwash_washNow")}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Summary")}
+                  style={styles.washLaterView}
+                >
+                  <Text style={styles.washLText}>{t("dacwash_washlater")}</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => navigation.navigate("Summary")}
+                  style={styles.washLaterView}
+                >
+                  <Text style={styles.pack}>{t("side_menu_Packages")}</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-          </View>
+          </>
         </View>
       </View>
     );

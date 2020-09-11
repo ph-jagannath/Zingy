@@ -18,7 +18,8 @@ export default StyleSheet.create({
   },
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
+    textTransform: "capitalize",
   },
   searchModal: {
     flexDirection: "row",
@@ -68,15 +69,17 @@ export default StyleSheet.create({
   },
 
   locationTView: {
-    backgroundColor: global.COLOR.white,
     position: "absolute",
     marginTop: hp(2),
     alignSelf: "center",
     width: wp(90),
-    borderRadius: 5,
-    alignItems: "center",
-    flexDirection: "row",
+  },
+  search_bar: {
     minHeight: hp(7),
+    borderRadius: 7,
+    backgroundColor: "#fff",
+    flexDirection: "row",
+    alignItems: "center",
   },
   searchIcon: {
     marginLeft: wp(2),
@@ -86,10 +89,6 @@ export default StyleSheet.create({
     fontSize: 14,
     width: "82%",
     marginLeft: 8,
-  },
-  touchRow: {
-    flexDirection: "row",
-    alignItems: "center",
   },
   locationT: {
     fontSize: wp(3),
@@ -179,7 +178,7 @@ export default StyleSheet.create({
     marginTop: hp(0.5),
   },
   standrd: {
-    fontSize: wp(3),
+    fontSize: wp(3.8),
     marginVertical: hp(1),
     marginRight: wp(5),
     marginLeft: wp(1),
@@ -187,13 +186,13 @@ export default StyleSheet.create({
   priceDacwash: {
     alignSelf: "flex-end",
     right: 10,
-    fontSize: wp(3),
+    fontSize: wp(3.5),
     marginVertical: hp(1),
   },
   map_pin_marker: {
     zIndex: 9,
     position: "absolute",
-    marginTop: hp(29),
+    marginTop: hp(31),
     alignSelf: "center",
   },
   map_pin_marker_image: {
@@ -201,6 +200,12 @@ export default StyleSheet.create({
     width: 35,
     resizeMode: "contain",
     tintColor: global.COLOR.PRIMARY_DARK,
+  },
+  map_pin_marker_image_sp: {
+    height: 35,
+    width: 35,
+    resizeMode: "contain",
+    tintColor: global.COLOR.PRIMARY_LIGHT,
   },
   map_my_location: {
     zIndex: 9,
@@ -218,5 +223,17 @@ export default StyleSheet.create({
     width: 35,
     resizeMode: "contain",
     tintColor: global.COLOR.PRIMARY_DARK,
+  },
+  map_address_icon_container: {
+    flexDirection: "row",
+    alignSelf: "flex-end",
+  },
+  list_empty_container: {
+    height: hp(9.5),
+    justifyContent: "center",
+  },
+  list_empty_text: {
+    fontSize: wp(4),
+    color: global.COLOR.PRIMARY_DARK,
   },
 });
