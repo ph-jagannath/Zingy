@@ -20,3 +20,5 @@ dacwash customer app in react native
     - Location Add
     - Location Edit
     - FAQ
+    - ondemand Booking with cash and card
+    - schedule Booking with cash and card
