@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FlatList, Image, Text, View, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { t } from "i18n-js";
-import { Icon, Header } from "react-native-elements";
+import { Icon, Header, Overlay } from "react-native-elements";
 import * as Permissions from "expo-permissions";
 import Geocode from "react-geocode";
 import * as Location from "expo-location";
@@ -13,6 +13,7 @@ import {
   api_get_plan_list_zone,
   api_get_nearby_sp,
 } from "../../../utils/Api";
+import { showMessage } from "react-native-flash-message";
 export default class SelectPlans extends Component {
   constructor(props) {
     super(props);
@@ -32,12 +33,19 @@ export default class SelectPlans extends Component {
       lng_delta: 0.003,
       address: "",
       selected_plan: "",
+      add_location_popup: false,
     };
   }
 
   componentDidMount() {
     this._getLocationAsync();
     api_get_locations();
+  }
+
+  toggle_add_location_popup() {
+    this.setState({
+      add_location_popup: !this.state.add_location_popup,
+    });
   }
 
   _getLocationAsync = async () => {
@@ -85,7 +93,7 @@ export default class SelectPlans extends Component {
       lat,
       lng,
       type: global.ADD_BOOKING_4_DATA[0].type,
-    }).then(() => this.update());
+    }).then(() => this.setState({ selected_plan: "" }));
     api_get_nearby_sp({
       lat,
       lng,
@@ -94,20 +102,11 @@ export default class SelectPlans extends Component {
     Geocode.setLanguage("en");
     Geocode.fromLatLng(lat, lng).then(
       (response) => {
-        // console.log("address", response.results[0].formatted_address);
         this.setState({
           lat,
           lng,
           address: response.results[0].formatted_address,
         });
-        // const region = {
-        //   latitude: lat,
-        //   longitude: lng,
-        //   latitudeDelta: 0.012,
-        //   longitudeDelta: 0.01,
-        // };
-        // this.map.animateToRegion(region, 500);
-        // console.log(global.ADD_BOOKING_4_DATA[0]);
       },
       (error) => {
         console.error(error);
@@ -132,6 +131,7 @@ export default class SelectPlans extends Component {
       reRender,
       address,
       selected_plan,
+      add_location_popup,
     } = this.state;
     const { navigation } = this.props;
     return (
@@ -295,7 +295,7 @@ export default class SelectPlans extends Component {
                           500
                         );
                       } else {
-                        console.log("no home address found");
+                        this.toggle_add_location_popup();
                       }
                     }}
                   />
@@ -324,7 +324,7 @@ export default class SelectPlans extends Component {
                           500
                         );
                       } else {
-                        console.log("no work address found");
+                        this.toggle_add_location_popup();
                       }
                     }}
                   />
@@ -333,23 +333,25 @@ export default class SelectPlans extends Component {
             </View>
           </>
           {/* service bar */}
-          <>
-            {/* <View style={styles.btmViewDacWashLocation}>
-            <View style={styles.apClrView}>
-              <Image
-                source={global.ASSETS.CAR}
-                resizeMode={"contain"}
-                style={styles.imgCarDacWash}
-              />
-              <Image
-                source={global.ASSETS.CLEANING}
-                resizeMode={"contain"}
-                style={styles.imgCarDacWash}
-              />
-              <Text style={styles.inOutText}>{t("dacwash_insideOutSide")}</Text>
-            </View>
-          </View> */}
-          </>
+          {selected_plan !== "" && (
+            <>
+              <View style={styles.btmViewDacWashLocation}>
+                <View style={styles.apClrView}>
+                  <Image
+                    source={global.ASSETS.CAR}
+                    resizeMode={"contain"}
+                    style={styles.imgCarDacWash}
+                  />
+                  <Image
+                    source={global.ASSETS.CLEANING}
+                    resizeMode={"contain"}
+                    style={styles.imgCarDacWash}
+                  />
+                  <Text style={styles.inOutText}>{selected_plan.services}</Text>
+                </View>
+              </View>
+            </>
+          )}
           {/* plans list */}
           <>
             <View style={styles.listView}>
@@ -417,7 +419,22 @@ export default class SelectPlans extends Component {
               />
               <View style={styles.rowView1}>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("Summary")}
+                  onPress={() => {
+                    if (global.NEARBY_SP.length == 0) {
+                      showMessage({
+                        message: "No Nearby Service Provider Available.",
+                        type: "danger",
+                      });
+                    } else if (selected_plan == "") {
+                      showMessage({
+                        message: "Select a plan to proceed.",
+                        type: "danger",
+                      });
+                    } else {
+                      global.ADD_BOOKING_4_DATA[1] = selected_plan;
+                      navigation.navigate("Summary");
+                    }
+                  }}
                   style={styles.washNowView}
                 >
                   <Text style={styles.washNow}>{t("dacwash_washNow")}</Text>
@@ -438,6 +455,32 @@ export default class SelectPlans extends Component {
             </View>
           </>
         </View>
+
+        {/* add location overlay */}
+        <Overlay
+          isVisible={add_location_popup}
+          animationType="fade"
+          overlayStyle={styles.add_location_container}
+          onBackdropPress={() => {
+            this.toggle_add_location_popup();
+          }}
+        >
+          <View>
+            <Text style={styles.add_location_text}>Add Location</Text>
+            <Text style={styles.add_location_text}>
+              Please save your location
+            </Text>
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.navigate("Location")}
+              style={styles.add_button}
+            >
+              <Text style={styles.add_button_Text}>
+                {t("location_addLocation")}
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </Overlay>
       </View>
     );
   }

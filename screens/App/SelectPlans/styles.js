@@ -115,7 +115,7 @@ export default StyleSheet.create({
   },
   inOutText: {
     color: global.COLOR.white,
-    fontSize: wp(3),
+    fontSize: wp(3.5),
     marginLeft: wp(2),
   },
   rowView1: {
@@ -235,5 +235,32 @@ export default StyleSheet.create({
   list_empty_text: {
     fontSize: wp(4),
     color: global.COLOR.PRIMARY_DARK,
+  },
+  add_location_container: {
+    width: wp(90),
+    borderRadius: 15,
+    height: hp(24),
+    backgroundColor: "#fff",
+    // justifyContent: "space-between",
+  },
+  add_location_text: {
+    fontSize: wp(4.5),
+    alignSelf: "center",
+    marginTop: hp(1.6),
+  },
+  add_button: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    marginVertical: hp(3),
+    height: hp(6.5),
+    width: wp(65),
+    alignSelf: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+  },
+  add_button_Text: {
+    color: global.COLOR.white,
+    fontSize: wp(4.3),
+    fontWeight: "bold",
+    alignSelf: "center",
   },
 });
