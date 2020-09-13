@@ -12,27 +12,58 @@ import {
 import styles from "./styles";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
-import { Icon, Header } from "react-native-elements";
-
+import { Icon, Header, Input } from "react-native-elements";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import moment from "moment";
+import { showMessage } from "react-native-flash-message";
 export default class Summary extends Component {
   constructor(props) {
     super(props);
     this.state = {
       remark: "",
+      date: "",
+      time: "",
       selected_plan: global.ADD_BOOKING_4_DATA[1],
+      date_visible: false,
+      time_visible: false,
     };
+  }
+
+  toggle_date_picker() {
+    this.setState({ date_visible: !this.state.date_visible });
   }
 
   validate() {
     // console.log("next");
-    const { selected_plan, remark } = this.state;
+    const { selected_plan, remark, date, time } = this.state;
     global.ADD_BOOKING_4_DATA[1] = selected_plan;
     global.ADD_BOOKING_4_DATA[6] = remark;
-    this.props.navigation.navigate("Payment");
+    global.ADD_BOOKING_4_DATA[5] = date;
+    global.ADD_BOOKING_4_DATA[14] = time;
+    if (global.ADD_BOOKING_4_DATA[8] == 2 && date == "") {
+      showMessage({
+        message: "Please select date.",
+        type: "warning",
+      });
+    } else if (global.ADD_BOOKING_4_DATA[8] == 2 && time == "") {
+      showMessage({
+        message: "Please select time.",
+        type: "warning",
+      });
+    } else {
+      this.props.navigation.navigate("Payment");
+    }
   }
 
   render() {
-    const { remark, selected_plan } = this.state;
+    const {
+      remark,
+      selected_plan,
+      date,
+      time,
+      date_visible,
+      time_visible,
+    } = this.state;
     return (
       <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
         <>
@@ -53,7 +84,7 @@ export default class Summary extends Component {
             }
           />
         </>
-        <ScrollView style={styles.container}>
+        <ScrollView>
           <View style={styles.marHorizon}>
             <Text style={styles.vehicle}>{t("summary_vehicleSelect")}</Text>
             <View style={styles.rightViewSummary}>
@@ -148,6 +179,55 @@ export default class Summary extends Component {
               }}
               keyExtractor={(item, index) => index.toString()}
             />
+            {/* location */}
+            <Text style={styles.vehicle}>{t("summary_location")}</Text>
+            <Text style={styles.text}>{global.ADD_BOOKING_4_DATA[2]}</Text>
+
+            {/* date time */}
+            {global.ADD_BOOKING_4_DATA[8] == 2 && (
+              <View style={styles.date_container}>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({ date_visible: true });
+                  }}
+                  activeOpacity={0.9}
+                >
+                  <Input
+                    editable={false}
+                    containerStyle={styles.dateInput}
+                    leftIcon={{
+                      name: "today",
+                      color: "#666666",
+                    }}
+                    placeholder={t("summary_date")}
+                    returnKeyType={"done"}
+                    placeholderTextColor="#666666"
+                    // onChangeText={(v) => this.setState({ remark: v })}
+                    value={date}
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    this.setState({ time_visible: true });
+                  }}
+                  activeOpacity={0.9}
+                >
+                  <Input
+                    editable={false}
+                    containerStyle={styles.dateInput}
+                    placeholder={t("summary_time")}
+                    returnKeyType={"done"}
+                    leftIcon={{
+                      name: "schedule",
+                      color: "#666666",
+                    }}
+                    placeholderTextColor="#666666"
+                    // onChangeText={(v) => this.setState({ remark: v })}
+                    value={time}
+                  />
+                </TouchableOpacity>
+              </View>
+            )}
             <View style={styles.EnterRemarkView}>
               <TextInput
                 style={styles.EnterRemarkInput}
@@ -158,16 +238,29 @@ export default class Summary extends Component {
                 value={remark}
               />
             </View>
-            <View style={styles.topHorizon}>
-              <View style={styles.roundView}>
-                <Text style={styles.roundViewText}>{t("summary_eta")}</Text>
-                <Text style={styles.roundViewText}>
-                  {
-                    global.NEARBY_SP.sort((a, b) => a.distance - b.distance)[0]
-                      .time
-                  }
-                </Text>
-              </View>
+            <View
+              style={[
+                styles.topHorizon,
+                {
+                  justifyContent:
+                    global.ADD_BOOKING_4_DATA[8] == 2
+                      ? "center"
+                      : "space-between",
+                },
+              ]}
+            >
+              {global.ADD_BOOKING_4_DATA[8] == 1 && (
+                <View style={styles.roundView}>
+                  <Text style={styles.roundViewText}>{t("summary_eta")}</Text>
+                  <Text style={styles.roundViewText}>
+                    {
+                      global.NEARBY_SP.sort(
+                        (a, b) => a.distance - b.distance
+                      )[0].time
+                    }
+                  </Text>
+                </View>
+              )}
               <View style={styles.roundView}>
                 <Text style={styles.roundViewText}>{t("summary_euro")}</Text>
                 <Text style={styles.roundViewText}>
@@ -183,6 +276,50 @@ export default class Summary extends Component {
             <Text style={styles.loginText}>{t("summary_Confirm")}</Text>
           </TouchableOpacity>
         </ScrollView>
+
+        {date_visible && (
+          <DateTimePicker
+            value={Date.now()}
+            mode="date"
+            minimumDate={Date.now()}
+            display="spinner"
+            onChange={(event, selectedDate) => {
+              console.log(selectedDate);
+              if (event.type == "set") {
+                this.setState({
+                  date: moment(selectedDate).format("YYYY-MM-DD"),
+                  date_visible: false,
+                });
+              } else {
+                this.setState({
+                  date_visible: false,
+                });
+              }
+            }}
+          />
+        )}
+        {time_visible && (
+          <DateTimePicker
+            value={Date.now()}
+            minimumDate={Date.now()}
+            mode="time"
+            is24Hour={true}
+            display="spinner"
+            onChange={(event, selectedDate) => {
+              console.log(selectedDate);
+              if (event.type == "set") {
+                this.setState({
+                  time: moment(selectedDate).format("HH:mm:ss"),
+                  time_visible: false,
+                });
+              } else {
+                this.setState({
+                  time_visible: false,
+                });
+              }
+            }}
+          />
+        )}
       </ImageBackground>
     );
   }

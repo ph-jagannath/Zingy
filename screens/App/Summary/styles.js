@@ -119,6 +119,12 @@ export default StyleSheet.create({
     fontSize: wp(4),
     alignSelf: "center",
   },
+  dateInput: {
+    marginLeft: wp(3),
+    fontSize: wp(4),
+    alignSelf: "center",
+    width: wp(40),
+  },
   borderView: {
     borderRadius: wp(2),
     borderColor: global.COLOR.gray,
@@ -185,5 +191,11 @@ export default StyleSheet.create({
     right: 10,
     fontSize: wp(3.5),
     marginVertical: hp(1),
+  },
+  date_container: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginTop: hp(2),
+    marginBottom: -hp(7),
   },
 });

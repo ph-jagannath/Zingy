@@ -85,6 +85,9 @@ i18n.translations = {
     summary_euro: "Amount",
     summary_Confirm: "Confirm",
     summary_service: "Services",
+    summary_location: "Location",
+    summary_date: "Date",
+    summary_time: "Time",
     //  payment.js
     payment_card: "Card",
     payment_cash: "Cash",
