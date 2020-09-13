@@ -16,7 +16,7 @@ import Profile from ".././screens/App/Profile";
 import VehicleStatus from "../screens/App/VehicleStatus";
 import Summary from "../screens/App/Summary";
 import Payment from "../screens/App/Payment";
-import CreDebitCardDetail from "../screens/App/CreDebitCardDetail";
+import Card from "../screens/App/Card";
 import BookingDetail from "../screens/App/BookingDetail";
 import HomeLocation from "../screens/App/HomeLocation";
 import EditVehicle from "../screens/App/EditVehicle";
@@ -67,10 +67,9 @@ function HomeStack() {
       <Stack.Screen name="Home" component={VehicleStatus} />
       <Stack.Screen name="select_plans" component={SelectPlans} />
       <Stack.Screen name="location_search" component={PlacesSearch} />
-      {/* <Stack.Screen name="MyBookings" component={MyBookings} /> */}
       <Stack.Screen name="Summary" component={Summary} />
       <Stack.Screen name="Payment" component={Payment} />
-      <Stack.Screen name="CreDebitCardDetail" component={CreDebitCardDetail} />
+      <Stack.Screen name="pay_card" component={Card} />
       <Stack.Screen name="BookingDetail" component={BookingDetail} />
       <Stack.Screen name="HomeLocation" component={HomeLocation} />
       <Stack.Screen name="Notification" component={Notification} />

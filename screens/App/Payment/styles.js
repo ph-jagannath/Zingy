@@ -3,13 +3,14 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   payment.js:
   container: {
     flex: 1,
-    backgroundColor: global.COLOR.white,
+    height: hp(110),
+    width: wp(100),
   },
   header: {
     borderBottomColor: global.COLOR.white,
@@ -48,7 +49,7 @@ export default StyleSheet.create({
   },
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   statusView: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
@@ -62,8 +63,8 @@ export default StyleSheet.create({
     marginTop: hp(1.5),
   },
   payment: {
-    fontSize: wp(3.2),
-    color: global.COLOR.gray,
+    fontSize: wp(4),
+    color: global.COLOR.PRIMARY_DARK,
   },
   TopViewPayment: {
     borderBottomColor: global.COLOR.lightGray,
@@ -76,16 +77,20 @@ export default StyleSheet.create({
   },
   radioStyle: {
     tintColor: global.COLOR.PRIMARY_LIGHT,
-    height: wp(3.3),
-    width: wp(3.3),
-    marginLeft: wp(2),
+    height: wp(5),
+    width: wp(5),
+    marginLeft: wp(3),
   },
   card: {
     marginLeft: wp(2),
+    width: wp(5),
+    height: hp(4),
+    resizeMode: "contain",
+    tintColor: "gray",
   },
   cardText: {
     marginLeft: wp(1),
-    color: global.COLOR.gray,
+    color: global.COLOR.PRIMARY_DARK,
     fontWeight: "bold",
   },
   roundViewPayment: {
@@ -106,5 +111,20 @@ export default StyleSheet.create({
   allPrice: {
     alignSelf: "center",
     color: global.COLOR.gray,
+  },
+  add_button: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    marginVertical: hp(3),
+    height: hp(7),
+    width: wp(75),
+    alignSelf: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+  },
+  add_button_Text: {
+    color: global.COLOR.white,
+    fontSize: wp(4.5),
+    fontWeight: "bold",
+    alignSelf: "center",
   },
 });

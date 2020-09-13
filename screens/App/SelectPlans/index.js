@@ -89,11 +89,12 @@ export default class SelectPlans extends Component {
   };
 
   get_address = async (lat, lng) => {
+    this.setState({ selected_plan: "" });
     api_get_plan_list_zone({
       lat,
       lng,
       type: global.ADD_BOOKING_4_DATA[0].type,
-    }).then(() => this.setState({ selected_plan: "" }));
+    }).then(() => this.update());
     api_get_nearby_sp({
       lat,
       lng,
@@ -120,6 +121,29 @@ export default class SelectPlans extends Component {
     this.setState({
       update: Date.now(),
     });
+  }
+
+  validate(t) {
+    const { selected_plan, address, lat, lng } = this.state;
+    const { navigation } = this.props;
+    if (global.NEARBY_SP.length == 0) {
+      showMessage({
+        message: "No Nearby Service Provider Available.",
+        type: "danger",
+      });
+    } else if (selected_plan == "") {
+      showMessage({
+        message: "Select a plan to proceed.",
+        type: "danger",
+      });
+    } else {
+      global.ADD_BOOKING_4_DATA[1] = selected_plan;
+      global.ADD_BOOKING_4_DATA[2] = address;
+      global.ADD_BOOKING_4_DATA[3] = lat;
+      global.ADD_BOOKING_4_DATA[4] = lng;
+      global.ADD_BOOKING_4_DATA[8] = t;
+      navigation.navigate("Summary");
+    }
   }
 
   render() {
@@ -419,28 +443,13 @@ export default class SelectPlans extends Component {
               />
               <View style={styles.rowView1}>
                 <TouchableOpacity
-                  onPress={() => {
-                    if (global.NEARBY_SP.length == 0) {
-                      showMessage({
-                        message: "No Nearby Service Provider Available.",
-                        type: "danger",
-                      });
-                    } else if (selected_plan == "") {
-                      showMessage({
-                        message: "Select a plan to proceed.",
-                        type: "danger",
-                      });
-                    } else {
-                      global.ADD_BOOKING_4_DATA[1] = selected_plan;
-                      navigation.navigate("Summary");
-                    }
-                  }}
+                  onPress={() => this.validate(1)}
                   style={styles.washNowView}
                 >
                   <Text style={styles.washNow}>{t("dacwash_washNow")}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("Summary")}
+                  onPress={() => this.validate(2)}
                   style={styles.washLaterView}
                 >
                   <Text style={styles.washLText}>{t("dacwash_washlater")}</Text>

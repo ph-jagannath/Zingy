@@ -3,7 +3,7 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   CreDebit.js:
@@ -13,7 +13,7 @@ export default StyleSheet.create({
 
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   statusView: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
@@ -43,12 +43,12 @@ export default StyleSheet.create({
   },
   mmInput: {
     margin: wp(1),
-    textAlign: "right",
-    fontSize: wp(3.4),
+    textAlign: "center",
+    fontSize: wp(4),
     width: wp(10),
     borderBottomColor: global.COLOR.gray,
-    borderBottomWidth: 2,
-    borderRadius: 1,
+    borderBottomWidth: 1,
+    // borderRadius: 1,
   },
   touchlogin: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
@@ -71,11 +71,11 @@ export default StyleSheet.create({
   yyInput: {
     margin: wp(1),
     textAlign: "center",
-    fontSize: wp(3.4),
-    width: wp(9),
+    fontSize: wp(4),
+    width: wp(10),
     borderBottomColor: global.COLOR.gray,
-    borderBottomWidth: 2,
-    borderRadius: 1,
+    borderBottomWidth: 1,
+    // borderRadius: 1,
   },
   postView: {
     width: wp(48),
@@ -85,7 +85,7 @@ export default StyleSheet.create({
     marginTop: hp(1),
     width: wp(29),
     borderBottomColor: global.COLOR.gray,
-    borderBottomWidth: 2,
+    borderBottomWidth: 1,
     borderRadius: 1,
   },
   cardHolderView: {
@@ -93,11 +93,10 @@ export default StyleSheet.create({
     marginHorizontal: wp(3),
   },
   nameInput: {
-    fontSize: wp(3.4),
+    fontSize: wp(4),
     marginTop: hp(1),
     borderBottomColor: global.COLOR.gray,
-    borderBottomWidth: 2,
-    borderRadius: 1,
+    borderBottomWidth: 1,
   },
   supported: {
     marginTop: hp(7),
@@ -119,7 +118,7 @@ export default StyleSheet.create({
     marginHorizontal: wp(3),
   },
   expView: {
-    width: wp(66),
+    // width: wp(66),
   },
 
   secndView: {
@@ -131,9 +130,25 @@ export default StyleSheet.create({
   },
   cardNumberInput: {
     margin: hp(1),
-    fontSize: wp(3.4),
+    fontSize: wp(4),
     borderBottomColor: global.COLOR.gray,
-    borderBottomWidth: 2,
-    borderRadius: 1,
+    borderBottomWidth: 1,
+    // borderRadius: 1,
+    // width: wp(80),
+  },
+  add_button: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    marginVertical: hp(3),
+    height: hp(7),
+    width: wp(75),
+    alignSelf: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+  },
+  add_button_Text: {
+    color: global.COLOR.white,
+    fontSize: wp(4.5),
+    fontWeight: "bold",
+    alignSelf: "center",
   },
 });

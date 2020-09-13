@@ -38,7 +38,7 @@
     "react-native-country-picker-modal": "^2.0.0",
     "react-native-dropdown-menu": "^2.0.0",
     "react-native-dropdown-picker": "^3.1.11",
-    "react-native-elements": "^2.0.4",
+    "react-native-elements": "^2.3.2",
     "react-native-flash-message": "^0.1.16",
     "react-native-geocoding": "^0.4.0",
     "react-native-geolocation-service": "^5.0.0",

@@ -857,3 +857,63 @@ export async function api_get_nearby_sp(d) {
   );
   return DATA;
 }
+
+/**
+ * CREATE booking api
+ *
+ */
+
+export async function api_booking_4_save(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "booking_saves",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+
+      transaction_id: "",
+      booking_date: global.ADD_BOOKING_4_DATA[5],
+      booking_time: global.ADD_BOOKING_4_DATA[14],
+      userId: global.AUTHTOKEN,
+      user_vehicle_id: global.ADD_BOOKING_4_DATA[0].id,
+      amount: global.ADD_BOOKING_4_DATA[1].amount,
+      plan_id: global.ADD_BOOKING_4_DATA[1].id,
+      booking_address: global.ADD_BOOKING_4_DATA[2],
+      latitude: global.ADD_BOOKING_4_DATA[3],
+      longitude: global.ADD_BOOKING_4_DATA[4],
+      remark: global.ADD_BOOKING_4_DATA[6],
+      payment_type: global.ADD_BOOKING_4_DATA[7],
+      booking_type: global.ADD_BOOKING_4_DATA[8],
+      package_id: global.ADD_BOOKING_4_DATA[9],
+      exp_month: global.ADD_BOOKING_4_DATA[10],
+      exp_year: global.ADD_BOOKING_4_DATA[11],
+      number: global.ADD_BOOKING_4_DATA[12],
+      cvc: global.ADD_BOOKING_4_DATA[13],
+      charges: global.ADD_BOOKING_4_DATA[1].amount,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.ADD_BOOKING_4_DATA = [];
+        RootNavigation.navigate("MyBookings");
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
+        });
+
+        return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

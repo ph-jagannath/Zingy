@@ -39,6 +39,9 @@ export default {
     ENG_WASH: require("../assets/enginedetailing.png"),
     MAP_PIN: require("../assets/map_pin.png"),
     BACK_ARROW: require("../assets/back_arrow.png"),
+    PAY_CASH: require("../assets/pay_cash.png"),
+    PAY_CARD: require("../assets/pay_card.png"),
+    PAY_PACKAGE: require("../assets/pay_package.png"),
   },
   COLOR: {
     PRIMARY_LIGHT: "#6ABC45",
@@ -268,10 +271,60 @@ export default {
     "", // 2 address
     "", // 3 lat
     "", // 4 lng
-    "", // 5 booking type
+    "", // 5 booking date
     "", // 6 remark
-    // "", // 7 country id
-    // "", // 8 plate number
-    // "", // 9 image
+    "", // 7 payment_type  1 => cash 2 => card 3=> package
+    "", // 8 booking_type  1 => ondemand 2 => schedule
+    "", // 9 package id
+    "", // 10 card exp_month
+    "", // 11 card exp_year
+    "", // 12 card number
+    "", // 13 card cvv
+    "", // 14 booking time
+    "", // 15 card name
   ],
 };
+
+// cash on demand
+
+// {
+//   "transaction_id": "",
+//   "booking_date": "",
+//   "latitude": "37.0681397164944",
+//   "booking_time": "",
+//   "user_vehicle_id": "4",
+//   "booking_address": "Corso Gelone, 7, 96100 Siracusa SR",
+//   "remark": "",
+//   "language": "eng",
+//   "payment_type": "1",
+//   "charges": "52.00",
+//   "user_id": "4",
+//   "booking_type": "1",
+//   "plan_id": "1",
+//   "longitude": "15.28430588543415"
+// }
+
+// card ondemand
+// {
+//     "transaction_id": "",
+//     "amount": "27.00",
+//     "booking_date": "",
+//     "latitude": "37.08882821364369",
+//     "booking_time": "",
+//     "exp_month": "02",
+//     "user_vehicle_id": "4",
+//     "booking_address": "Via Modica, 2, 96100 Siracusa SR",
+//     "remark": "",
+//     "language": "eng",
+//     "package_id": "",
+//     "exp_year": "25",
+//     "userId": "4",
+//     "number": "4242424242424242",
+//     "cvc": "252",
+//     "payment_type": "2",
+//     "charges": "27.00",
+//     "user_id": "4",
+//     "booking_type": "1",
+//     "plan_id": "2",
+//     "longitude": "15.268100313842297"
+// }
