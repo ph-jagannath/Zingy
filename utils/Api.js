@@ -1033,7 +1033,7 @@ export async function api_package_save(d) {
   Loading.show();
   const DATA = Axios({
     method: "post",
-    url: "packagePayment",
+    url: "add_packages",
     data: {
       user_id: global.AUTHTOKEN,
       transaction_id: d,
