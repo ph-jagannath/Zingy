@@ -32,6 +32,7 @@ export default class DrawerContent extends Component {
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.TopViewDrawer}>
+            {/* home */}
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => navigation.navigate("Home")}
@@ -50,6 +51,26 @@ export default class DrawerContent extends Component {
               </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
+            {/* two wheeler */}
+            <TouchableOpacity
+              activeOpacity={0.8}
+              onPress={() => navigation.navigate("two_wheeler")}
+              style={[
+                styles.contentTop,
+                active_route == "two_wheeler" && styles.active_tab,
+              ]}
+            >
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "two_wheeler" && styles.active_content,
+                ]}
+              >
+                {t("side_menu_two_wheeler")}
+              </Text>
+              <Icon name="chevron-right" size={32} color="#ccc" />
+            </TouchableOpacity>
+
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => navigation.navigate("MyVehicle")}

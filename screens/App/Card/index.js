@@ -15,7 +15,11 @@ import { t } from "i18n-js";
 
 import { Icon, Header } from "react-native-elements";
 import { showMessage } from "react-native-flash-message";
-import { api_booking_4_save, api_package_pay } from "../../../utils/Api";
+import {
+  api_booking_2_save,
+  api_booking_4_save,
+  api_package_pay,
+} from "../../../utils/Api";
 
 export default class Card extends Component {
   constructor(props) {
@@ -93,7 +97,9 @@ export default class Card extends Component {
       global.ADD_BOOKING_4_DATA[12] = this.state.cardNumber.split(" ").join("");
       global.ADD_BOOKING_4_DATA[13] = this.state.cvv;
       global.ADD_BOOKING_4_DATA[15] = this.state.name;
-      if (global.ADD_BOOKING_4_DATA[9] == "") {
+      if (global.ADD_BOOKING_4_DATA[16] !== "") {
+        api_booking_2_save();
+      } else if (global.ADD_BOOKING_4_DATA[9] == "") {
         api_booking_4_save();
       } else {
         api_package_pay();
@@ -127,7 +133,9 @@ export default class Card extends Component {
               <Text style={styles.headingText}>{t("creDebit_totalAmnt")}</Text>
               <Text style={styles.headingText}>
                 {global.CONSTANT.CURRENCY}{" "}
-                {global.ADD_BOOKING_4_DATA[9] == ""
+                {global.ADD_BOOKING_4_DATA[16] !== ""
+                  ? global.ADD_BOOKING_4_DATA[16]
+                  : global.ADD_BOOKING_4_DATA[9] == ""
                   ? global.ADD_BOOKING_4_DATA[1].amount
                   : global.ADD_BOOKING_4_DATA[9].cost}
               </Text>

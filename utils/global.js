@@ -250,6 +250,7 @@ export default {
   PLANS_LIST: [],
   PACKAGE_LIST_ZONE: [],
   FAQ: [],
+  SCOOTER_WASH_PRICE: [],
 
   // Add vehicle data
   ADD_VEHICLE_DATA: [
@@ -283,5 +284,6 @@ export default {
     "", // 13 card cvv
     "", // 14 booking time
     "", // 15 card name
+    "", // 16 2-wheeler amount
   ],
 };

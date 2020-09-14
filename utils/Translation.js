@@ -16,6 +16,7 @@ i18n.translations = {
     side_menu_Messages: "Messages",
     side_menu_Contact: "Contact",
     side_menu_Logout: "Logout",
+    side_menu_two_wheeler: "Two Wheeler Wash",
 
     // Login
     // validation

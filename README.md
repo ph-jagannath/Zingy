@@ -22,3 +22,5 @@ dacwash customer app in react native
     - FAQ
     - ondemand Booking with cash and card
     - schedule Booking with cash and card
+    - package booking
+    - two wheeler wash

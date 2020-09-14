@@ -201,7 +201,8 @@ export default class SelectPackage extends Component {
               <View style={styles.roundView}>
                 <Text style={styles.roundViewText}>{t("summary_euro")}</Text>
                 <Text style={styles.roundViewText}>
-                  {global.CONSTANT.CURRENCY} {selected_plan.cost}
+                  {global.CONSTANT.CURRENCY}{" "}
+                  {selected_plan == "" ? "0" : selected_plan.cost}
                 </Text>
               </View>
             </View>

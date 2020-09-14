@@ -5,7 +5,7 @@ import { Icon, Header } from "react-native-elements";
 import styles from "./styles";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
-import { api_booking_4_save } from "../../../utils/Api";
+import { api_booking_2_save, api_booking_4_save } from "../../../utils/Api";
 
 export default class Payment extends Component {
   constructor(props) {
@@ -20,7 +20,11 @@ export default class Payment extends Component {
   validate() {
     global.ADD_BOOKING_4_DATA[7] = this.state.payment_mode;
     if (this.state.payment_mode == 1) {
-      api_booking_4_save();
+      if (global.ADD_BOOKING_4_DATA[16] == "") {
+        api_booking_4_save();
+      } else {
+        api_booking_2_save();
+      }
     } else if (this.state.payment_mode == 2) {
       this.props.navigation.navigate("pay_card");
       console.log(" card ", global.ADD_BOOKING_4_DATA);
@@ -97,31 +101,36 @@ export default class Payment extends Component {
             </TouchableOpacity>
 
             {/* package */}
-            <TouchableOpacity
-              onPress={() => {
-                this.setState({ payment_mode: 3 });
-              }}
-              style={styles.rowView}
-            >
-              <Icon
-                name={
-                  payment_mode == 3
-                    ? "radio-button-checked"
-                    : "radio-button-unchecked"
-                }
-                size={20}
-                color={global.COLOR.PRIMARY_DARK}
-              />
-              <Image source={global.ASSETS.PAY_PACKAGE} style={styles.card} />
-              <Text style={styles.cardText}>{t("payment_package")}</Text>
-            </TouchableOpacity>
+            {global.ADD_BOOKING_4_DATA[16] == "" && (
+              <TouchableOpacity
+                onPress={() => {
+                  this.setState({ payment_mode: 3 });
+                }}
+                style={styles.rowView}
+              >
+                <Icon
+                  name={
+                    payment_mode == 3
+                      ? "radio-button-checked"
+                      : "radio-button-unchecked"
+                  }
+                  size={20}
+                  color={global.COLOR.PRIMARY_DARK}
+                />
+                <Image source={global.ASSETS.PAY_PACKAGE} style={styles.card} />
+                <Text style={styles.cardText}>{t("payment_package")}</Text>
+              </TouchableOpacity>
+            )}
           </View>
         </View>
         <View style={styles.roundViewPayment}>
           <View style={styles.roundView}>
             <Text style={styles.audText}>{t("payment_aud")}</Text>
             <Text style={styles.audText}>
-              {global.CONSTANT.CURRENCY} {global.ADD_BOOKING_4_DATA[1].amount}
+              {global.CONSTANT.CURRENCY}{" "}
+              {global.ADD_BOOKING_4_DATA[16] == ""
+                ? global.ADD_BOOKING_4_DATA[1].amount
+                : global.ADD_BOOKING_4_DATA[16]}
             </Text>
           </View>
         </View>

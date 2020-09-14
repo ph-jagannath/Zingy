@@ -859,7 +859,7 @@ export async function api_get_nearby_sp(d) {
 }
 
 /**
- * CREATE booking api
+ * CREATE car booking api
  *
  */
 
@@ -1007,12 +1007,12 @@ export async function api_package_pay(d) {
     validateStatus: () => true,
   }).then(
     function (response) {
-      Loading.hide();
       if (response.data.response.status) {
         api_package_save(response.data.response.data.payment_id);
 
         // return true;
       } else {
+        Loading.hide();
         showMessage({
           message: response.data.response.message,
           type: "danger",
@@ -1051,8 +1051,99 @@ export async function api_package_save(d) {
     function (response) {
       Loading.hide();
       if (response.data.response.status) {
-        // global.ADD_BOOKING_4_DATA = [];
-        // RootNavigation.navigate("Package");
+        global.ADD_BOOKING_4_DATA = [];
+        RootNavigation.navigate("Package");
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
+        });
+
+        return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * Get scooter wash price
+ *
+ */
+
+export async function api_get_scooter_price(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "get_scooter_wash_price",
+    data: {
+      user_id: global.AUTHTOKEN,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.SCOOTER_WASH_PRICE = response.data.response.data.scooty_wash;
+        return global.SCOOTER_WASH_PRICE;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * CREATE scooter booking api
+ *
+ */
+
+export async function api_booking_2_save(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "scooter_booking_saves",
+    data: {
+      user_id: global.AUTHTOKEN,
+      userId: global.AUTHTOKEN,
+      amount: global.ADD_BOOKING_4_DATA[16],
+      booking_address: global.ADD_BOOKING_4_DATA[2],
+      latitude: global.ADD_BOOKING_4_DATA[3],
+      longitude: global.ADD_BOOKING_4_DATA[4],
+      remark: global.ADD_BOOKING_4_DATA[6],
+      payment_type: global.ADD_BOOKING_4_DATA[7],
+      booking_type: global.ADD_BOOKING_4_DATA[8],
+      exp_month: global.ADD_BOOKING_4_DATA[10],
+      exp_year: global.ADD_BOOKING_4_DATA[11],
+      number: global.ADD_BOOKING_4_DATA[12],
+      cvc: global.ADD_BOOKING_4_DATA[13],
+      charges: global.ADD_BOOKING_4_DATA[16],
+      language: "eng",
+      plan_id: "",
+      transaction_id: "",
+      booking_date: "",
+      booking_time: "",
+      user_vehicle_id: "",
+      package_id: "",
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.ADD_BOOKING_4_DATA = [];
+        RootNavigation.navigate("MyBookings");
         showMessage({
           message: response.data.response.message,
           type: "success",

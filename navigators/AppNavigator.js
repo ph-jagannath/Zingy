@@ -31,6 +31,7 @@ import AddVehicle_2 from "../screens/App/AddVehicle_2";
 import PlacesSearch from "../screens/App/PlacesSearch";
 import SelectPlans from "../screens/App/SelectPlans";
 import SelectPackage from "../screens/App/SelectPackage";
+import TwoWheelLocation from "../screens/App/TwoWheelLocation";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -47,6 +48,7 @@ export default function AppNavigator() {
       }}
     >
       <Drawer.Screen name="Home" component={HomeStack} />
+      <Drawer.Screen name="two_wheeler" component={two_wheel_Stack} />
       <Drawer.Screen name="MyVehicle" component={MyVehicleStack} />
       <Drawer.Screen name="Location" component={MyLocationStack} />
       <Drawer.Screen name="MyBookings" component={MyBookingStack} />
@@ -77,6 +79,21 @@ function HomeStack() {
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
       {/* <Stack.Screen name="Dacwash" component={Dacwash} /> */}
+    </Stack.Navigator>
+  );
+}
+
+function two_wheel_Stack() {
+  return (
+    <Stack.Navigator
+      initialRouteName={"Home"}
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="select_location" component={TwoWheelLocation} />
+      <Stack.Screen name="location_search" component={PlacesSearch} />
+      <Stack.Screen name="Summary" component={Summary} />
+      <Stack.Screen name="Payment" component={Payment} />
+      <Stack.Screen name="pay_card" component={Card} />
     </Stack.Navigator>
   );
 }
