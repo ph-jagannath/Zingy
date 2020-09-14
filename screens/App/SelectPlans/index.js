@@ -12,6 +12,7 @@ import {
   api_get_locations,
   api_get_plan_list_zone,
   api_get_nearby_sp,
+  api_get_package_avail,
 } from "../../../utils/Api";
 import { showMessage } from "react-native-flash-message";
 export default class SelectPlans extends Component {
@@ -34,6 +35,7 @@ export default class SelectPlans extends Component {
       address: "",
       selected_plan: "",
       add_location_popup: false,
+      package_avail: false,
     };
   }
 
@@ -95,6 +97,11 @@ export default class SelectPlans extends Component {
       lng,
       type: global.ADD_BOOKING_4_DATA[0].type,
     }).then(() => this.update());
+    api_get_package_avail({
+      lat,
+      lng,
+      vehicle_id: global.ADD_BOOKING_4_DATA[0].id,
+    }).then((r) => this.setState({ package_avail: r }));
     api_get_nearby_sp({
       lat,
       lng,
@@ -156,6 +163,7 @@ export default class SelectPlans extends Component {
       address,
       selected_plan,
       add_location_popup,
+      package_avail,
     } = this.state;
     const { navigation } = this.props;
     return (
@@ -361,16 +369,20 @@ export default class SelectPlans extends Component {
             <>
               <View style={styles.btmViewDacWashLocation}>
                 <View style={styles.apClrView}>
-                  <Image
-                    source={global.ASSETS.CAR}
-                    resizeMode={"contain"}
-                    style={styles.imgCarDacWash}
-                  />
-                  <Image
-                    source={global.ASSETS.CLEANING}
-                    resizeMode={"contain"}
-                    style={styles.imgCarDacWash}
-                  />
+                  {selected_plan.services.toLowerCase().includes("ext") && (
+                    <Image
+                      source={global.ASSETS.CAR}
+                      resizeMode={"contain"}
+                      style={styles.imgCarDacWash}
+                    />
+                  )}
+                  {selected_plan.services.toLowerCase().includes("int") && (
+                    <Image
+                      source={global.ASSETS.CLEANING}
+                      resizeMode={"contain"}
+                      style={styles.imgCarDacWash}
+                    />
+                  )}
                   <Text style={styles.inOutText}>{selected_plan.services}</Text>
                 </View>
               </View>
@@ -455,7 +467,19 @@ export default class SelectPlans extends Component {
                   <Text style={styles.washLText}>{t("dacwash_washlater")}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                  onPress={() => navigation.navigate("Summary")}
+                  onPress={() => {
+                    if (!package_avail) {
+                      showMessage({
+                        message: "No package available for current location.",
+                        type: "danger",
+                      });
+                    } else {
+                      global.ADD_BOOKING_4_DATA[2] = address;
+                      global.ADD_BOOKING_4_DATA[3] = lat;
+                      global.ADD_BOOKING_4_DATA[4] = lng;
+                      navigation.navigate("select_package");
+                    }
+                  }}
                   style={styles.washLaterView}
                 >
                   <Text style={styles.pack}>{t("side_menu_Packages")}</Text>

@@ -107,16 +107,20 @@ export default class Summary extends Component {
               <>
                 <View style={styles.btmViewDacWashLocation}>
                   <View style={styles.apClrView}>
-                    <Image
-                      source={global.ASSETS.CAR}
-                      resizeMode={"contain"}
-                      style={styles.imgCarDacWash}
-                    />
-                    <Image
-                      source={global.ASSETS.CLEANING}
-                      resizeMode={"contain"}
-                      style={styles.imgCarDacWash}
-                    />
+                    {selected_plan.services.toLowerCase().includes("ext") && (
+                      <Image
+                        source={global.ASSETS.CAR}
+                        resizeMode={"contain"}
+                        style={styles.imgCarDacWash}
+                      />
+                    )}
+                    {selected_plan.services.toLowerCase().includes("int") && (
+                      <Image
+                        source={global.ASSETS.CLEANING}
+                        resizeMode={"contain"}
+                        style={styles.imgCarDacWash}
+                      />
+                    )}
                     <Text style={styles.inOutText}>
                       {selected_plan.services}
                     </Text>

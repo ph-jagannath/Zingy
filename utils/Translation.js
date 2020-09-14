@@ -88,6 +88,7 @@ i18n.translations = {
     summary_location: "Location",
     summary_date: "Date",
     summary_time: "Time",
+    package_book: "Book Now",
     //  payment.js
     payment_card: "Card",
     payment_cash: "Cash",

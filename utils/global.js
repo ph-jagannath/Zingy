@@ -248,6 +248,7 @@ export default {
   PLANS_LIST_ZONE: [],
   NEARBY_SP: [],
   PLANS_LIST: [],
+  PACKAGE_LIST_ZONE: [],
   FAQ: [],
 
   // Add vehicle data
@@ -275,7 +276,7 @@ export default {
     "", // 6 remark
     "", // 7 payment_type  1 => cash 2 => card 3=> package
     "", // 8 booking_type  1 => ondemand 2 => schedule
-    "", // 9 package id
+    "", // 9 package data
     "", // 10 card exp_month
     "", // 11 card exp_year
     "", // 12 card number

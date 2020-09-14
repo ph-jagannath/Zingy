@@ -917,3 +917,157 @@ export async function api_booking_4_save(d) {
   );
   return DATA;
 }
+
+/**
+ * Get package avialibility in location
+ *
+ */
+
+export async function api_get_package_avail(d) {
+  // Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "check_area_for_packages",
+    data: {
+      user_id: global.AUTHTOKEN,
+      latitude: d.lat,
+      longitude: d.lng,
+      user_vehicle_id: d.vehicle_id,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        return true;
+      } else {
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * Get list of packages  in the zone
+ *
+ */
+
+export async function api_get_package_zone(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "get_packages_zone",
+    data: {
+      user_id: global.AUTHTOKEN,
+      latitude: global.ADD_BOOKING_4_DATA[3],
+      longitude: global.ADD_BOOKING_4_DATA[4],
+      vechicle_type: global.ADD_BOOKING_4_DATA[0].type,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.PACKAGE_LIST_ZONE = response.data.response.data;
+        return global.PACKAGE_LIST_ZONE;
+      } else {
+        global.PACKAGE_LIST_ZONE = [];
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * package paymnent api
+ *
+ */
+
+export async function api_package_pay(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "packagePayment",
+    data: {
+      user_id: global.AUTHTOKEN,
+      userId: global.AUTHTOKEN,
+      amount: global.ADD_BOOKING_4_DATA[9].cost,
+      package_id: global.ADD_BOOKING_4_DATA[9].id,
+      exp_month: global.ADD_BOOKING_4_DATA[10],
+      exp_year: global.ADD_BOOKING_4_DATA[11],
+      number: global.ADD_BOOKING_4_DATA[12],
+      cvc: global.ADD_BOOKING_4_DATA[13],
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        api_package_save(response.data.response.data.payment_id);
+
+        // return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ *  after  package paymnent save api
+ *
+ */
+
+export async function api_package_save(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "packagePayment",
+    data: {
+      user_id: global.AUTHTOKEN,
+      transaction_id: d,
+      zone_id: global.ADD_BOOKING_4_DATA[9].zone_id,
+      amount: global.ADD_BOOKING_4_DATA[9].cost,
+      package_id: global.ADD_BOOKING_4_DATA[9].id,
+      address: global.ADD_BOOKING_4_DATA[2],
+      latitude: global.ADD_BOOKING_4_DATA[3],
+      longitude: global.ADD_BOOKING_4_DATA[4],
+      user_vehicle_id: global.ADD_BOOKING_4_DATA[0].id,
+      remark: global.ADD_BOOKING_4_DATA[6],
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        // global.ADD_BOOKING_4_DATA = [];
+        // RootNavigation.navigate("Package");
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
+        });
+
+        return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

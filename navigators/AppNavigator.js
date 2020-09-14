@@ -30,6 +30,7 @@ import AddVehicle_1 from "../screens/App/AddVehicle_1";
 import AddVehicle_2 from "../screens/App/AddVehicle_2";
 import PlacesSearch from "../screens/App/PlacesSearch";
 import SelectPlans from "../screens/App/SelectPlans";
+import SelectPackage from "../screens/App/SelectPackage";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -67,6 +68,7 @@ function HomeStack() {
       <Stack.Screen name="Home" component={VehicleStatus} />
       <Stack.Screen name="select_plans" component={SelectPlans} />
       <Stack.Screen name="location_search" component={PlacesSearch} />
+      <Stack.Screen name="select_package" component={SelectPackage} />
       <Stack.Screen name="Summary" component={Summary} />
       <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="pay_card" component={Card} />
