@@ -134,7 +134,8 @@ function MyBookingStack() {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="booking_list" component={MyBookings} />
-      <Stack.Screen name="booking_detail" component={HomeLocation} />
+      <Stack.Screen name="booking_track" component={BookingDetail} />
+      <Stack.Screen name="booking_detail" component={BookingDetail} />
     </Stack.Navigator>
   );
 }

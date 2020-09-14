@@ -14,6 +14,7 @@ import global from "../../../utils/global";
 import { Icon, Header } from "react-native-elements";
 import { t } from "i18n-js";
 import { api_get_bookings } from "../../../utils/Api";
+import { showMessage } from "react-native-flash-message";
 
 const preData = [{ pre: `Previous Soon` }];
 export default class MyBookings extends Component {
@@ -146,8 +147,18 @@ export default class MyBookings extends Component {
                 <TouchableOpacity
                   activeOpacity={0.9}
                   onPress={() => {
-                    console.log("book");
-                    navigation.navigate("booking_detail");
+                    console.log(
+                      d.booking_driver_id ? d.booking_driver_id : "111"
+                    );
+                    if (d.booking_driver_id) {
+                      navigation.navigate("booking_track");
+                    } else {
+                      showMessage({
+                        message: "Washer will be assigned soon.",
+                        type: "warning",
+                      });
+                    }
+                    // navigation.navigate("booking_detail");
                   }}
                   style={styles.listContainerMyBook}
                 >
@@ -168,7 +179,9 @@ export default class MyBookings extends Component {
                   <>
                     <View>
                       <Text style={styles.stand}>{d.plan_name}</Text>
-                      <Text style={styles.stand}>{d.vehicle_model}</Text>
+                      <Text style={styles.stand}>
+                        {d.vehicle_make} {d.vehicle_model}
+                      </Text>
                       <Text style={styles.locationMyBook}>
                         Location: {d.booking_address}
                       </Text>
