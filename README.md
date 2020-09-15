@@ -7,6 +7,13 @@ dacwash customer app in react native
     - Remove unused libraries
     - Terms and condition of Signup
     - List empty messages
+    - Profile edit
+    - Chat
+    - Messages
+    - Tracking Map
+    - Cancel
+    - Reschedule
+    -
 
 # DONE
 
@@ -24,3 +31,5 @@ dacwash customer app in react native
     - schedule Booking with cash and card
     - package booking
     - two wheeler wash
+    - Booking details
+    - booking track

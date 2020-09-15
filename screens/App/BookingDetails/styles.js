@@ -3,21 +3,26 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   BookingDetail.js:
+  container: {
+    flex: 1,
+    height: hp(110),
+    width: wp(100),
+  },
   header: {
     borderBottomColor: global.COLOR.white,
   },
   containerMybooking: {
     flex: 1,
-    backgroundColor: global.COLOR.newContainer,
+    // backgroundColor: global.COLOR.newContainer,
   },
 
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   statusView: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
@@ -41,18 +46,21 @@ export default StyleSheet.create({
   },
   wahrView: {
     alignSelf: "center",
+    alignItems: "center",
+    marginVertical: hp(2),
   },
   waherText: {
     fontWeight: "bold",
-    fontSize: wp(3),
+    fontSize: wp(4.2),
+    textTransform: "capitalize",
+    marginVertical: hp(1),
   },
   number: {
     fontWeight: "bold",
-    marginTop: hp(1),
+    // marginTop: hp(1),
     fontSize: wp(3),
   },
   starView: {
-    marginTop: hp(2),
     alignItems: "center",
   },
   starStyle: {
@@ -89,39 +97,39 @@ export default StyleSheet.create({
     backgroundColor: global.COLOR.white,
     alignItems: "center",
     borderRadius: 10,
-    marginTop: hp(3),
+    // marginTop: hp(3),
   },
   leftViewBookingDetails: {
     flexDirection: "row",
     marginLeft: wp(3),
-    marginVertical: hp(3),
+    // marginVertical: hp(3),
   },
   paymText: {
-    fontSize: wp(3),
+    fontSize: wp(3.5),
     fontWeight: "bold",
     marginLeft: wp(1),
   },
   ModeText: {
-    fontSize: wp(3),
+    fontSize: wp(3.5),
     fontWeight: "bold",
   },
   EuroText: {
-    fontSize: wp(3),
+    fontSize: wp(3.5),
     fontWeight: "bold",
     marginRight: wp(3),
-    marginVertical: hp(3),
+    marginVertical: hp(1),
   },
   locationText: {
-    fontSize: wp(3),
+    fontSize: wp(3.5),
     fontWeight: "bold",
     marginRight: wp(3),
-    marginVertical: hp(3),
+    marginVertical: hp(1),
     width: wp(60),
     textAlign: "right",
   },
   locaton: {
-    marginTop: hp(1),
-    fontSize: wp(3),
+    // marginTop: hp(1),
+    fontSize: wp(3.5),
     fontWeight: "bold",
   },
   location: {
@@ -130,9 +138,9 @@ export default StyleSheet.create({
   },
   viewPhoto: {
     fontWeight: "bold",
-    fontSize: wp(3),
+    fontSize: wp(3.5),
     color: global.COLOR.black,
-    marginVertical: hp(3),
+    marginVertical: hp(1),
     alignSelf: "center",
   },
   touchView: {
@@ -179,5 +187,17 @@ export default StyleSheet.create({
     borderRadius: 15,
     width: wp(46),
     justifyContent: "center",
+    borderColor: global.COLOR.PRIMARY_DARK,
+    borderWidth: 0.8,
+  },
+  wash_image: {
+    height: wp(30),
+    width: wp(30),
+    resizeMode: "contain",
+  },
+  wash_img_container: {
+    flexDirection: "row",
+    justifyContent: "space-evenly",
+    marginVertical: hp(1),
   },
 });

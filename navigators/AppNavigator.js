@@ -17,7 +17,6 @@ import VehicleStatus from "../screens/App/VehicleStatus";
 import Summary from "../screens/App/Summary";
 import Payment from "../screens/App/Payment";
 import Card from "../screens/App/Card";
-import BookingDetail from "../screens/App/BookingDetail";
 import HomeLocation from "../screens/App/HomeLocation";
 import EditVehicle from "../screens/App/EditVehicle";
 import Notification from "../screens/App/Notification";
@@ -32,6 +31,8 @@ import PlacesSearch from "../screens/App/PlacesSearch";
 import SelectPlans from "../screens/App/SelectPlans";
 import SelectPackage from "../screens/App/SelectPackage";
 import TwoWheelLocation from "../screens/App/TwoWheelLocation";
+import BookingTrack from "../screens/App/BookingTrack";
+import BookingDetails from "../screens/App/BookingDetails";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -74,7 +75,6 @@ function HomeStack() {
       <Stack.Screen name="Summary" component={Summary} />
       <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="pay_card" component={Card} />
-      <Stack.Screen name="BookingDetail" component={BookingDetail} />
       <Stack.Screen name="HomeLocation" component={HomeLocation} />
       <Stack.Screen name="Notification" component={Notification} />
       <Stack.Screen name="ChangePassword" component={ChangePassword} />
@@ -134,8 +134,8 @@ function MyBookingStack() {
       screenOptions={{ headerShown: false }}
     >
       <Stack.Screen name="booking_list" component={MyBookings} />
-      <Stack.Screen name="booking_track" component={BookingDetail} />
-      <Stack.Screen name="booking_detail" component={BookingDetail} />
+      <Stack.Screen name="booking_track" component={BookingTrack} />
+      <Stack.Screen name="booking_detail" component={BookingDetails} />
     </Stack.Navigator>
   );
 }

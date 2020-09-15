@@ -752,6 +752,40 @@ export async function api_get_bookings(d) {
 }
 
 /**
+ * Get Bookings details
+ *
+ */
+
+export async function api_get_booking_details(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "my_booking_details",
+    data: {
+      user_id: global.AUTHTOKEN,
+      booking_id: d,
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.BOOKING_DETAILS = response.data.response.data;
+        return global.BOOKING_DETAILS;
+      } else {
+        global.BOOKING_DETAILS = [];
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
  * Get plans list
  *
  */

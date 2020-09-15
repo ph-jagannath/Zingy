@@ -34,6 +34,7 @@ export default {
     NO_IMAGE: require("../assets/no_image.jpg"),
     SELECT_VEHICLE_IMAGE:
       "http://placehold.jp/cccccc/404040/150x150.png?text=SELECT%20VEHICLE%20IMAGE",
+    NO_IMAGE: "http://placehold.jp/cccccc/404040/150x150.png?text=NO%20IMAGE",
     EXT_WASH: require("../assets/ext-wash.png"),
     INT_WASH: require("../assets/interiorcleaning.png"),
     ENG_WASH: require("../assets/enginedetailing.png"),
@@ -251,6 +252,7 @@ export default {
   PACKAGE_LIST_ZONE: [],
   FAQ: [],
   SCOOTER_WASH_PRICE: [],
+  BOOKING_DETAILS: [],
 
   // Add vehicle data
   ADD_VEHICLE_DATA: [

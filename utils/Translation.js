@@ -115,6 +115,7 @@ i18n.translations = {
     bookingD_Washertest: "Washer test",
     bookingD_PaymentMode: "Payment Mode:",
     bookingD_location: "Location",
+    status: "Status",
     bookingD_PhotoGallery: "View Photo gallery",
     bookingD_PreWash: "Pre Wash",
     bookingD_AfterWash: "After Wash",

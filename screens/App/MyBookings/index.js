@@ -13,10 +13,9 @@ import styles from "./styles";
 import global from "../../../utils/global";
 import { Icon, Header } from "react-native-elements";
 import { t } from "i18n-js";
-import { api_get_bookings } from "../../../utils/Api";
+import { api_get_bookings, api_get_booking_details } from "../../../utils/Api";
 import { showMessage } from "react-native-flash-message";
 
-const preData = [{ pre: `Previous Soon` }];
 export default class MyBookings extends Component {
   constructor(props) {
     super(props);
@@ -146,12 +145,15 @@ export default class MyBookings extends Component {
               return (
                 <TouchableOpacity
                   activeOpacity={0.9}
-                  onPress={() => {
-                    console.log(
-                      d.booking_driver_id ? d.booking_driver_id : "111"
-                    );
+                  onPress={async () => {
                     if (d.booking_driver_id) {
-                      navigation.navigate("booking_track");
+                      const r = await api_get_booking_details(d.booking_id);
+                      if (r && active_tab == 2) {
+                        navigation.navigate("booking_track");
+                      }
+                      if (r && active_tab == 1) {
+                        navigation.navigate("booking_detail");
+                      }
                     } else {
                       showMessage({
                         message: "Washer will be assigned soon.",
@@ -188,7 +190,7 @@ export default class MyBookings extends Component {
                       <Text style={styles.priceMyBook}>
                         Price - {global.CONSTANT.CURRENCY} {d.booking_amount}
                       </Text>
-                      {active_tab == 2 && (
+                      {active_tab == 2 && (d.status == "1" || d.status == "0") && (
                         <>
                           <View style={styles.leftView}>
                             <TouchableOpacity
