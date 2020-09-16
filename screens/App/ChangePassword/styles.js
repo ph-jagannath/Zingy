@@ -3,13 +3,18 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   changepassword.js:
   containerMybooking: {
     flex: 1,
-    backgroundColor: global.COLOR.newContainer,
+    // backgroundColor: global.COLOR.newContainer,
+  },
+  container: {
+    flex: 1,
+    height: hp(110),
+    width: wp(100),
   },
   statusView: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
@@ -17,7 +22,7 @@ export default StyleSheet.create({
   },
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   touchVIewChangePass: {
     marginTop: hp(10),
@@ -53,13 +58,14 @@ export default StyleSheet.create({
     marginHorizontal: wp(5),
     flexDirection: "row",
     alignItems: "center",
-    backgroundColor: global.COLOR.white,
+    borderColor: global.COLOR.PRIMARY_DARK,
     borderRadius: 50,
+    borderWidth: 0.8,
   },
   sideIcon: {
     height: hp(5),
     width: wp(6),
-    tintColor: "#ccc",
+    tintColor: global.COLOR.PRIMARY_DARK,
     marginLeft: wp(5),
   },
   nameInputSignup: {
@@ -68,5 +74,20 @@ export default StyleSheet.create({
     marginLeft: hp(2),
     borderBottomWidth: 0,
     backgroundColor: "white",
+  },
+  add_button: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    marginVertical: hp(3),
+    height: hp(7),
+    width: wp(75),
+    alignSelf: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+  },
+  add_button_Text: {
+    color: global.COLOR.white,
+    fontSize: wp(4.5),
+    fontWeight: "bold",
+    alignSelf: "center",
   },
 });

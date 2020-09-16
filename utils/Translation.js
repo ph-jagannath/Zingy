@@ -17,6 +17,7 @@ i18n.translations = {
     side_menu_Contact: "Contact",
     side_menu_Logout: "Logout",
     side_menu_two_wheeler: "Two Wheeler Wash",
+    edit_profile: "Edit Profile",
 
     // Login
     // validation
@@ -31,6 +32,7 @@ i18n.translations = {
     signup_welcome: "Welcome",
     signup_plsSignUp: "Please sign up to continue",
     signup_name: "Name",
+    signup_phone: "Phone Number",
     signup_email: "Email",
     signup_password: "Password",
     signup_bySignUp: "By signing up,you agree to our",

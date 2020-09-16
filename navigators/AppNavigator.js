@@ -33,6 +33,7 @@ import SelectPackage from "../screens/App/SelectPackage";
 import TwoWheelLocation from "../screens/App/TwoWheelLocation";
 import BookingTrack from "../screens/App/BookingTrack";
 import BookingDetails from "../screens/App/BookingDetails";
+import EditProfile from "../screens/App/EditProfile";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -58,7 +59,7 @@ export default function AppNavigator() {
       <Drawer.Screen name="Faqs" component={Faqs} />
       <Drawer.Screen name="ChangeLanguage" component={ChangeLanguage} />
       <Drawer.Screen name="Package" component={Packages} />
-      <Stack.Screen name="Profile" component={Profile} />
+      <Drawer.Screen name="Profile" component={ProfileStack} />
     </Drawer.Navigator>
   );
 }
@@ -77,8 +78,6 @@ function HomeStack() {
       <Stack.Screen name="pay_card" component={Card} />
       <Stack.Screen name="HomeLocation" component={HomeLocation} />
       <Stack.Screen name="Notification" component={Notification} />
-      <Stack.Screen name="ChangePassword" component={ChangePassword} />
-      {/* <Stack.Screen name="Dacwash" component={Dacwash} /> */}
     </Stack.Navigator>
   );
 }
@@ -136,6 +135,19 @@ function MyBookingStack() {
       <Stack.Screen name="booking_list" component={MyBookings} />
       <Stack.Screen name="booking_track" component={BookingTrack} />
       <Stack.Screen name="booking_detail" component={BookingDetails} />
+    </Stack.Navigator>
+  );
+}
+
+function ProfileStack() {
+  return (
+    <Stack.Navigator
+      initialRouteName="profile_home"
+      screenOptions={{ headerShown: false }}
+    >
+      <Stack.Screen name="profile_home" component={Profile} />
+      <Stack.Screen name="profile_edit" component={EditProfile} />
+      <Stack.Screen name="profile_password" component={ChangePassword} />
     </Stack.Navigator>
   );
 }

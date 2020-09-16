@@ -7,14 +7,17 @@ import {
   StatusBar,
   View,
   Alert,
+  ImageBackground,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { TextInput } from "react-native-paper";
-import styles from "../../styles/app/changePassword_styles";
-import global from "../../utils/global";
+import styles from "./styles";
+import global from "../../../utils/global";
 import { t } from "i18n-js";
 
 import { Icon, Header } from "react-native-elements";
+import { showMessage } from "react-native-flash-message";
+import { api_update_password } from "../../../utils/Api";
 
 export default class ChangePassword extends Component {
   constructor(props) {
@@ -37,32 +40,39 @@ export default class ChangePassword extends Component {
       header: header,
     });
   };
-  handleValidation = () => {
+  handleValidation = async () => {
     if (this.state.oldPassword == "") {
-      Alert.alert(global.CONSTANT.APPNAME, t("plzEnterCurrentPass"));
+      showMessage({
+        message: t("plzEnterCurrentPass"),
+        type: "warning",
+      });
     } else if (this.state.newPassword == "") {
-      Alert.alert(global.CONSTANT.APPNAME, t("plzEnterNewPass"));
+      showMessage({
+        message: t("plzEnterNewPass"),
+        type: "warning",
+      });
     } else if (this.state.newPassword.length < 6) {
-      Alert.alert(global.CONSTANT.APPNAME, t("passShouldLess"));
+      showMessage({
+        message: t("passShouldLess"),
+        type: "warning",
+      });
     } else if (this.state.newPassword !== this.state.conPassword) {
-      Alert.alert(global.CONSTANT.APPNAME, t("passAndConPassNotMatch"));
+      showMessage({
+        message: t("passAndConPassNotMatch"),
+        type: "warning",
+      });
     } else {
-      alert("Update");
+      const r = await api_update_password(this.state);
+      r && this.props.navigation.goBack();
     }
   };
   render() {
     return (
-      <View style={styles.containerMybooking}>
-        <View style={styles.statusView}>
-          <StatusBar
-            translucent
-            backgroundColor={global.COLOR.PRIMARY_LIGHT}
-            barStyle="light-content"
-          />
-        </View>
+      <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
         <Header
           containerStyle={styles.header}
           backgroundColor={global.COLOR.PRIMARY_LIGHT}
+          statusBarProps={{ backgroundColor: global.COLOR.PRIMARY_LIGHT }}
           leftComponent={
             <TouchableOpacity onPress={() => this.props.navigation.goBack()}>
               <Icon name="chevron-left" size={32} color={global.COLOR.white} />
@@ -145,7 +155,7 @@ export default class ChangePassword extends Component {
             </TouchableOpacity>
           </View>
         </ScrollView>
-      </View>
+      </ImageBackground>
     );
   }
 }

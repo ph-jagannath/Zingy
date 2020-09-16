@@ -3,25 +3,26 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
-import global from "../../utils/global";
+import global from "../../../utils/global";
 
 export default StyleSheet.create({
   //   profile.js:
 
   container: {
     flex: 1,
-    backgroundColor: global.COLOR.white,
+    height: hp(110),
+    width: wp(100),
   },
   header: {
     borderBottomColor: global.COLOR.white,
   },
   containerMybooking: {
     flex: 1,
-    backgroundColor: global.COLOR.newContainer,
+    // backgroundColor: global.COLOR.newContainer,
   },
   headerText: {
     color: global.COLOR.white,
-    fontSize: wp(4),
+    fontSize: wp(5),
   },
   statusView: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
@@ -37,14 +38,14 @@ export default StyleSheet.create({
   imgStyle: {
     height: wp(5),
     width: wp(5),
-    tintColor: global.COLOR.PRIMARY_LIGHT,
+    tintColor: global.COLOR.PRIMARY_DARK,
   },
   MimgStyle: {
-    tintColor: global.COLOR.PRIMARY_LIGHT,
+    tintColor: global.COLOR.PRIMARY_DARK,
   },
   nameText: {
     marginLeft: wp(3),
-    color: global.COLOR.PRIMARY_LIGHT,
+    color: global.COLOR.PRIMARY_DARK,
     fontWeight: "bold",
   },
   usrName: {
@@ -55,10 +56,11 @@ export default StyleSheet.create({
   horizonViewProfile: {
     marginTop: hp(2),
     borderRadius: 12,
-    height: hp(12),
-    backgroundColor: "#fff",
+    height: hp(11),
+    borderColor: global.COLOR.PRIMARY_DARK,
     marginHorizontal: wp(5),
     justifyContent: "center",
+    borderWidth: 0.8,
   },
   HorizonRowViewProfile: {
     flexDirection: "row",
@@ -68,5 +70,20 @@ export default StyleSheet.create({
   },
   profileRightView: {
     marginHorizontal: wp(6),
+  },
+  add_button: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    marginVertical: hp(3),
+    height: hp(7),
+    width: wp(75),
+    alignSelf: "center",
+    justifyContent: "center",
+    borderRadius: 8,
+  },
+  add_button_Text: {
+    color: global.COLOR.white,
+    fontSize: wp(4.5),
+    fontWeight: "bold",
+    alignSelf: "center",
   },
 });

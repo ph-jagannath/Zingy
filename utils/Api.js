@@ -1,15 +1,10 @@
-import React from "react";
 import Axios from "axios";
 import Loading from "../components/Loading";
-import { showMessage, hideMessage } from "react-native-flash-message";
+import { showMessage } from "react-native-flash-message";
 import * as RootNavigation from "./RootNavigation";
 import AsyncStorage from "@react-native-community/async-storage";
-// import NetInfo from "@react-native-community/netinfo";
-// import * as Linking from "expo-linking";
 import global from "./global";
-import { Icon } from "react-native-elements";
 import * as SplashScreen from "expo-splash-screen";
-// import * as Contacts from "expo-contacts";
 import * as Facebook from "expo-facebook";
 
 // Network listener
@@ -378,7 +373,7 @@ export async function api_logout() {
  * Get USer Vehicles
  */
 
-export async function api_get_vehicle(d) {
+export async function api_get_vehicle() {
   Loading.show();
   global.MY_VEHICLES = [];
   const DATA = Axios({
@@ -410,7 +405,7 @@ export async function api_get_vehicle(d) {
  * Get make and model
  */
 
-export async function api_get_make(d) {
+export async function api_get_make() {
   Loading.show();
   const DATA = Axios({
     method: "get",
@@ -439,7 +434,7 @@ export async function api_get_make(d) {
  * Add new vehicle
  */
 
-export async function api_add_vehicle(d) {
+export async function api_add_vehicle() {
   Loading.show();
 
   var data = new FormData();
@@ -581,7 +576,7 @@ export async function api_delete_vehicle(d) {
  * Get Packages
  */
 
-export async function api_get_packages(d) {
+export async function api_get_packages() {
   Loading.show();
 
   const DATA = Axios({
@@ -613,7 +608,7 @@ export async function api_get_packages(d) {
  * Get Locations
  */
 
-export async function api_get_locations(d) {
+export async function api_get_locations() {
   Loading.show();
 
   const DATA = Axios({
@@ -686,7 +681,7 @@ export async function api_add_location(d) {
  * Get FAQ
  */
 
-export async function api_get_faq(d) {
+export async function api_get_faq() {
   Loading.show();
 
   const DATA = Axios({
@@ -790,7 +785,7 @@ export async function api_get_booking_details(d) {
  *
  */
 
-export async function api_get_plan_list(d) {
+export async function api_get_plan_list() {
   Loading.show();
   global.PLANS_LIST = [];
   const DATA = Axios({
@@ -897,7 +892,7 @@ export async function api_get_nearby_sp(d) {
  *
  */
 
-export async function api_booking_4_save(d) {
+export async function api_booking_4_save() {
   Loading.show();
   const DATA = Axios({
     method: "post",
@@ -987,7 +982,7 @@ export async function api_get_package_avail(d) {
  *
  */
 
-export async function api_get_package_zone(d) {
+export async function api_get_package_zone() {
   Loading.show();
   const DATA = Axios({
     method: "post",
@@ -1023,7 +1018,7 @@ export async function api_get_package_zone(d) {
  *
  */
 
-export async function api_package_pay(d) {
+export async function api_package_pay() {
   Loading.show();
   const DATA = Axios({
     method: "post",
@@ -1111,7 +1106,7 @@ export async function api_package_save(d) {
  *
  */
 
-export async function api_get_scooter_price(d) {
+export async function api_get_scooter_price() {
   Loading.show();
   const DATA = Axios({
     method: "post",
@@ -1143,7 +1138,7 @@ export async function api_get_scooter_price(d) {
  *
  */
 
-export async function api_booking_2_save(d) {
+export async function api_booking_2_save() {
   Loading.show();
   const DATA = Axios({
     method: "post",
@@ -1195,4 +1190,128 @@ export async function api_booking_2_save(d) {
     }.bind(this)
   );
   return DATA;
+}
+
+/**
+ * change password api
+ *
+ */
+
+export async function api_update_password(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "change_password",
+    data: {
+      user_id: global.AUTHTOKEN,
+      cofirm_password: d.conPassword,
+      old_password: d.oldPassword,
+      new_password: d.newPassword,
+      language: "eng",
+    },
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
+        });
+        return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * edit profile api
+ *
+ */
+
+export async function api_update_profile(d) {
+  Loading.show();
+  var data = new FormData();
+  data.append("user_id", global.AUTHTOKEN);
+  data.append("first_name", d.name);
+  data.append("last_name", " ");
+  data.append("device_type", global.CONSTANT.DEVICETYPE);
+  data.append("email", d.email);
+  data.append("latitude", "");
+  data.append("longitude", "");
+  data.append("device_id", global.CONSTANT.DEVICETOKEN);
+  data.append("language", "eng");
+  data.append("image", {
+    uri: "https://dacwash.com/img/Admin/logo.png",
+    name: "profile.jpg",
+    type: "image/jpg",
+  });
+  const DATA = Axios({
+    method: "post",
+    url: "edit_profile",
+    data,
+    validateStatus: () => true,
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
+        });
+        api_get_my_profile();
+        RootNavigation.navigate("Home");
+        return true;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * my profile api
+ *
+ */
+export async function api_get_my_profile(d) {
+  // Loading.show();
+  Axios({
+    method: "post",
+    url: "my_profile",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      if (response.data.response.status) {
+        StoreUserData(response.data.response.data);
+        return true;
+      } else {
+        Loading.hide();
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
 }
