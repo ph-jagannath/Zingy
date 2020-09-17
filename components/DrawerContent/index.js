@@ -181,6 +181,24 @@ export default class DrawerContent extends Component {
             </TouchableOpacity>
             <TouchableOpacity
               activeOpacity={0.8}
+              onPress={() => navigation.navigate("Notification")}
+              style={[
+                styles.contentTop,
+                active_route == "Notification" && styles.active_tab,
+              ]}
+            >
+              <Text
+                style={[
+                  styles.content,
+                  active_route == "Notification" && styles.active_content,
+                ]}
+              >
+                {t("Notification")}
+              </Text>
+              <Icon name="chevron-right" size={32} color="#ccc" />
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.8}
               onPress={() => navigation.navigate("Contact")}
               style={[
                 styles.contentTop,

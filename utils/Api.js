@@ -1289,7 +1289,7 @@ export async function api_update_profile(d) {
  */
 export async function api_get_my_profile(d) {
   // Loading.show();
-  Axios({
+  const DATA = Axios({
     method: "post",
     url: "my_profile",
     data: {
@@ -1314,15 +1314,16 @@ export async function api_get_my_profile(d) {
       }
     }.bind(this)
   );
+  return DATA;
 }
 
 /**
  * my notification api
  *
  */
-export async function api_get_notifiactions(d) {
+export async function api_get_notifications(d) {
   Loading.show();
-  Axios({
+  const DATA = Axios({
     method: "post",
     url: "notification_list",
     data: {
@@ -1337,7 +1338,7 @@ export async function api_get_notifiactions(d) {
       Loading.hide();
       if (response.data.response.status) {
         global.NOTIFICATIONS_LIST = response.data.response.data;
-        return true;
+        return global.NOTIFICATIONS_LIST;
       } else {
         global.NOTIFICATIONS_LIST = [];
         showMessage({
@@ -1348,4 +1349,106 @@ export async function api_get_notifiactions(d) {
       }
     }.bind(this)
   );
+  return DATA;
+}
+
+/**
+ * read notification api
+ *
+ */
+export async function api_read_notifications(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "notification_status",
+    data: {
+      user_id: global.AUTHTOKEN,
+      is_read: "1",
+      language: "eng",
+      notification_id: d,
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      if (response.data.response.status) {
+        return true;
+      } else {
+        Loading.hide();
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * delete notification api
+ *
+ */
+export async function api_delete_notifications(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "notification_delete",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+      notification_id: d,
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      if (response.data.response.status) {
+        return true;
+      } else {
+        Loading.hide();
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * delete all notification api
+ *
+ */
+export async function api_delete_all_notifications(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "notification_delete",
+    data: {
+      user_id: global.AUTHTOKEN,
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      if (response.data.response.status) {
+        return true;
+      } else {
+        Loading.hide();
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
 }

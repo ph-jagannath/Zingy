@@ -10,6 +10,11 @@ export default StyleSheet.create({
   header: {
     borderBottomColor: global.COLOR.white,
   },
+  container: {
+    flex: 1,
+    height: hp(110),
+    width: wp(100),
+  },
   touchLeft: {
     marginTop: 5,
   },
@@ -17,14 +22,24 @@ export default StyleSheet.create({
     color: global.COLOR.white,
     fontSize: wp(5),
   },
-  flatListContainer: {
-    marginTop: hp(2),
-  },
+
   statusView: {
     backgroundColor: global.COLOR.PRIMARY_LIGHT,
   },
   containerMybooking: {
     flex: 1,
     backgroundColor: global.COLOR.newContainer,
+  },
+  msg_container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    borderBottomWidth: 1,
+    paddingVertical: hp(1),
+    paddingHorizontal: wp(4),
+    // minHeight: hp(5),
+  },
+  msg_text: {
+    width: wp(83),
+    color: global.COLOR.PRIMARY_DARK,
   },
 });
