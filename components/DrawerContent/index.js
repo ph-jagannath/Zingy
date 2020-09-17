@@ -161,7 +161,7 @@ export default class DrawerContent extends Component {
               </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => navigation.navigate("Message")}
               style={[
@@ -178,7 +178,7 @@ export default class DrawerContent extends Component {
                 {t("side_menu_Messages")}
               </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
             <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => navigation.navigate("Notification")}

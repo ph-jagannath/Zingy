@@ -251,7 +251,7 @@ export async function FBAuth() {
         `https://graph.facebook.com/me?fields=id,name,email,friends,birthday,picture.type(large)&access_token=${token}`
       );
       let data = await response.json();
-      // SocialLogin({email:})
+      // SocialLogin(data);
       return data;
     } else {
       return false;
@@ -1429,8 +1429,9 @@ export async function api_delete_all_notifications(d) {
   Loading.show();
   const DATA = Axios({
     method: "post",
-    url: "notification_delete",
+    url: "notification_delete_all",
     data: {
+      // language: "eng",
       user_id: global.AUTHTOKEN,
     },
     validateStatus: () => {
@@ -1519,6 +1520,45 @@ export async function api_cancel_booking(d) {
           message: response.data.response.message,
           type: "danger",
         });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * send notifiction api
+ *
+ */
+export async function api_send_push_notif(d) {
+  // Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "sendNotification",
+    data: {
+      sender_id: global.AUTHTOKEN,
+      receiver_id: d.id,
+      receiver_type: "2",
+      message: d.msg,
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      if (response.data.response.status) {
+        // showMessage({
+        //   message: response.data.response.message,
+        //   type: "success",
+        // });
+        return true;
+      } else {
+        // Loading.hide();
+        // showMessage({
+        //   message: response.data.response.message,
+        //   type: "danger",
+        // });
         return false;
       }
     }.bind(this)

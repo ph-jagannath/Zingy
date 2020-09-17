@@ -5,17 +5,17 @@ dacwash customer app in react native
 # TODO
 
     - Remove unused libraries
-    - Terms and condition of Signup
     - List empty messages
-    - Chat
-    - Messages
     - Tracking Map
-    - Cancel
     - Reschedule
     -
 
 # DONE
 
+    - Chat
+    - Messages
+    - Terms and condition of Signup
+    - Cancel
     - Profile edit
     - Sign Up Api
     - Login Api

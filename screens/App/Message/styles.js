@@ -42,6 +42,7 @@ export default StyleSheet.create({
     tintColor: global.COLOR.white,
     height: hp(5),
     width: hp(4),
+    resizeMode: "contain",
   },
 
   notiText: {

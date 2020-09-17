@@ -20,6 +20,7 @@ i18n.translations = {
     edit_profile: "Edit Profile",
     Privacy: "Privacy Policy",
     Terms: "Terms & Conditions",
+    Chat: "Chat",
 
     // Login
     // validation

@@ -35,6 +35,7 @@ import BookingDetails from "../screens/App/BookingDetails";
 import EditProfile from "../screens/App/EditProfile";
 import Privacy from "../screens/App/Privacy";
 import Terms from "../screens/App/Terms";
+import Chat from "../screens/App/Chat";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -137,6 +138,7 @@ function MyBookingStack() {
       <Stack.Screen name="booking_list" component={MyBookings} />
       <Stack.Screen name="booking_track" component={BookingTrack} />
       <Stack.Screen name="booking_detail" component={BookingDetails} />
+      <Stack.Screen name="booking_chat" component={Chat} />
     </Stack.Navigator>
   );
 }

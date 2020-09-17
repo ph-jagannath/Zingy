@@ -5,6 +5,7 @@ import {
   FlatList,
   TouchableOpacity,
   ImageBackground,
+  RefreshControl,
 } from "react-native";
 import styles from "./styles";
 import global from "../../../utils/global";
@@ -29,7 +30,7 @@ export default class Notification extends Component {
 
   get_data = async () => {
     await api_get_notifications();
-    r && this.update();
+    this.update();
   };
 
   update() {
@@ -87,6 +88,14 @@ export default class Notification extends Component {
         <FlatList
           ListEmptyComponent={this.emptyList}
           data={global.NOTIFICATIONS_LIST}
+          refreshControl={
+            <RefreshControl
+              refreshing={false}
+              onRefresh={() => {
+                this.get_data();
+              }}
+            />
+          }
           keyExtractor={(item, index) => index.toString()}
           renderItem={({ item: i }) => {
             return (

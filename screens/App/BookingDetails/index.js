@@ -67,7 +67,12 @@ export default class BookingDetails extends Component {
             d.status == "1" ||
             d.status == "5" ||
             d.status == "9") && (
-            <TouchableOpacity style={styles.msgTouch}>
+            <TouchableOpacity
+              onPress={() => {
+                navigation.navigate("booking_chat");
+              }}
+              style={styles.msgTouch}
+            >
               <Image style={styles.msgImg} source={global.ASSETS.MESSAGE} />
             </TouchableOpacity>
           )}
