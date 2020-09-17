@@ -9,8 +9,8 @@ import {
   FlatList,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import styles from "../../styles/app/notification_styles";
-import global from "../../utils/global";
+import styles from "./styles";
+import global from "../../../utils/global";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
 
@@ -23,6 +23,18 @@ export default class Notification extends Component {
       Notifications: [],
     };
   }
+
+  async componentDidMount() {
+    const r = await api_get_notifiactions();
+    this.update();
+  }
+
+  update() {
+    this.setState({
+      update: Date.now(),
+    });
+  }
+
   renderList = () => {
     <View style={{ flex: 1 }}>
       <Text>{item.data}</Text>
@@ -40,15 +52,9 @@ export default class Notification extends Component {
     const { preTab } = this.state;
     return (
       <View style={styles.containerMybooking}>
-        <View style={styles.statusView}>
-          <StatusBar
-            translucent
-            backgroundColor={global.COLOR.PRIMARY_LIGHT}
-            barStyle="light-content"
-          />
-        </View>
         <Header
           containerStyle={styles.header}
+          statusBarProps={{ backgroundColor: global.COLOR.PRIMARY_LIGHT }}
           backgroundColor={global.COLOR.PRIMARY_LIGHT}
           leftComponent={
             <TouchableOpacity
@@ -65,7 +71,7 @@ export default class Notification extends Component {
         <FlatList
           contentContainerStyle={styles.flatListContainer}
           ListEmptyComponent={this.emptyList}
-          data={this.state.Notifications}
+          data={global.NOTIFICATIONS_LIST}
           renderItem={({ item, index }) => this.renderList({ item, index })}
           keyExtractor={(item, index) => index.toString()}
         />

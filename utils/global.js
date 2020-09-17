@@ -253,6 +253,7 @@ export default {
   FAQ: [],
   SCOOTER_WASH_PRICE: [],
   BOOKING_DETAILS: [],
+  NOTIFICATIONS_LIST: [],
 
   // Add vehicle data
   ADD_VEHICLE_DATA: [

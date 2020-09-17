@@ -8,11 +8,11 @@ import {
   StatusBar,
   View,
 } from "react-native";
-import styles from "../../styles/app/message_styles";
-import global from "../../utils/global";
+import styles from "./styles";
+import global from "../../../utils/global";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { Icon, Header } from "react-native-elements";
-import emp from "../../assets/emp.png";
+import emp from "../../../assets/emp.png";
 import { t } from "i18n-js";
 
 const userMesege = [

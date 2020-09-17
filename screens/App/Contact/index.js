@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { ScrollView, Image, Text, StatusBar, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import styles from "../../styles/app/contact_styles";
-import global from "../../utils/global";
+import styles from "./styles";
+import global from "../../../utils/global";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
 export default class Contact extends Component {

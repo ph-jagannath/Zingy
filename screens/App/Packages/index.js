@@ -111,7 +111,7 @@ export default class Packages extends Component {
                     </View>
                   </View>
 
-                  <View style={styles.horzonView}>
+                  {/* <View style={styles.horzonView}>
                     <View style={styles.itemes}>
                       <Image
                         source={global.ASSETS.ENG_WASH}
@@ -121,7 +121,7 @@ export default class Packages extends Component {
                         {u.no_of_wash} X Engine Wash
                       </Text>
                     </View>
-                  </View>
+                  </View> */}
                   <Text style={styles.expDate}>Expiry: {u.expiry_date}</Text>
                   <Text style={styles.expDate}>Remark: {u.remark}</Text>
                 </View>

@@ -1315,3 +1315,37 @@ export async function api_get_my_profile(d) {
     }.bind(this)
   );
 }
+
+/**
+ * my notification api
+ *
+ */
+export async function api_get_notifiactions(d) {
+  Loading.show();
+  Axios({
+    method: "post",
+    url: "notification_list",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.NOTIFICATIONS_LIST = response.data.response.data;
+        return true;
+      } else {
+        global.NOTIFICATIONS_LIST = [];
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+}

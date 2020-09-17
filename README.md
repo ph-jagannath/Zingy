@@ -7,7 +7,6 @@ dacwash customer app in react native
     - Remove unused libraries
     - Terms and condition of Signup
     - List empty messages
-    - Profile edit
     - Chat
     - Messages
     - Tracking Map
@@ -17,6 +16,7 @@ dacwash customer app in react native
 
 # DONE
 
+    - Profile edit
     - Sign Up Api
     - Login Api
     - Logout Api

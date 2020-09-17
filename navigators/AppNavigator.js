@@ -6,10 +6,10 @@ import DrawerComponent from "../components/DrawerContent";
 import MyVehicle from "../screens/App/MyVehicle";
 import Faqs from ".././screens/App/Faqs";
 import Packages from "../screens/App/Packages";
-import Message from ".././screens/App/Message";
+import Message from "../screens/App/Message";
 import MyBookings from ".././screens/App/MyBookings";
 import Location from ".././screens/App/Location";
-import ChangeLanguage from ".././screens/App/ChangeLanguage";
+import ChangeLanguage from "../screens/App/ChangeLanguage";
 
 // out of drawer screens
 import Profile from ".././screens/App/Profile";
@@ -17,7 +17,6 @@ import VehicleStatus from "../screens/App/VehicleStatus";
 import Summary from "../screens/App/Summary";
 import Payment from "../screens/App/Payment";
 import Card from "../screens/App/Card";
-import HomeLocation from "../screens/App/HomeLocation";
 import EditVehicle from "../screens/App/EditVehicle";
 import Notification from "../screens/App/Notification";
 import Contact from "../screens/App/Contact";
@@ -42,7 +41,7 @@ export default function AppNavigator() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerComponent {...props} />}
-      initialRouteName="Home"
+      initialRouteName="Notification"
       backBehavior="initialRoute"
       drawerType={"slide"}
       screenOptions={{
@@ -60,6 +59,7 @@ export default function AppNavigator() {
       <Drawer.Screen name="ChangeLanguage" component={ChangeLanguage} />
       <Drawer.Screen name="Package" component={Packages} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
+      <Drawer.Screen name="Notification" component={Notification} />
     </Drawer.Navigator>
   );
 }
@@ -76,8 +76,6 @@ function HomeStack() {
       <Stack.Screen name="Summary" component={Summary} />
       <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="pay_card" component={Card} />
-      <Stack.Screen name="HomeLocation" component={HomeLocation} />
-      <Stack.Screen name="Notification" component={Notification} />
     </Stack.Navigator>
   );
 }
