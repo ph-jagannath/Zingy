@@ -1452,3 +1452,76 @@ export async function api_delete_all_notifications(d) {
   );
   return DATA;
 }
+
+/**
+ * static pages  api
+ *
+ */
+export async function api_get_pages(d) {
+  global.PAGE_CONTENT = [];
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "pages_view",
+    data: {
+      page_slug: d,
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        global.PAGE_CONTENT = response.data.response.data[0].contents;
+        return global.PAGE_CONTENT;
+      } else {
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * cancel booking api
+ *
+ */
+export async function api_cancel_booking(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "cancel_booking",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+      booking_id: d.cancel_id,
+      cancel_reason: d.reason_text,
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      if (response.data.response.status) {
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+        });
+        return true;
+      } else {
+        Loading.hide();
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

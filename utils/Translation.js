@@ -18,6 +18,8 @@ i18n.translations = {
     side_menu_Logout: "Logout",
     side_menu_two_wheeler: "Two Wheeler Wash",
     edit_profile: "Edit Profile",
+    Privacy: "Privacy Policy",
+    Terms: "Terms & Conditions",
 
     // Login
     // validation

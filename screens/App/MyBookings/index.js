@@ -11,17 +11,23 @@ import {
 } from "react-native";
 import styles from "./styles";
 import global from "../../../utils/global";
-import { Icon, Header } from "react-native-elements";
+import { Icon, Header, Overlay, Input } from "react-native-elements";
 import { t } from "i18n-js";
-import { api_get_bookings, api_get_booking_details } from "../../../utils/Api";
+import {
+  api_cancel_booking,
+  api_get_bookings,
+  api_get_booking_details,
+} from "../../../utils/Api";
 import { showMessage } from "react-native-flash-message";
 
 export default class MyBookings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      preTab: true,
       active_tab: 2,
+      reason_visible: false,
+      reason_text: "",
+      cancel_id: "",
     };
   }
 
@@ -34,8 +40,14 @@ export default class MyBookings extends Component {
     this.setState({ update: Date.now() });
   }
 
+  toggle_reason() {
+    this.setState({
+      reason_visible: !this.state.reason_visible,
+    });
+  }
+
   render() {
-    const { active_tab } = this.state;
+    const { active_tab, reason_visible, reason_text, cancel_id } = this.state;
     const { navigation } = this.props;
     return (
       <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
@@ -195,7 +207,8 @@ export default class MyBookings extends Component {
                           <View style={styles.leftView}>
                             <TouchableOpacity
                               onPress={() => {
-                                console.log("cancel");
+                                this.setState({ cancel_id: d.booking_id });
+                                this.toggle_reason();
                               }}
                             >
                               <Text style={styles.cancel}>Cancel</Text>
@@ -220,6 +233,49 @@ export default class MyBookings extends Component {
             }}
             keyExtractor={(item, index) => index.toString()}
           />
+        </>
+
+        {/* reason overlay */}
+        <>
+          <Overlay
+            isVisible={reason_visible}
+            animationType="fade"
+            overlayStyle={styles.add_location_container}
+            onBackdropPress={() => {
+              this.toggle_reason();
+            }}
+          >
+            <View>
+              <View style={styles.reson_header}>
+                <Text style={styles.add_location_text}>Cancel Reason</Text>
+              </View>
+
+              <Input
+                placeholder="Cancel Reason"
+                style={styles.reason_input}
+                multiline
+                onChangeText={(v) => this.setState({ reason_text: v })}
+                value={reason_text}
+              />
+              <TouchableOpacity
+                activeOpacity={0.9}
+                onPress={async () => {
+                  if (reason_text.trim() !== "") {
+                    this.toggle_reason();
+                    const r = await api_cancel_booking(this.state);
+                    if (r) {
+                      await api_get_bookings(2);
+
+                      this.update();
+                    }
+                  }
+                }}
+                style={styles.reson_cancel_button}
+              >
+                <Text style={styles.add_location_text}>OK</Text>
+              </TouchableOpacity>
+            </View>
+          </Overlay>
         </>
       </ImageBackground>
     );

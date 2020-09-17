@@ -251,6 +251,7 @@ export default {
   PLANS_LIST: [],
   PACKAGE_LIST_ZONE: [],
   FAQ: [],
+  PAGE_CONTENT: [],
   SCOOTER_WASH_PRICE: [],
   BOOKING_DETAILS: [],
   NOTIFICATIONS_LIST: [],

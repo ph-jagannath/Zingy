@@ -176,4 +176,37 @@ export default StyleSheet.create({
     alignSelf: "center",
     marginTop: hp(27),
   },
+  add_location_container: {
+    width: wp(80),
+    borderRadius: 15,
+    minHeight: hp(28),
+    backgroundColor: "#fff",
+    padding: 0,
+    // justifyContent: "space-between",
+  },
+  add_location_text: {
+    fontSize: wp(4.5),
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  reson_header: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    justifyContent: "center",
+    alignItems: "center",
+    height: hp(7),
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+  },
+  reason_input: {
+    marginTop: hp(2),
+  },
+  reson_cancel_button: {
+    backgroundColor: global.COLOR.PRIMARY_DARK,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    width: wp(22),
+    height: hp(6),
+    borderRadius: 10,
+  },
 });

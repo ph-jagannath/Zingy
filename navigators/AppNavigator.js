@@ -33,6 +33,8 @@ import TwoWheelLocation from "../screens/App/TwoWheelLocation";
 import BookingTrack from "../screens/App/BookingTrack";
 import BookingDetails from "../screens/App/BookingDetails";
 import EditProfile from "../screens/App/EditProfile";
+import Privacy from "../screens/App/Privacy";
+import Terms from "../screens/App/Terms";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -41,7 +43,7 @@ export default function AppNavigator() {
   return (
     <Drawer.Navigator
       drawerContent={(props) => <DrawerComponent {...props} />}
-      initialRouteName="Notification"
+      initialRouteName="Home"
       backBehavior="initialRoute"
       drawerType={"slide"}
       screenOptions={{
@@ -60,6 +62,8 @@ export default function AppNavigator() {
       <Drawer.Screen name="Package" component={Packages} />
       <Drawer.Screen name="Profile" component={ProfileStack} />
       <Drawer.Screen name="Notification" component={Notification} />
+      <Drawer.Screen name="Privacy" component={Privacy} />
+      <Drawer.Screen name="Terms" component={Terms} />
     </Drawer.Navigator>
   );
 }

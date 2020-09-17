@@ -44,6 +44,7 @@ export default StyleSheet.create({
   },
   content: {
     fontSize: wp(4.2),
+    textTransform: "capitalize",
   },
   active_content: {
     color: "#fff",
