@@ -468,6 +468,12 @@ export default class SelectPlans extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
+                    // if (global.ADD_BOOKING_4_DATA[0].is_package == 1) {
+                    //   showMessage({
+                    //     message: "Vehicle already has a package.",
+                    //     type: "danger",
+                    //   });
+                    // } else
                     if (!package_avail) {
                       showMessage({
                         message: "No package available for current location.",

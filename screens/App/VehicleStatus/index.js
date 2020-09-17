@@ -13,6 +13,7 @@ import styles from "./styles";
 import { t } from "i18n-js";
 import global from "../../../utils/global";
 import { api_get_vehicle } from "../../../utils/Api";
+import { showMessage } from "react-native-flash-message";
 
 export default class VehicleStatus extends Component {
   constructor(props) {
@@ -74,9 +75,16 @@ export default class VehicleStatus extends Component {
                   activeOpacity={0.9}
                   style={styles.rendTouch}
                   onPress={() => {
+                    // if (d.is_booked == 1) {
+                    //   showMessage({
+                    //     message: "Vehicle already Booked.",
+                    //     type: "danger",
+                    //   });
+                    // } else {
                     global.ADD_BOOKING_4_DATA[16] = "";
                     global.ADD_BOOKING_4_DATA[0] = d;
                     navigation.navigate("select_plans");
+                    // }
                   }}
                 >
                   <View style={styles.touchBtmView}>

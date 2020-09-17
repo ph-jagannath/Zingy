@@ -735,10 +735,10 @@ export async function api_get_bookings(d) {
         return global.MY_BOOKINGS;
       } else {
         global.MY_BOOKINGS = [];
-        showMessage({
-          message: response.data.response.message,
-          type: "danger",
-        });
+        // showMessage({
+        //   message: response.data.response.message,
+        //   type: "danger",
+        // });
         return false;
       }
     }.bind(this)

@@ -5,7 +5,12 @@ import { Icon, Header } from "react-native-elements";
 import styles from "./styles";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
-import { api_booking_2_save, api_booking_4_save } from "../../../utils/Api";
+import {
+  api_booking_2_save,
+  api_booking_4_save,
+  api_get_packages,
+} from "../../../utils/Api";
+import { showMessage } from "react-native-flash-message";
 
 export default class Payment extends Component {
   constructor(props) {
@@ -29,13 +34,29 @@ export default class Payment extends Component {
       this.props.navigation.navigate("pay_card");
       console.log(" card ", global.ADD_BOOKING_4_DATA);
     } else if (this.state.payment_mode == 3) {
+      // global.
+      api_booking_4_save();
       console.log("package ", global.ADD_BOOKING_4_DATA);
     }
+  }
+
+  componentDidMount = async () => {
+    await api_get_packages();
+    this.update();
+  };
+
+  update() {
+    this.setState({
+      update: Date.now(),
+    });
   }
 
   render() {
     const { navigation } = this.props;
     const { payment_mode } = this.state;
+    const p = global.MY_PACKAGES.filter(
+      (p) => p.UserPackage.user_vehicle_id == global.ADD_BOOKING_4_DATA[0].id
+    )[0];
     return (
       <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
         <Header
@@ -104,6 +125,15 @@ export default class Payment extends Component {
             {global.ADD_BOOKING_4_DATA[16] == "" && (
               <TouchableOpacity
                 onPress={() => {
+                  // if (global.ADD_BOOKING_4_DATA[0].is_package == 1) {
+                  //   this.setState({ payment_mode: 3 });
+                  // } else {
+                  //   showMessage({
+                  //     message: "No package available for this vehicle.",
+                  //     type: "danger",
+                  //   });
+                  // }
+
                   this.setState({ payment_mode: 3 });
                 }}
                 style={styles.rowView}
@@ -121,6 +151,22 @@ export default class Payment extends Component {
                 <Text style={styles.cardText}>{t("payment_package")}</Text>
               </TouchableOpacity>
             )}
+            <View>
+              {payment_mode == 3 && (
+                <View style={styles.touchAppClrView}>
+                  <Text style={styles.standrd}>
+                    {p.Package.monthly_yearly} {p.Package.name}
+                  </Text>
+                  {/* cost */}
+                  <Text style={styles.priceDacwash}>
+                    {p.UserPackage.no_of_exterior_wash} X Exterior Wash
+                  </Text>
+                  <Text style={styles.priceDacwash}>
+                    {p.UserPackage.no_of_interior_wash} X Interior Wash
+                  </Text>
+                </View>
+              )}
+            </View>
           </View>
         </View>
         <View style={styles.roundViewPayment}>
