@@ -7,7 +7,7 @@ dacwash customer app in react native
     - Remove unused libraries
     - List empty messages
     - Tracking Map
-    - Reschedule
+    - Reschedule scooter
     -
 
 # DONE

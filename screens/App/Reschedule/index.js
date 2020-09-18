@@ -116,29 +116,35 @@ export default class Reschedule extends Component {
               <Text style={styles.service}>{t("summary_service")}</Text>
               {/* service bar */}
               <>
-                <View style={styles.btmViewDacWashLocation}>
-                  <View style={styles.apClrView}>
-                    {d.plan_service.toLowerCase().includes("ext") && (
-                      <Image
-                        source={global.ASSETS.CAR}
-                        resizeMode={"contain"}
-                        style={styles.imgCarDacWash}
-                      />
-                    )}
-                    {d.plan_service.toLowerCase().includes("int") && (
-                      <Image
-                        source={global.ASSETS.CLEANING}
-                        resizeMode={"contain"}
-                        style={styles.imgCarDacWash}
-                      />
-                    )}
-                    <Text style={styles.inOutText}>{d.plan_service}</Text>
+                {!!d.plan_service && d.plan_service.length > 0 && (
+                  <View style={styles.btmViewDacWashLocation}>
+                    <View style={styles.apClrView}>
+                      {d.plan_service.toLowerCase().includes("ext") && (
+                        <Image
+                          source={global.ASSETS.CAR}
+                          resizeMode={"contain"}
+                          style={styles.imgCarDacWash}
+                        />
+                      )}
+                      {d.plan_service.toLowerCase().includes("int") && (
+                        <Image
+                          source={global.ASSETS.CLEANING}
+                          resizeMode={"contain"}
+                          style={styles.imgCarDacWash}
+                        />
+                      )}
+                      <Text style={styles.inOutText}>{d.plan_service}</Text>
+                    </View>
                   </View>
-                </View>
+                )}
               </>
               <View>
                 <TouchableOpacity style={styles.touchAppClrView}>
-                  <Text style={styles.standrd}>{d.plan_name}</Text>
+                  <Text style={styles.standrd}>
+                    {!!d.plan_service && d.plan_service.length > 0
+                      ? d.plan_service
+                      : d.vehicle_make}
+                  </Text>
                   <Text style={styles.priceDacwash}>
                     {global.CONSTANT.CURRENCY} {d.booking_amount}
                   </Text>
