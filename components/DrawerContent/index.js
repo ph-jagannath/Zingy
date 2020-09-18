@@ -251,7 +251,7 @@ export default class DrawerContent extends Component {
               </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
             </TouchableOpacity>
-            <TouchableOpacity
+            {/* <TouchableOpacity
               activeOpacity={0.8}
               onPress={() => navigation.navigate("ChangeLanguage")}
               style={[
@@ -268,11 +268,14 @@ export default class DrawerContent extends Component {
                 {t("changeLanguage_header")}
               </Text>
               <Icon name="chevron-right" size={32} color="#ccc" />
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={() => api_logout()}
+              onPress={() => {
+                navigation.closeDrawer();
+                api_logout();
+              }}
               style={styles.contentTop}
             >
               <Text style={styles.content}>{t("side_menu_Logout")}</Text>

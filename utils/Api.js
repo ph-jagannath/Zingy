@@ -251,7 +251,12 @@ export async function FBAuth() {
         `https://graph.facebook.com/me?fields=id,name,email,friends,birthday,picture.type(large)&access_token=${token}`
       );
       let data = await response.json();
-      // SocialLogin(data);
+      SocialLogin({
+        email: data.email,
+        name: data.name,
+        social_type: "Facebook",
+        social_id: data.id,
+      });
       return data;
     } else {
       return false;
@@ -271,10 +276,19 @@ export async function SocialLogin(d) {
   Loading.show();
   Axios({
     method: "post",
-    url: "ischeck",
+    url: "social_login",
     data: {
       email: d.email,
-      device_token: global.CONSTANT.DEVICETOKEN,
+      first_name: d.name,
+      social_id: d.social_id,
+      login_type: d.social_type,
+      language: "eng",
+      device_type: global.CONSTANT.DEVICETYPE,
+      device_id: global.CONSTANT.DEVICETOKEN,
+      last_name: " ",
+      password: "",
+      mobile: "",
+      country_code: "",
     },
     validateStatus: () => {
       return true;
@@ -282,18 +296,13 @@ export async function SocialLogin(d) {
   }).then(
     function (response) {
       if (response.data.status_code == 200) {
-        StoreToken(response.data.data.api_token);
-        GetToken(response.data.data);
+        StoreToken(response.data.response.data[0].user_id);
+        GetToken(response.data.response.data[0]);
       } else {
         Loading.hide();
-
-        Popup.show({
-          type: "Danger",
-          title: global.CONSTANT.APPNAME + " Alert❗",
-          button: false,
-          textBody: response.data.error_message,
-          buttontext: "Ok",
-          callback: () => Popup.hide(),
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
         });
       }
     }.bind(this)

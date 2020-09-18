@@ -39,7 +39,12 @@ export default class Login extends Component {
       const { type } = await GoogleSignIn.signInAsync();
       if (type === "success") {
         const user = await GoogleSignIn.signInSilentlyAsync();
-        SocialLogin(user);
+        SocialLogin({
+          email: user.email,
+          name: user.firstName + " " + user.lastName,
+          social_type: "Google",
+          social_id: user.uid,
+        });
       }
     } catch ({ message }) {
       showMessage({
@@ -140,7 +145,12 @@ export default class Login extends Component {
                       var token = credential.identityToken;
                       var decoded = await jwtDecode(token);
                       console.log(decoded.email);
-                      SocialLogin({ email: decoded.email });
+                      // SocialLogin({
+                      //   email: decoded.email,
+                      //   name: data.name,
+                      //   social_type: "Facebook",
+                      //   social_id: data.id,
+                      // });
                     } catch (e) {
                       if (e.code === "ERR_CANCELED") {
                         // handle that the user canceled the sign-in flow
