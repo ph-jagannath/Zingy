@@ -35,7 +35,7 @@
         "googleSignIn": {
           "reservedClientId": "com.googleusercontent.apps.244777178350-u4i6vij5g7id1di5qos19hmjed44j391"
         },
-        "googleMapsApiKey": "AIzaSyBG3aIJqv-kD-nbVQLjGJTff5E-ZiFl4EU"
+        "googleMapsApiKey": "AIzaSyBhT6nm9y-3e3RXbSGvM6hqUWFJxlkC9sc"
       },
       "googleServicesFile": "./GoogleService-Info.plist"
     },
@@ -47,7 +47,7 @@
       "versionCode": 1,
       "config": {
         "googleMaps": {
-          "apiKey": "AIzaSyDPArcv_-wXiOLGRpHMgEqAYLevALx2BtQ"
+          "apiKey": "AIzaSyAZXHsrsKwL6OGt1XGbIDIhaBTK6bUuRs8"
         }
       },
       "googleServicesFile": "./google-services.json"
