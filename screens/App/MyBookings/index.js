@@ -31,11 +31,14 @@ export default class MyBookings extends Component {
     };
   }
 
-  componentDidMount = async () => {
+  componentDidMount() {
+    this.get_data();
+  }
+
+  get_data = async () => {
     await api_get_bookings(2);
     this.update();
   };
-
   update() {
     this.setState({ update: Date.now() });
   }
@@ -213,7 +216,17 @@ export default class MyBookings extends Component {
                             >
                               <Text style={styles.cancel}>Cancel</Text>
                             </TouchableOpacity>
-                            <TouchableOpacity>
+                            <TouchableOpacity
+                              onPress={async () => {
+                                const r = await api_get_booking_details(
+                                  d.booking_id
+                                );
+                                r &&
+                                  navigation.navigate("booking_reschedule", {
+                                    onReschedule: this.get_data,
+                                  });
+                              }}
+                            >
                               <Text style={styles.resch}>Reshcedule</Text>
                             </TouchableOpacity>
                           </View>

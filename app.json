@@ -18,13 +18,45 @@
     "facebookDisplayName": "DacWash",
     "facebookScheme": "fb570696010280160",
     "ios": {
-      "supportsTablet": true
+      "bundleIdentifier": "com.app.dacwash.customer",
+      "buildNumber": "1",
+      "infoPlist": {
+        "UIUserInterfaceStyle": "Light",
+        "LSApplicationQueriesSchemes": ["comgooglemaps"],
+        "NSCameraUsageDescription": "This app uses the camera for the user to select their vehicle photo.",
+        "NSPhotoLibraryUsageDescription": "This app uses the camera for the user to select their vehicle photo.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "This app uses location access to locate the current user and help in finding out the nearby service provider for their quick servces offered by the app which helps the user transfer their goods from one place to another with ease.",
+        "NSLocationAlwaysUsageDescription": "This app uses location access to locate the current user and help in finding out the nearby service provider for their quick servces offered by the app which helps the user transfer their goods from one place to another with ease.",
+        "NSLocationWhenInUseUsageDescription": "This app uses location access to locate the current user and help in finding out the nearby service provider for their quick servces offered by the app which helps the user transfer their goods from one place to another with ease."
+      },
+      "supportsTablet": true,
+      "usesAppleSignIn": true,
+      "config": {
+        "googleSignIn": {
+          "reservedClientId": "com.googleusercontent.apps.244777178350-u4i6vij5g7id1di5qos19hmjed44j391"
+        },
+        "googleMapsApiKey": "AIzaSyBG3aIJqv-kD-nbVQLjGJTff5E-ZiFl4EU"
+      },
+      "googleServicesFile": "./GoogleService-Info.plist"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/icon.png"
     },
     "android": {
-      "package": "com.hk_.Dacwash"
+      "package": "com.app.dacwash.customer",
+      "versionCode": 1,
+      "config": {
+        "googleMaps": {
+          "apiKey": "AIzaSyDPArcv_-wXiOLGRpHMgEqAYLevALx2BtQ"
+        }
+      },
+      "googleServicesFile": "./google-services.json"
+    },
+    "notification": {
+      "icon": "./assets/noti_icon.png",
+      "color": "#006937",
+      "iosDisplayInForeground": true,
+      "androidMode": "default"
     },
     "androidNavigationBar": {
       "barStyle": "dark-content",

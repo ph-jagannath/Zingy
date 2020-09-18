@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>244777178350-u4i6vij5g7id1di5qos19hmjed44j391.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.244777178350-u4i6vij5g7id1di5qos19hmjed44j391</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBG3aIJqv-kD-nbVQLjGJTff5E-ZiFl4EU</string>
+	<key>GCM_SENDER_ID</key>
+	<string>244777178350</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.app.dacwash.customer</string>
+	<key>PROJECT_ID</key>
+	<string>dacwash</string>
+	<key>STORAGE_BUCKET</key>
+	<string>dacwash.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:244777178350:ios:796f773db9645fab348fff</string>
+	<key>DATABASE_URL</key>
+	<string>https://dacwash.firebaseio.com</string>
+</dict>
+</plist>

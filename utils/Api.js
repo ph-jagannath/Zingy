@@ -1565,3 +1565,43 @@ export async function api_send_push_notif(d) {
   );
   return DATA;
 }
+
+/**
+ * reschedule booking api
+ *
+ */
+export async function api_booking_reschedule(d) {
+  // Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "reschedule_datetime",
+    data: {
+      user_id: global.AUTHTOKEN,
+      language: "eng",
+      booking_id: d.id,
+      booking_date: d.date,
+      booking_time: d.time,
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      if (response.data.response.status) {
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+        });
+        return true;
+      } else {
+        Loading.hide();
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}

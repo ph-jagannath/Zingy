@@ -1,0 +1,119 @@
+{
+  "project_info": {
+    "project_number": "244777178350",
+    "firebase_url": "https://dacwash.firebaseio.com",
+    "project_id": "dacwash",
+    "storage_bucket": "dacwash.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244777178350:android:a7bae3dfdbe0435a348fff",
+        "android_client_info": {
+          "package_name": "com.app.dacwash.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244777178350-v9ijhvbi7hogothuekk6282ukl0jige3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPArcv_-wXiOLGRpHMgEqAYLevALx2BtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244777178350-v9ijhvbi7hogothuekk6282ukl0jige3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "244777178350-4uqs6s3uj44d8rimupbvee5b4ou5jgt1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dacwash.driver"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244777178350:android:2ee43d08cbaaf47c348fff",
+        "android_client_info": {
+          "package_name": "com.dacwash.customer"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244777178350-v9ijhvbi7hogothuekk6282ukl0jige3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPArcv_-wXiOLGRpHMgEqAYLevALx2BtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244777178350-v9ijhvbi7hogothuekk6282ukl0jige3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "244777178350-4uqs6s3uj44d8rimupbvee5b4ou5jgt1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dacwash.driver"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244777178350:android:c88aa9a7d4fc0085348fff",
+        "android_client_info": {
+          "package_name": "com.dacwash.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244777178350-v9ijhvbi7hogothuekk6282ukl0jige3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDPArcv_-wXiOLGRpHMgEqAYLevALx2BtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244777178350-v9ijhvbi7hogothuekk6282ukl0jige3.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "244777178350-4uqs6s3uj44d8rimupbvee5b4ou5jgt1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dacwash.driver"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
