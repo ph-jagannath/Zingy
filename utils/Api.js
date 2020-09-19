@@ -6,7 +6,7 @@ import AsyncStorage from "@react-native-community/async-storage";
 import global from "./global";
 import * as SplashScreen from "expo-splash-screen";
 import * as Facebook from "expo-facebook";
-
+import * as GoogleSignIn from "expo-google-sign-in";
 // Network listener
 
 // base url
@@ -295,11 +295,12 @@ export async function SocialLogin(d) {
     },
   }).then(
     function (response) {
-      if (response.data.status_code == 200) {
+      if (response.data.response.status) {
         StoreToken(response.data.response.data[0].user_id);
         GetToken(response.data.response.data[0]);
       } else {
         Loading.hide();
+        GoogleSignIn.signOutAsync();
         showMessage({
           message: response.data.response.message,
           type: "danger",
@@ -374,6 +375,7 @@ export async function api_logout() {
   //   }.bind(this)
   // );
   // return DATA;
+  GoogleSignIn.signOutAsync();
   await AsyncStorage.multiRemove([global.API_TOKEN, global.USER_DATA]);
   RootNavigation.navigate("Auth");
 }

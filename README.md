@@ -4,14 +4,14 @@ dacwash customer app in react native
 
 # TODO
 
-    - Remove unused libraries
     - List empty messages
-    - Tracking Map
-    - Reschedule scooter
+    - Remove unused libraries
     -
 
 # DONE
 
+    - Tracking Map
+    - Reschedule scooter
     - Chat
     - Messages
     - Terms and condition of Signup

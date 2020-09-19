@@ -16,8 +16,8 @@ export default class BookingTrack extends Component {
       loading: false,
       key: 0,
       tracksViewChanges: true,
-      lat: "",
-      lng: "",
+      lat: global.BOOKING_DETAILS.booking_lat,
+      lng: global.BOOKING_DETAILS.booking_long,
       lat_delta: 0.006,
       lng_delta: 0.003,
     };
@@ -27,6 +27,7 @@ export default class BookingTrack extends Component {
     const { lat, lat_delta, lng, lng_delta } = this.state;
     const { navigation } = this.props;
     const d = global.BOOKING_DETAILS;
+    console.log(d);
     return (
       <View style={styles.container}>
         {/* header */}
@@ -63,7 +64,7 @@ export default class BookingTrack extends Component {
               // marginBottom: marginBottom,
             }}
             // key={key}
-            // onMapReady={this._onMapReady}
+            onMapReady={this._onMapReady}
             showsUserLocation={false}
             showsCompass={false}
             moveOnMarkerPress={false}
@@ -76,32 +77,29 @@ export default class BookingTrack extends Component {
             pitchEnabled={true}
             provider="google"
             initialRegion={{
-              latitude: lat,
-              longitude: lng,
+              latitude: Number(lat),
+              longitude: Number(lng),
               latitudeDelta: lat_delta,
               longitudeDelta: lng_delta,
             }}
           >
-            {global.NEARBY_SP.length > 0 &&
-              global.NEARBY_SP.map((i) => (
-                <MapView.Marker
-                  coordinate={{
-                    latitude: Number(i.latitude),
-                    longitude: Number(i.longitude),
-                  }}
-                  tracksViewChanges={this.state.tracksViewChanges}
-                  // zIndex={i++}
-                >
-                  <View>
-                    <Image
-                      source={global.ASSETS.MAP_PIN}
-                      onLoad={this.stopTrackingViewChanges}
-                      fadeDuration={0}
-                      style={styles.map_pin_marker_image_sp}
-                    />
-                  </View>
-                </MapView.Marker>
-              ))}
+            <MapView.Marker
+              coordinate={{
+                latitude: Number(d.user_lat),
+                longitude: Number(d.user_lon),
+              }}
+              tracksViewChanges={this.state.tracksViewChanges}
+              // zIndex={i++}
+            >
+              <View>
+                <Image
+                  source={global.ASSETS.MAP_PIN}
+                  onLoad={this.stopTrackingViewChanges}
+                  fadeDuration={0}
+                  style={styles.map_pin_marker_image_sp}
+                />
+              </View>
+            </MapView.Marker>
           </MapView>
         </>
         {/* details bar */}
