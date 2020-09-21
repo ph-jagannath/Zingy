@@ -81,7 +81,7 @@ export default StyleSheet.create({
     borderWidth: 0.6,
   },
   category: {
-    fontSize: wp(3),
+    fontSize: wp(3.5),
     color: global.COLOR.black,
     marginLeft: wp(3),
   },

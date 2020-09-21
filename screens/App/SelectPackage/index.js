@@ -48,8 +48,12 @@ export default class SelectPackage extends Component {
     const { selected_plan, remark } = this.state;
     global.ADD_BOOKING_4_DATA[9] = selected_plan;
     global.ADD_BOOKING_4_DATA[6] = remark;
-
-    if (selected_plan == "") {
+    if (global.PACKAGE_LIST_ZONE.length < 1) {
+      showMessage({
+        message: "No package available.",
+        type: "warning",
+      });
+    } else if (selected_plan == "") {
       showMessage({
         message: "Please select a package.",
         type: "warning",

@@ -28,8 +28,8 @@ export default class SelectPlans extends Component {
       key: 0,
       tracksViewChanges: true,
       type: "home",
-      lat: "",
-      lng: "",
+      lat: 26.8026797,
+      lng: 75.8081312,
       lat_delta: 0.006,
       lng_delta: 0.003,
       address: "",
@@ -60,6 +60,7 @@ export default class SelectPlans extends Component {
       this.setState({ hasLocationPermissions: true });
     }
     let location = await Location.getCurrentPositionAsync();
+    console.log(location);
     this.get_address(location.coords.latitude, location.coords.longitude);
   };
 

@@ -75,9 +75,6 @@ export default class Faqs extends Component {
                 style={styles.bellS}
                 color={global.COLOR.white}
               />
-              <View style={styles.notiView}>
-                <Text style={styles.notText}>16</Text>
-              </View>
             </TouchableOpacity>
           }
         />

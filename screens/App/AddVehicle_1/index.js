@@ -37,13 +37,13 @@ export default class AddVehicle_1 extends Component {
   // Image Picker function
   _pickImage = async (v) => {
     let permissionResult = await ImagePicker.requestCameraRollPermissionsAsync();
+    let cameraResult = await ImagePicker.requestCameraPermissionsAsync();
 
-    if (permissionResult.granted === false) {
+    if (permissionResult.granted === false || cameraResult.granted === false) {
       alert("Permission to access camera roll is required!");
       return;
     }
 
-    this.chooseUpload();
     let option =
       v == "camera"
         ? ImagePicker.launchCameraAsync
@@ -51,6 +51,7 @@ export default class AddVehicle_1 extends Component {
     let result = await option({
       quality: 0.2,
     });
+    this.chooseUpload();
 
     if (!result.cancelled) {
       this.setState({

@@ -140,17 +140,18 @@ export default class Login extends Component {
                       let credential = await AppleAuthentication.signInAsync({
                         requestedScopes: [
                           AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                          AppleAuthentication.AppleAuthenticationScope
+                            .FULL_NAME,
                         ],
                       });
                       var token = credential.identityToken;
                       var decoded = await jwtDecode(token);
-                      console.log(decoded.email);
-                      // SocialLogin({
-                      //   email: decoded.email,
-                      //   name: data.name,
-                      //   social_type: "Facebook",
-                      //   social_id: data.id,
-                      // });
+                      SocialLogin({
+                        email: decoded.email,
+                        name: decoded.email.split("@")[0],
+                        social_type: "Apple",
+                        social_id: decoded.c_hash,
+                      });
                     } catch (e) {
                       if (e.code === "ERR_CANCELED") {
                         // handle that the user canceled the sign-in flow

@@ -160,7 +160,10 @@ export default class BookingTrack extends Component {
                 style={styles.name_text}
                 onPress={async () => {
                   const r = await api_get_booking_details(d.booking_id);
-                  r && navigation.navigate("booking_detail");
+                  r &&
+                    navigation.navigate("booking_detail", {
+                      is_rated: 1,
+                    });
                 }}
               >
                 View Details

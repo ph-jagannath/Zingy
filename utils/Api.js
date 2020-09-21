@@ -1256,6 +1256,7 @@ export async function api_update_profile(d) {
   data.append("last_name", " ");
   data.append("device_type", global.CONSTANT.DEVICETYPE);
   data.append("email", d.email);
+  data.append("mobile", d.phoneNumber);
   data.append("latitude", "");
   data.append("longitude", "");
   data.append("device_id", global.CONSTANT.DEVICETOKEN);
