@@ -24,6 +24,8 @@ export default {
     RADIO: require("../assets/radioOf.png"),
     EMP: require("../assets/emp.png"),
     PHONE: require("../assets/phone.png"),
+    FB: require("../assets/facebook.png"),
+    INSTA: require("../assets/instagram.png"),
     DOWN: require("../assets/down.png"),
     UP: require("../assets/uparrow.png"),
     CAR: require("../assets/exteriorewash.png"),

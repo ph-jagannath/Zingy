@@ -1,10 +1,17 @@
 import React, { Component } from "react";
-import { ScrollView, Image, Text, StatusBar, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  ScrollView,
+  Image,
+  Text,
+  StatusBar,
+  View,
+  TouchableOpacity,
+} from "react-native";
 import styles from "./styles";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
 import { Icon, Header } from "react-native-elements";
+import * as Linking from "expo-linking";
 export default class Contact extends Component {
   constructor(props) {
     super(props);
@@ -53,21 +60,44 @@ export default class Contact extends Component {
             <Text style={styles.welcomeSignup}>{t("contact_contactUs")}</Text>
           </View>
           <View style={styles.topcContact}>
-            <View style={styles.radiousContact}>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL("https://www.facebook.com/dacwashapp");
+              }}
+              style={styles.radiousContact}
+            >
               <Image
-                source={global.ASSETS.PHONE}
+                source={global.ASSETS.FB}
                 style={styles.imgContact}
                 resizeMode={"center"}
               />
-            </View>
-            <Text style={styles.numberContact}>++61 123456789</Text>
-            <View style={styles.radiousContact}>
+            </TouchableOpacity>
+            <Text style={styles.numberContact}>Facebook</Text>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL("https://www.facebook.com/dacwashapp");
+              }}
+              style={styles.radiousContact}
+            >
+              <Image
+                source={global.ASSETS.INSTA}
+                style={styles.imgContact}
+                resizeMode={"center"}
+              />
+            </TouchableOpacity>
+            <Text style={styles.numberContact}>Instagram</Text>
+            <TouchableOpacity
+              onPress={() => {
+                Linking.openURL("mailto:info@DacWash.com");
+              }}
+              style={styles.radiousContact}
+            >
               <Image
                 source={global.ASSETS.EMAIL}
                 style={styles.imgContact}
                 resizeMode={"center"}
               />
-            </View>
+            </TouchableOpacity>
             <Text style={styles.numberContact}>info@DacWash.com</Text>
           </View>
         </ScrollView>

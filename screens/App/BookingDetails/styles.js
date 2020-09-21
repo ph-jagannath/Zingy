@@ -195,9 +195,53 @@ export default StyleSheet.create({
     width: wp(30),
     resizeMode: "contain",
   },
+  wash_image_full: {
+    height: "100%",
+    width: "100%",
+    resizeMode: "contain",
+    alignSelf: "center",
+  },
   wash_img_container: {
     flexDirection: "row",
     justifyContent: "space-evenly",
     marginVertical: hp(1),
+  },
+  add_location_container: {
+    width: wp(80),
+    borderRadius: 15,
+    minHeight: hp(28),
+    backgroundColor: "#fff",
+    padding: 0,
+    // justifyContent: "space-between",
+  },
+  add_location_text: {
+    fontSize: wp(4.5),
+    fontWeight: "bold",
+    color: "#fff",
+  },
+  reson_header: {
+    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+    justifyContent: "center",
+    alignItems: "center",
+    height: hp(7),
+    borderTopLeftRadius: 15,
+    borderTopRightRadius: 15,
+  },
+  reason_input: {
+    marginTop: hp(2),
+  },
+  reson_cancel_button: {
+    backgroundColor: global.COLOR.PRIMARY_DARK,
+    justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    width: wp(22),
+    height: hp(6),
+    borderRadius: 10,
+  },
+  new_rating: {
+    // flex: 1,
+    justifyContent: "space-evenly",
+    height: hp(20),
   },
 });

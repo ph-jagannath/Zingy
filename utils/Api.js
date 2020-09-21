@@ -604,10 +604,10 @@ export async function api_get_packages() {
         global.MY_PACKAGES = response.data.response.data;
         return global.MY_PACKAGES;
       } else {
-        showMessage({
-          message: response.data.response.message,
-          type: "danger",
-        });
+        // showMessage({
+        //   message: response.data.response.message,
+        //   type: "danger",
+        // });
         return false;
       }
     }.bind(this)
@@ -1606,6 +1606,46 @@ export async function api_booking_reschedule(d) {
         return true;
       } else {
         Loading.hide();
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
+        });
+        return false;
+      }
+    }.bind(this)
+  );
+  return DATA;
+}
+
+/**
+ * driver rating api
+ *
+ */
+export async function api_driver_rating(d) {
+  Loading.show();
+  const DATA = Axios({
+    method: "post",
+    url: "driver_rating",
+    data: {
+      user_id: global.AUTHTOKEN,
+      booking_id: d.booking_id,
+      booking_driver_id: d.driver_id,
+      rating: d.rating,
+    },
+    validateStatus: () => {
+      return true;
+    },
+  }).then(
+    function (response) {
+      Loading.hide();
+      if (response.data.response.status) {
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+        });
+        RootNavigation.navigate("Home");
+        return true;
+      } else {
         showMessage({
           message: response.data.response.message,
           type: "danger",

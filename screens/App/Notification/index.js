@@ -104,7 +104,13 @@ export default class Notification extends Component {
                 onPress={async () => {
                   if (i.is_read == "0") {
                     const r = await api_read_notifications(i.id);
-                    r && this.get_data();
+                    if (r) {
+                      if (i.message.toLowerCase().includes("rate")) {
+                        this.props.navigation.navigate("MyBookings");
+                      } else {
+                        this.get_data();
+                      }
+                    }
                   }
                 }}
                 style={[

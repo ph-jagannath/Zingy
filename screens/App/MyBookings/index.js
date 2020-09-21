@@ -167,7 +167,9 @@ export default class MyBookings extends Component {
                         navigation.navigate("booking_track");
                       }
                       if (r && active_tab == 1) {
-                        navigation.navigate("booking_detail");
+                        navigation.navigate("booking_detail", {
+                          is_rated: d.is_rating,
+                        });
                       }
                     } else {
                       showMessage({

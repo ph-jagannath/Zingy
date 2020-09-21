@@ -12,8 +12,9 @@ import {
 import styles from "./styles";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
-import { Icon, Header, Avatar, Rating } from "react-native-elements";
+import { Icon, Header, Avatar, Rating, Overlay } from "react-native-elements";
 import Lightbox from "react-native-lightbox";
+import { api_driver_rating } from "../../../utils/Api";
 
 export default class BookingDetails extends Component {
   constructor(props) {
@@ -21,12 +22,15 @@ export default class BookingDetails extends Component {
     this.state = {
       star: 0,
       img_type: 1,
+      full_screen: false,
+      new_rating: 0,
     };
   }
 
   render() {
-    const { img_type } = this.state;
+    const { img_type, full_screen, new_rating } = this.state;
     const { navigation } = this.props;
+    const { is_rated } = this.props.route.params;
     const d = global.BOOKING_DETAILS;
     return (
       <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
@@ -180,46 +184,86 @@ export default class BookingDetails extends Component {
             {img_type == 1 && (
               <View>
                 <View style={styles.wash_img_container}>
-                  <Lightbox>
+                  <Lightbox
+                    underlayColor="transparent"
+                    onOpen={() => {
+                      this.setState({ full_screen: true });
+                    }}
+                    onClose={() => {
+                      this.setState({ full_screen: false });
+                    }}
+                  >
                     <Image
                       source={{
                         uri: d.befor.image_1
                           ? d.befor.image_1
                           : global.ASSETS.NO_IMAGE,
                       }}
-                      style={styles.wash_image}
+                      style={
+                        full_screen ? styles.wash_image_full : styles.wash_image
+                      }
                     />
                   </Lightbox>
-                  <Lightbox>
+                  <Lightbox
+                    underlayColor="transparent"
+                    onOpen={() => {
+                      this.setState({ full_screen: true });
+                    }}
+                    onClose={() => {
+                      this.setState({ full_screen: false });
+                    }}
+                  >
                     <Image
                       source={{
                         uri: d.befor.image_2
                           ? d.befor.image_2
                           : global.ASSETS.NO_IMAGE,
                       }}
-                      style={styles.wash_image}
+                      style={
+                        full_screen ? styles.wash_image_full : styles.wash_image
+                      }
                     />
                   </Lightbox>
                 </View>
                 <View style={styles.wash_img_container}>
-                  <Lightbox>
+                  <Lightbox
+                    underlayColor="transparent"
+                    onOpen={() => {
+                      this.setState({ full_screen: true });
+                    }}
+                    onClose={() => {
+                      this.setState({ full_screen: false });
+                    }}
+                  >
                     <Image
                       source={{
                         uri: d.befor.image_3
                           ? d.befor.image_3
                           : global.ASSETS.NO_IMAGE,
                       }}
-                      style={styles.wash_image}
+                      style={
+                        full_screen ? styles.wash_image_full : styles.wash_image
+                      }
                     />
                   </Lightbox>
-                  <Lightbox>
+                  <Lightbox
+                    underlayColor="transparent"
+                    onOpen={() => {
+                      this.setState({ full_screen: true });
+                    }}
+                    onClose={() => {
+                      this.setState({ full_screen: false });
+                    }}
+                  >
                     <Image
                       source={{
                         uri: d.befor.image_4
                           ? d.befor.image_4
                           : global.ASSETS.NO_IMAGE,
                       }}
-                      style={styles.wash_image}
+                      style={
+                        full_screen ? styles.wash_image_full : styles.wash_image
+                      }
                     />
                   </Lightbox>
                 </View>
@@ -229,46 +273,86 @@ export default class BookingDetails extends Component {
             {img_type == 2 && (
               <View>
                 <View style={styles.wash_img_container}>
-                  <Lightbox>
+                  <Lightbox
+                    underlayColor="transparent"
+                    onOpen={() => {
+                      this.setState({ full_screen: true });
+                    }}
+                    onClose={() => {
+                      this.setState({ full_screen: false });
+                    }}
+                  >
                     <Image
                       source={{
                         uri: d.after.image_1
                           ? d.after.image_1
                           : global.ASSETS.NO_IMAGE,
                       }}
-                      style={styles.wash_image}
+                      style={
+                        full_screen ? styles.wash_image_full : styles.wash_image
+                      }
                     />
                   </Lightbox>
-                  <Lightbox>
+                  <Lightbox
+                    underlayColor="transparent"
+                    onOpen={() => {
+                      this.setState({ full_screen: true });
+                    }}
+                    onClose={() => {
+                      this.setState({ full_screen: false });
+                    }}
+                  >
                     <Image
                       source={{
                         uri: d.after.image_2
                           ? d.after.image_2
                           : global.ASSETS.NO_IMAGE,
                       }}
-                      style={styles.wash_image}
+                      style={
+                        full_screen ? styles.wash_image_full : styles.wash_image
+                      }
                     />
                   </Lightbox>
                 </View>
                 <View style={styles.wash_img_container}>
-                  <Lightbox>
+                  <Lightbox
+                    underlayColor="transparent"
+                    onOpen={() => {
+                      this.setState({ full_screen: true });
+                    }}
+                    onClose={() => {
+                      this.setState({ full_screen: false });
+                    }}
+                  >
                     <Image
                       source={{
                         uri: d.after.image_3
                           ? d.after.image_3
                           : global.ASSETS.NO_IMAGE,
                       }}
-                      style={styles.wash_image}
+                      style={
+                        full_screen ? styles.wash_image_full : styles.wash_image
+                      }
                     />
                   </Lightbox>
-                  <Lightbox>
+                  <Lightbox
+                    underlayColor="transparent"
+                    onOpen={() => {
+                      this.setState({ full_screen: true });
+                    }}
+                    onClose={() => {
+                      this.setState({ full_screen: false });
+                    }}
+                  >
                     <Image
                       source={{
                         uri: d.after.image_4
                           ? d.after.image_4
                           : global.ASSETS.NO_IMAGE,
                       }}
-                      style={styles.wash_image}
+                      style={
+                        full_screen ? styles.wash_image_full : styles.wash_image
+                      }
                     />
                   </Lightbox>
                 </View>
@@ -276,6 +360,52 @@ export default class BookingDetails extends Component {
             )}
           </View>
         </ScrollView>
+
+        {/* reason overlay */}
+        <>
+          <Overlay
+            isVisible={is_rated == 1 ? false : true}
+            animationType="fade"
+            overlayStyle={styles.add_location_container}
+            onBackdropPress={() => {
+              navigation.goBack();
+            }}
+          >
+            <View>
+              <View style={styles.reson_header}>
+                <Text style={styles.add_location_text}>Rate Driver</Text>
+              </View>
+              <View style={styles.new_rating}>
+                <Rating
+                  imageSize={40}
+                  // readonly
+                  ratingBackgroundColor="transparent"
+                  startingValue={0}
+                  fractions={1}
+                  style={styles.rating}
+                  onFinishRating={(v) => {
+                    this.setState({
+                      new_rating: v,
+                    });
+                  }}
+                />
+                <TouchableOpacity
+                  activeOpacity={0.9}
+                  onPress={async () => {
+                    api_driver_rating({
+                      booking_id: d.booking_id,
+                      driver_id: d.booking_driver_id,
+                      rating: new_rating,
+                    });
+                  }}
+                  style={styles.reson_cancel_button}
+                >
+                  <Text style={styles.add_location_text}>Rate</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </Overlay>
+        </>
       </ImageBackground>
     );
   }
