@@ -35,7 +35,11 @@ export default StyleSheet.create({
     flex: 1,
     // marginVertical: hp(2),
   },
-
+  list_empty_text: {
+    fontWeight: "bold",
+    alignSelf: "center",
+    marginTop: hp(27),
+  },
   listContainerMyBook: {
     marginHorizontal: wp(5),
     borderRadius: 10,

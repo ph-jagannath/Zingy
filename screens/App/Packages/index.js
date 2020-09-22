@@ -67,6 +67,9 @@ export default class Packages extends Component {
         <FlatList
           contentContainerStyle={styles.flatListContainer}
           data={global.MY_PACKAGES}
+          ListEmptyComponent={
+            <Text style={styles.list_empty_text}>No Packages Available</Text>
+          }
           refreshControl={
             <RefreshControl
               refreshing={false}
