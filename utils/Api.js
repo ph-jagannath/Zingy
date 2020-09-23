@@ -377,6 +377,7 @@ export async function api_logout() {
   // return DATA;
   GoogleSignIn.signOutAsync();
   await AsyncStorage.multiRemove([global.API_TOKEN, global.USER_DATA]);
+  global.AUTHTOKEN = "AUTH";
   RootNavigation.navigate("Auth");
 }
 

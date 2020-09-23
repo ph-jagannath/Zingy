@@ -38,12 +38,13 @@ export default class Terms extends Component {
             <TouchableOpacity
               style={styles.leftIcon}
               onPress={() => {
-                this.props.navigation.toggleDrawer();
+                global.AUTHTOKEN == "AUTH"
+                  ? this.props.navigation.goBack()
+                  : this.props.navigation.toggleDrawer();
               }}
             >
               <Icon
-                name={"menu"}
-                type={"mdiMenu"}
+                name={global.AUTHTOKEN == "AUTH" ? "chevron-left" : "menu"}
                 size={30}
                 color={global.COLOR.white}
               />

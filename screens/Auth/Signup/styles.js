@@ -147,4 +147,10 @@ export default StyleSheet.create({
     fontWeight: "bold",
     alignSelf: "center",
   },
+  logo_image: {
+    height: hp(20),
+    width: wp(70),
+    resizeMode: "contain",
+    alignSelf: "center",
+  },
 });

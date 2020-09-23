@@ -99,7 +99,7 @@ export default class SignUp extends Component {
         <ScrollView style={styles.containerMybooking}>
           <View style={styles.imgViewSignup}>
             <Image
-              style={styles.img}
+              style={styles.logo_image}
               source={global.ASSETS.LOGO}
               resizeMode={"center"}
             />
@@ -228,11 +228,22 @@ export default class SignUp extends Component {
               <Text style={styles.bySignText}>
                 By signing up you agree to our
               </Text>
-              <TouchableOpacity
-                onPress={() => this.setState({ modalVisible: true })}
+              <Text
+                style={styles.termText}
+                onPress={() => {
+                  this.props.navigation.navigate("Terms");
+                }}
               >
-                <Text style={styles.termText}>Terms & Policy</Text>
-              </TouchableOpacity>
+                Terms &
+              </Text>
+              <Text
+                style={styles.termText}
+                onPress={() => {
+                  this.props.navigation.navigate("Privacy");
+                }}
+              >
+                Privacy Policy
+              </Text>
             </View>
           </>
           <TouchableOpacity
@@ -241,32 +252,6 @@ export default class SignUp extends Component {
           >
             <Text style={styles.loginText}>Sign Up</Text>
           </TouchableOpacity>
-
-          <Modal
-            animationType="slide"
-            transparent={false}
-            visible={this.state.modalVisible}
-            // onRequestClose={() => {
-            //     console.log("Modal has been closed.");
-            //   }}
-          >
-            <View style={styles.modalSignUp}>
-              <View style={styles.modalView}>
-                <Text>This is terms and conditions you should Agree</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.agreeTouch}
-                onPress={() => {
-                  this.setState({
-                    check: true,
-                    modalVisible: !this.state.modalVisible,
-                  });
-                }}
-              >
-                <Text style={styles.iAgree}>{t("signup_agree")}</Text>
-              </TouchableOpacity>
-            </View>
-          </Modal>
         </ScrollView>
       </ImageBackground>
     );
