@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import {
-  FlatList,
   TextInput,
   ScrollView,
   Image,
@@ -13,7 +12,6 @@ import styles from "./styles";
 import global from "../../../utils/global";
 import { t } from "i18n-js";
 import { Icon, Header, Input } from "react-native-elements";
-import DateTimePicker from "@react-native-community/datetimepicker";
 import moment from "moment";
 import { showMessage } from "react-native-flash-message";
 import { api_booking_reschedule } from "../../../utils/Api";
@@ -36,10 +34,15 @@ export default class Reschedule extends Component {
 
   validate = async () => {
     // console.log("next");
-    const { selected_plan, remark, date, time } = this.state;
+    const { date, time } = this.state;
     if (date == "") {
       showMessage({
         message: "Please select date.",
+        type: "warning",
+      });
+    } else if (date !== "" && !moment(date).isSameOrAfter(moment(), "days")) {
+      showMessage({
+        message: "Please select a date in future.",
         type: "warning",
       });
     } else if (time == "") {
@@ -48,9 +51,11 @@ export default class Reschedule extends Component {
         type: "warning",
       });
     } else {
+      const new_date = moment(date).format("YYYY-MM-DD");
+      const new_time = moment(time, ["h:mm A"]).format("HH:mm:ss");
       const r = await api_booking_reschedule({
-        date,
-        time,
+        date: new_date,
+        time: new_time,
         id: global.BOOKING_DETAILS.booking_id,
       });
       if (r) {
@@ -60,15 +65,19 @@ export default class Reschedule extends Component {
     }
   };
 
+  handleDate = (n) => {
+    this.setState({
+      date: n,
+    });
+  };
+  handleTime = (n) => {
+    this.setState({
+      time: n,
+    });
+  };
+
   render() {
-    const {
-      remark,
-      selected_plan,
-      date,
-      time,
-      date_visible,
-      time_visible,
-    } = this.state;
+    const { remark, date, time } = this.state;
     const d = global.BOOKING_DETAILS;
     return (
       <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
@@ -159,7 +168,9 @@ export default class Reschedule extends Component {
             <View style={styles.date_container}>
               <TouchableOpacity
                 onPress={() => {
-                  this.setState({ date_visible: true });
+                  this.props.navigation.navigate("select_date", {
+                    onDateSelect: this.handleDate,
+                  });
                 }}
                 activeOpacity={0.9}
               >
@@ -179,7 +190,9 @@ export default class Reschedule extends Component {
               </TouchableOpacity>
               <TouchableOpacity
                 onPress={() => {
-                  this.setState({ time_visible: true });
+                  this.props.navigation.navigate("select_time", {
+                    onTimeSelect: this.handleTime,
+                  });
                 }}
                 activeOpacity={0.9}
               >
@@ -231,50 +244,6 @@ export default class Reschedule extends Component {
             <Text style={styles.loginText}>{t("summary_Confirm")}</Text>
           </TouchableOpacity>
         </ScrollView>
-
-        {date_visible && (
-          <DateTimePicker
-            value={Date.now()}
-            mode="date"
-            minimumDate={Date.now()}
-            display="spinner"
-            onChange={(event, selectedDate) => {
-              console.log(selectedDate);
-              if (event.type == "set") {
-                this.setState({
-                  date: moment(selectedDate).format("YYYY-MM-DD"),
-                  date_visible: false,
-                });
-              } else {
-                this.setState({
-                  date_visible: false,
-                });
-              }
-            }}
-          />
-        )}
-        {time_visible && (
-          <DateTimePicker
-            value={Date.now()}
-            minimumDate={Date.now()}
-            mode="time"
-            is24Hour={true}
-            display="spinner"
-            onChange={(event, selectedDate) => {
-              console.log(selectedDate);
-              if (event.type == "set") {
-                this.setState({
-                  time: moment(selectedDate).format("HH:mm:ss"),
-                  time_visible: false,
-                });
-              } else {
-                this.setState({
-                  time_visible: false,
-                });
-              }
-            }}
-          />
-        )}
       </ImageBackground>
     );
   }

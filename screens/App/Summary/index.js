@@ -38,11 +38,20 @@ export default class Summary extends Component {
     const { selected_plan, remark, date, time } = this.state;
     global.ADD_BOOKING_4_DATA[1] = selected_plan;
     global.ADD_BOOKING_4_DATA[6] = remark;
-    global.ADD_BOOKING_4_DATA[5] = date;
-    global.ADD_BOOKING_4_DATA[14] = time;
+    global.ADD_BOOKING_4_DATA[5] = moment(date).format("YYYY-MM-DD");
+    global.ADD_BOOKING_4_DATA[14] = moment(time, ["h:mm A"]).format("HH:mm:ss");
     if (global.ADD_BOOKING_4_DATA[8] == 2 && date == "") {
       showMessage({
         message: "Please select date.",
+        type: "warning",
+      });
+    } else if (
+      global.ADD_BOOKING_4_DATA[8] == 2 &&
+      date !== "" &&
+      !moment(date).isSameOrAfter(moment(), "days")
+    ) {
+      showMessage({
+        message: "Please select a date in future.",
         type: "warning",
       });
     } else if (global.ADD_BOOKING_4_DATA[8] == 2 && time == "") {
@@ -54,6 +63,17 @@ export default class Summary extends Component {
       this.props.navigation.navigate("Payment");
     }
   }
+
+  handleDate = (n) => {
+    this.setState({
+      date: n,
+    });
+  };
+  handleTime = (n) => {
+    this.setState({
+      time: n,
+    });
+  };
 
   render() {
     const {
@@ -210,7 +230,9 @@ export default class Summary extends Component {
               <View style={styles.date_container}>
                 <TouchableOpacity
                   onPress={() => {
-                    this.setState({ date_visible: true });
+                    this.props.navigation.navigate("select_date", {
+                      onDateSelect: this.handleDate,
+                    });
                   }}
                   activeOpacity={0.9}
                 >
@@ -230,7 +252,9 @@ export default class Summary extends Component {
                 </TouchableOpacity>
                 <TouchableOpacity
                   onPress={() => {
-                    this.setState({ time_visible: true });
+                    this.props.navigation.navigate("select_time", {
+                      onTimeSelect: this.handleTime,
+                    });
                   }}
                   activeOpacity={0.9}
                 >
@@ -301,50 +325,6 @@ export default class Summary extends Component {
             <Text style={styles.loginText}>{t("summary_Confirm")}</Text>
           </TouchableOpacity>
         </ScrollView>
-
-        {date_visible && (
-          <DateTimePicker
-            value={Date.now()}
-            mode="date"
-            minimumDate={Date.now()}
-            display="spinner"
-            onChange={(event, selectedDate) => {
-              console.log(selectedDate);
-              if (event.type == "set") {
-                this.setState({
-                  date: moment(selectedDate).format("YYYY-MM-DD"),
-                  date_visible: false,
-                });
-              } else {
-                this.setState({
-                  date_visible: false,
-                });
-              }
-            }}
-          />
-        )}
-        {time_visible && (
-          <DateTimePicker
-            value={Date.now()}
-            minimumDate={Date.now()}
-            mode="time"
-            is24Hour={true}
-            display="spinner"
-            onChange={(event, selectedDate) => {
-              console.log(selectedDate);
-              if (event.type == "set") {
-                this.setState({
-                  time: moment(selectedDate).format("HH:mm:ss"),
-                  time_visible: false,
-                });
-              } else {
-                this.setState({
-                  time_visible: false,
-                });
-              }
-            }}
-          />
-        )}
       </ImageBackground>
     );
   }

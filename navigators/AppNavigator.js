@@ -37,6 +37,8 @@ import Privacy from "../screens/App/Privacy";
 import Terms from "../screens/App/Terms";
 import Chat from "../screens/App/Chat";
 import Reschedule from "../screens/App/Reschedule";
+import DatePicker from "../components/DatePicker";
+import TimePicker from "../components/TimePicker";
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -82,6 +84,8 @@ function HomeStack() {
       <Stack.Screen name="Summary" component={Summary} />
       <Stack.Screen name="Payment" component={Payment} />
       <Stack.Screen name="pay_card" component={Card} />
+      <Stack.Screen name="select_date" component={DatePicker} />
+      <Stack.Screen name="select_time" component={TimePicker} />
     </Stack.Navigator>
   );
 }
@@ -139,6 +143,8 @@ function MyBookingStack() {
       <Stack.Screen name="booking_list" component={MyBookings} />
       <Stack.Screen name="booking_track" component={BookingTrack} />
       <Stack.Screen name="booking_reschedule" component={Reschedule} />
+      <Stack.Screen name="select_date" component={DatePicker} />
+      <Stack.Screen name="select_time" component={TimePicker} />
       <Stack.Screen name="booking_detail" component={BookingDetails} />
       <Stack.Screen name="booking_chat" component={Chat} />
     </Stack.Navigator>
