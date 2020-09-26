@@ -57,6 +57,7 @@ export default class Terms extends Component {
         <WebView
           originWhitelist={["*"]}
           scalesPageToFit={true}
+          showsVerticalScrollIndicator={false}
           automaticallyAdjustContentInsets={true}
           style={{ flex: 1 }}
           source={{
