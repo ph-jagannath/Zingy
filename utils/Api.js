@@ -7,6 +7,8 @@ import global from "./global";
 import * as SplashScreen from "expo-splash-screen";
 import * as Facebook from "expo-facebook";
 import * as GoogleSignIn from "expo-google-sign-in";
+import * as Location from "expo-location";
+
 // Network listener
 
 // base url
@@ -25,6 +27,11 @@ Axios.interceptors.response.use((response) => {
   console.log("Response: \n", response.status, response.data);
   return response;
 });
+
+/**
+ * Helper Function's
+ *
+ */
 
 // store auth token in storage
 function StoreToken(responseData) {
@@ -163,6 +170,38 @@ export async function StoreUserData(data) {
   }
 }
 
+export async function helper_my_location() {
+  let { status } = await Location.requestPermissionsAsync();
+  if (status == "granted") {
+    Loading.show();
+    try {
+      let location = await Location.getCurrentPositionAsync();
+      global.CONSTANT.LAT = location.coords.latitude;
+      global.CONSTANT.LNG = location.coords.longitude;
+      Loading.hide();
+      return global.CONSTANT;
+    } catch (e) {
+      Loading.hide();
+      showMessage({
+        message: "Permission to access location was denied.",
+        type: "danger",
+      });
+      return false;
+    }
+  } else {
+    showMessage({
+      message: "Permission to access location was denied.",
+      type: "danger",
+    });
+    return false;
+  }
+}
+
+/**
+ * Webservice Api's
+ *
+ */
+
 // login api
 export async function api_login(d) {
   Loading.show();
@@ -221,6 +260,7 @@ export async function api_register(d) {
         showMessage({
           message: response.data.response.message,
           type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
         });
       } else {
         showMessage({
@@ -311,46 +351,34 @@ export async function SocialLogin(d) {
 }
 
 // ForgotPassword api
-export async function ForgotPassword(d) {
+export async function api_forgot_pass(d) {
   Loading.show();
   const DATA = await Axios({
     method: "post",
-    url: "forgotpassword",
+    url: "forget_password",
     data: {
       email: d.email,
     },
-    headers: { Authorization: "Bearer " + global.AUTHTOKEN },
     validateStatus: () => {
       return true;
     },
   }).then(
     function (response) {
-      if (response.status == 200) {
-        // StoreUserData(response.data.data);
-        Loading.hide();
-        Popup.show({
-          type: "Success",
-          title: global.CONSTANT.APPNAME + " Alert❗",
-          button: false,
-          textBody: response.data.success_message,
-          buttonText: "Reset Now",
-          callback: () => {
-            Popup.hide();
-            Linking.openURL(response.data);
-            // NavigationService.navigate("Login");
-          },
+      Loading.hide();
+      if (response.data.response.status) {
+        showMessage({
+          message: response.data.response.message,
+          type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
         });
-        // return global.USER;
+        RootNavigation.navigate("Login");
+        return true;
       } else {
-        Loading.hide();
-        Popup.show({
-          type: "Danger",
-          title: global.CONSTANT.APPNAME + " Alert❗",
-          button: false,
-          textBody: response.data.error_message,
-          buttontext: "Ok",
-          callback: () => Popup.hide(),
+        showMessage({
+          message: response.data.response.message,
+          type: "danger",
         });
+        return false;
       }
     }.bind(this)
   );
@@ -852,10 +880,10 @@ export async function api_get_plan_list_zone(d) {
         return global.PLANS_LIST_ZONE;
       } else {
         global.PLANS_LIST_ZONE = [];
-        showMessage({
-          message: response.data.response.message,
-          type: "danger",
-        });
+        // showMessage({
+        //   message: response.data.response.message,
+        //   type: "danger",
+        // });
         return false;
       }
     }.bind(this)
@@ -1525,6 +1553,7 @@ export async function api_cancel_booking(d) {
         showMessage({
           message: response.data.response.message,
           type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
         });
         return true;
       } else {
@@ -1604,6 +1633,7 @@ export async function api_booking_reschedule(d) {
         showMessage({
           message: response.data.response.message,
           type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
         });
         return true;
       } else {
@@ -1644,6 +1674,7 @@ export async function api_driver_rating(d) {
         showMessage({
           message: response.data.response.message,
           type: "success",
+          backgroundColor: global.COLOR.PRIMARY_DARK,
         });
         RootNavigation.navigate("Home");
         return true;

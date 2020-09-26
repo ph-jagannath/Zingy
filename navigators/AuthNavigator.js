@@ -4,6 +4,7 @@ import Login from "../screens/Auth/Login";
 import Signup from "../screens/Auth/Signup";
 import Privacy from "../screens/App/Privacy";
 import Terms from "../screens/App/Terms";
+import Forgot from "../screens/Auth/Forgot";
 // import VerifyNumber from "./../screens/Auth/VerifyNumber";
 // import WelcomeDacwash from "../screens/Auth/WelcomeDacwash";
 // import AddVehicle from "../screens/Auth/AddVehicle";
@@ -14,6 +15,7 @@ export default function AuthNavigator() {
     <Stack.Navigator headerMode="none" initialRouteName="Login">
       <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Signup" component={Signup} />
+      <Stack.Screen name="Forgot" component={Forgot} />
       <Stack.Screen name="Privacy" component={Privacy} />
       <Stack.Screen name="Terms" component={Terms} />
 

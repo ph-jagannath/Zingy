@@ -3,9 +3,7 @@ import { FlatList, Image, Text, View, TouchableOpacity } from "react-native";
 import styles from "./styles";
 import { t } from "i18n-js";
 import { Icon, Header, Overlay } from "react-native-elements";
-import * as Permissions from "expo-permissions";
 import Geocode from "react-geocode";
-import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import global from "../../../utils/global";
 import {
@@ -28,19 +26,19 @@ export default class SelectPlans extends Component {
       key: 0,
       tracksViewChanges: true,
       type: "home",
-      lat: 26.8026797,
-      lng: 75.8081312,
+      lat: global.CONSTANT.LAT,
+      lng: global.CONSTANT.LNG,
       lat_delta: 0.006,
       lng_delta: 0.003,
       address: "",
       selected_plan: "",
       add_location_popup: false,
       package_avail: false,
+      map_loading: true,
     };
   }
 
   componentDidMount() {
-    this._getLocationAsync();
     api_get_locations();
   }
 
@@ -49,20 +47,6 @@ export default class SelectPlans extends Component {
       add_location_popup: !this.state.add_location_popup,
     });
   }
-
-  _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      this.setState({
-        locationResult: "Permission to access location was denied",
-      });
-    } else {
-      this.setState({ hasLocationPermissions: true });
-    }
-    let location = await Location.getCurrentPositionAsync();
-    console.log(location);
-    this.get_address(location.coords.latitude, location.coords.longitude);
-  };
 
   handleOnNavigateBack = (d) => {
     api_get_plan_list_zone({
@@ -75,7 +59,7 @@ export default class SelectPlans extends Component {
       lat: d.geometry.location.lat,
       lng: d.geometry.location.lng,
       key: Date.now(),
-      reRender: false,
+      // reRender: false,
       marginBottom: 1,
     });
     const region = {
@@ -84,11 +68,10 @@ export default class SelectPlans extends Component {
       latitudeDelta: 0.012,
       longitudeDelta: 0.01,
     };
-    this.map.animateToRegion(region, 500);
-
     setTimeout(() => {
       this.setState({ reRender: true });
     }, 1000);
+    this.map.animateToRegion(region, 500);
   };
 
   get_address = async (lat, lng) => {
@@ -202,6 +185,7 @@ export default class SelectPlans extends Component {
                 // marginBottom: marginBottom,
               }}
               // key={key}
+              // loadingEnabled={map_loading}
               // onMapReady={this._onMapReady}
               showsUserLocation={false}
               showsCompass={false}
@@ -232,11 +216,12 @@ export default class SelectPlans extends Component {
                       longitude: Number(i.longitude),
                     }}
                     tracksViewChanges={this.state.tracksViewChanges}
+                    title={i.time.toString()}
                     // zIndex={i++}
                   >
                     <View>
                       <Image
-                        source={global.ASSETS.MAP_PIN}
+                        source={global.ASSETS.MAP_PIN_WASHER}
                         onLoad={this.stopTrackingViewChanges}
                         fadeDuration={0}
                         style={styles.map_pin_marker_image_sp}
@@ -403,7 +388,7 @@ export default class SelectPlans extends Component {
                   </View>
                 }
                 data={global.PLANS_LIST_ZONE}
-                renderItem={({ item: p, index }) => {
+                renderItem={({ item: p }) => {
                   return (
                     <View>
                       <TouchableOpacity

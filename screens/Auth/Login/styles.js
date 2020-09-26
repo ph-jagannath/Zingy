@@ -78,4 +78,11 @@ export default StyleSheet.create({
   dontAccount: {
     fontSize: wp(4),
   },
+  forgot_pass: {
+    fontSize: wp(4),
+    marginTop: hp(2),
+    marginHorizontal: wp(5),
+    alignSelf: "flex-end",
+    color: global.COLOR.PRIMARY_DARK,
+  },
 });

@@ -14,7 +14,7 @@ import styles from "./styles";
 import global from "../../../utils/global";
 import { Icon, Header } from "react-native-elements";
 import { t } from "i18n-js";
-import { api_get_locations } from "../../../utils/Api";
+import { api_get_locations, helper_my_location } from "../../../utils/Api";
 export default class Location extends Component {
   constructor(props) {
     super(props);
@@ -136,12 +136,15 @@ export default class Location extends Component {
         </View>
         <TouchableOpacity
           activeOpacity={0.8}
-          onPress={() =>
-            navigation.navigate("AddLocation", {
-              action_type: "add",
-              onAddLocation: this.get_data,
-            })
-          }
+          onPress={async () => {
+            const r = await helper_my_location();
+
+            r &&
+              navigation.navigate("AddLocation", {
+                action_type: "add",
+                onAddLocation: this.get_data,
+              });
+          }}
           style={styles.add_button}
         >
           <Text style={styles.add_button_Text}>

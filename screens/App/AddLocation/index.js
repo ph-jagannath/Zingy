@@ -8,7 +8,7 @@ import * as Permissions from "expo-permissions";
 import * as Location from "expo-location";
 import Geocode from "react-geocode";
 import MapView from "react-native-maps";
-import { api_add_location } from "../../../utils/Api";
+import { api_add_location, helper_my_location } from "../../../utils/Api";
 
 export default class AddLocation extends Component {
   constructor(props) {
@@ -23,30 +23,13 @@ export default class AddLocation extends Component {
       key: 0,
       tracksViewChanges: true,
       type: "home",
-      lat: "",
-      lng: "",
+      lat: global.CONSTANT.LAT,
+      lng: global.CONSTANT.LNG,
       lat_delta: 0.006,
       lng_delta: 0.003,
       address: "",
     };
   }
-
-  componentDidMount() {
-    this._getLocationAsync();
-  }
-
-  _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      this.setState({
-        locationResult: "Permission to access location was denied",
-      });
-    } else {
-      this.setState({ hasLocationPermissions: true });
-    }
-    let location = await Location.getCurrentPositionAsync();
-    this.get_address(location.coords.latitude, location.coords.longitude);
-  };
 
   handleOnNavigateBack = (d) => {
     this.setState({
@@ -54,7 +37,7 @@ export default class AddLocation extends Component {
       lat: d.geometry.location.lat,
       lng: d.geometry.location.lng,
       key: Date.now(),
-      reRender: false,
+      // reRender: false,
       marginBottom: 1,
     });
     const region = {
@@ -80,13 +63,6 @@ export default class AddLocation extends Component {
           lng,
           address: response.results[0].formatted_address,
         });
-        const region = {
-          latitude: lat,
-          longitude: lng,
-          latitudeDelta: 0.012,
-          longitudeDelta: 0.01,
-        };
-        this.map.animateToRegion(region, 500);
       },
       (error) => {
         console.error(error);
@@ -206,8 +182,17 @@ export default class AddLocation extends Component {
           <>
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={() => {
-                this._getLocationAsync();
+              onPress={async () => {
+                const r = await helper_my_location();
+                if (r) {
+                  const region = {
+                    latitude: global.CONSTANT.LAT,
+                    longitude: global.CONSTANT.LNG,
+                    latitudeDelta: 0.012,
+                    longitudeDelta: 0.01,
+                  };
+                  this.map.animateToRegion(region, 500);
+                }
               }}
               style={styles.map_my_location}
             >

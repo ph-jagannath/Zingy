@@ -29,8 +29,8 @@ export default class TwoWheelLocation extends Component {
       key: 0,
       tracksViewChanges: true,
       type: "home",
-      lat: 26.8026797,
-      lng: 75.8081312,
+      lat: global.CONSTANT.LAT,
+      lng: global.CONSTANT.LNG,
       lat_delta: 0.006,
       lng_delta: 0.003,
       address: "",
@@ -41,7 +41,6 @@ export default class TwoWheelLocation extends Component {
   }
 
   componentDidMount() {
-    this._getLocationAsync();
     api_get_locations();
   }
 
@@ -51,26 +50,13 @@ export default class TwoWheelLocation extends Component {
     });
   }
 
-  _getLocationAsync = async () => {
-    let { status } = await Permissions.askAsync(Permissions.LOCATION);
-    if (status !== "granted") {
-      this.setState({
-        locationResult: "Permission to access location was denied",
-      });
-    } else {
-      this.setState({ hasLocationPermissions: true });
-    }
-    let location = await Location.getCurrentPositionAsync();
-    this.get_address(location.coords.latitude, location.coords.longitude);
-  };
-
   handleOnNavigateBack = (d) => {
     this.setState({
       address: d.name + ", " + d.formatted_address,
       lat: d.geometry.location.lat,
       lng: d.geometry.location.lng,
       key: Date.now(),
-      reRender: false,
+      // reRender: false,
       marginBottom: 1,
     });
     const region = {
@@ -215,11 +201,12 @@ export default class TwoWheelLocation extends Component {
                       longitude: Number(i.longitude),
                     }}
                     tracksViewChanges={this.state.tracksViewChanges}
+                    title={i.time.toString()}
                     // zIndex={i++}
                   >
                     <View>
                       <Image
-                        source={global.ASSETS.MAP_PIN}
+                        source={global.ASSETS.MAP_PIN_WASHER}
                         onLoad={this.stopTrackingViewChanges}
                         fadeDuration={0}
                         style={styles.map_pin_marker_image_sp}

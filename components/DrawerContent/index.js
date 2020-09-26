@@ -4,7 +4,7 @@ import global from "../../utils/global";
 import { t } from "i18n-js";
 import styles from "./styles";
 import { Icon } from "react-native-elements";
-import { api_logout } from "../../utils/Api";
+import { api_logout, helper_my_location } from "../../utils/Api";
 export default class DrawerContent extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +54,11 @@ export default class DrawerContent extends Component {
             {/* two wheeler */}
             <TouchableOpacity
               activeOpacity={0.8}
-              onPress={() => navigation.navigate("two_wheeler")}
+              onPress={async () => {
+                const r = await helper_my_location();
+
+                r && navigation.navigate("two_wheeler");
+              }}
               style={[
                 styles.contentTop,
                 active_route == "two_wheeler" && styles.active_tab,
