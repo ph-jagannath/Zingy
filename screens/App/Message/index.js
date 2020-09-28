@@ -110,6 +110,7 @@ export default class Message extends Component {
         />
 
         <FlatList
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.flatListContainer}
           data={userMesege}
           renderItem={({ item, index }) => this.renderItem({ item, index })}

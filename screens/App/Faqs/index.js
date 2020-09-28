@@ -81,6 +81,7 @@ export default class Faqs extends Component {
         <View style={styles.containerMybooking}>
           <FlatList
             contentContainerStyle={styles.flatView2}
+            showsVerticalScrollIndicator={false}
             refreshControl={
               <RefreshControl
                 refreshing={false}

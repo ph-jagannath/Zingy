@@ -71,6 +71,7 @@ export default class Location extends Component {
         />
         <View style={styles.locationTop}>
           <FlatList
+            showsVerticalScrollIndicator={false}
             data={global.MY_LOCATIONS}
             refreshControl={
               <RefreshControl

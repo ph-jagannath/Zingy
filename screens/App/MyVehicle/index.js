@@ -65,6 +65,7 @@ export default class MyVehicle extends Component {
           }
         />
         <FlatList
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.flatListContainer}
           data={global.MY_VEHICLES}
           refreshControl={

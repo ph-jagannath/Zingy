@@ -86,6 +86,7 @@ export default class Notification extends Component {
           }
         />
         <FlatList
+          showsVerticalScrollIndicator={false}
           ListEmptyComponent={this.emptyList}
           data={global.NOTIFICATIONS_LIST}
           refreshControl={

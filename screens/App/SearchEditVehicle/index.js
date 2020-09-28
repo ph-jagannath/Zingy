@@ -65,6 +65,7 @@ export default class SearchEditVehicle extends Component {
           />
         </View>
         <FlatList
+          showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.flatListContainer}
           data={list.filter((i) =>
             i.name.toLowerCase().includes(filter_text.toLowerCase())

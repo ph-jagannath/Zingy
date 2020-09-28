@@ -60,6 +60,7 @@ export default class VehicleStatus extends Component {
           }
         />
         <FlatList
+          showsVerticalScrollIndicator={false}
           style={styles.flatListContainer}
           ListEmptyComponent={
             <Text style={styles.list_empty_text}>No Vehicles Added</Text>

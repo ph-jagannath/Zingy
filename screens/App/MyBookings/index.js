@@ -153,6 +153,7 @@ export default class MyBookings extends Component {
         <>
           <FlatList
             data={global.MY_BOOKINGS}
+            showsVerticalScrollIndicator={false}
             ListEmptyComponent={
               <Text style={styles.list_empty_text}>No Booking Available</Text>
             }
