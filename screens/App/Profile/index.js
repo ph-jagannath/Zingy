@@ -54,11 +54,7 @@ export default class Profile extends Component {
         <ScrollView style={styles.containerMybooking}>
           <View style={styles.horizonViewProfile}>
             <View style={styles.HorizonRowViewProfile}>
-              <Image
-                source={global.ASSETS.USER}
-                style={styles.imgStyle}
-                resizeMode={"center"}
-              />
+              <Image source={global.ASSETS.USER} style={styles.imgStyle} />
               <View style={styles.profileRightView}>
                 <Text style={styles.nameText}>{t("signup_name")}</Text>
                 <Text style={styles.usrName}>{d.first_name}</Text>
@@ -67,11 +63,7 @@ export default class Profile extends Component {
           </View>
           <View style={styles.horizonViewProfile}>
             <View style={styles.HorizonRowViewProfile}>
-              <Image
-                source={global.ASSETS.EMAIL}
-                style={styles.imgStyle}
-                resizeMode={"center"}
-              />
+              <Image source={global.ASSETS.EMAIL} style={styles.imgStyle} />
               <View style={styles.profileRightView}>
                 <Text style={styles.nameText}>{t("signup_email")}</Text>
                 <Text style={styles.usrName}>{d.email}</Text>
@@ -80,11 +72,7 @@ export default class Profile extends Component {
           </View>
           <View style={styles.horizonViewProfile}>
             <View style={styles.HorizonRowViewProfile}>
-              <Image
-                source={global.ASSETS.MOBAIL}
-                style={styles.MimgStyle}
-                resizeMode={"cover"}
-              />
+              <Image source={global.ASSETS.MOBAIL} style={styles.imgStyle} />
               <View style={styles.profileRightView}>
                 <Text style={styles.nameText}>{t("signup_phone")}</Text>
                 <Text style={styles.usrName}>{d.mobile}</Text>
@@ -93,11 +81,7 @@ export default class Profile extends Component {
           </View>
           <View style={styles.horizonViewProfile}>
             <View style={styles.HorizonRowViewProfile}>
-              <Image
-                source={global.ASSETS.LOCK}
-                style={styles.imgStyle}
-                resizeMode={"center"}
-              />
+              <Image source={global.ASSETS.LOCK} style={styles.imgStyle} />
               <TouchableOpacity
                 onPress={() =>
                   this.props.navigation.navigate("profile_password")

@@ -36,9 +36,10 @@ export default StyleSheet.create({
   },
 
   imgStyle: {
-    height: wp(5),
-    width: wp(5),
+    height: wp(7),
+    width: wp(7),
     tintColor: global.COLOR.PRIMARY_DARK,
+    resizeMode: "contain",
   },
   MimgStyle: {
     tintColor: global.COLOR.PRIMARY_DARK,
@@ -64,7 +65,7 @@ export default StyleSheet.create({
   },
   HorizonRowViewProfile: {
     flexDirection: "row",
-    backgroundColor: "#fff",
+    // backgroundColor: "#fff",
     alignItems: "center",
     marginHorizontal: wp(4),
   },
