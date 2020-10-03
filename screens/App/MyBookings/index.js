@@ -230,7 +230,7 @@ export default class MyBookings extends Component {
                                   });
                               }}
                             >
-                              <Text style={styles.resch}>Reshcedule</Text>
+                              <Text style={styles.resch}>Reschedule</Text>
                             </TouchableOpacity>
                           </View>
                         </>

@@ -15,7 +15,7 @@ import global from "../../../utils/global";
 import CountryPicker from "react-native-country-picker-modal";
 import { showMessage } from "react-native-flash-message";
 import { api_update_profile } from "../../../utils/Api";
-
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export default class EditProfile extends Component {
   constructor(props) {
     super(props);
@@ -26,8 +26,8 @@ export default class EditProfile extends Component {
       phoneNumber: global.USER.mobile,
       modalVisible: false,
       isLoading: false,
-      country: "IT",
-      country_code: "39",
+      country: global.USER.country_short_code,
+      country_code: global.USER.country_code,
     };
   }
 
@@ -78,96 +78,102 @@ export default class EditProfile extends Component {
             <Text style={styles.headerText}>{t("profile_header")}</Text>
           }
         />
-        <ScrollView style={styles.containerMybooking}>
-          <>
-            {/* name */}
-            <View style={styles.nameView}>
-              <Image
-                source={global.ASSETS.USER}
-                style={styles.sideIcon}
-                resizeMode={"contain"}
-              />
-              <TextInput
-                ref={(ref) => {
-                  this.name_input = ref;
-                }}
-                style={styles.nameInputSignup}
-                label="Name"
-                underlineColor="transparent"
-                selectionColor={global.COLOR.PRIMARY_LIGHT}
-                theme={{
-                  colors: { primary: global.COLOR.PRIMARY_DARK },
-                }}
-                returnKeyType={"next"}
-                onSubmitEditing={() => this.email_input.focus()}
-                value={name}
-                onChangeText={(name) => this.setState({ name })}
-              />
-            </View>
-            {/* email */}
-            <View style={styles.nameView}>
-              <Image
-                source={global.ASSETS.EMAIL}
-                style={styles.sideIcon}
-                resizeMode={"contain"}
-              />
-              <TextInput
-                style={styles.nameInputSignup}
-                label="Email"
-                ref={(ref) => {
-                  this.email_input = ref;
-                }}
-                onSubmitEditing={() => {
-                  this.phone_input.focus();
-                }}
-                returnKeyType={"next"}
-                selectionColor={global.COLOR.PRIMARY_LIGHT}
-                theme={{
-                  colors: { primary: global.COLOR.PRIMARY_DARK },
-                }}
-                underlineColor="transparent"
-                value={email}
-                onChangeText={(email) => this.setState({ email })}
-              />
-            </View>
-            {/* phone */}
-            <View style={styles.nameView}>
-              <CountryPicker
-                countryCode={country}
-                withFilter
-                withFlag
-                withFlagButton
-                withCallingCode
-                withCallingCodeButton
-                withAlphaFilter
-                onSelect={(c) => {
-                  this.setState({
-                    country_code: c.callingCode[0],
-                    country: c.cca2,
-                  });
-                }}
-              />
-              <TextInput
-                style={styles.nameInputSignup}
-                ref={(ref) => {
-                  this.phone_input = ref;
-                }}
-                onSubmitEditing={() => this.pass_input.focus()}
-                selectionColor={global.COLOR.PRIMARY_LIGHT}
-                theme={{
-                  colors: { primary: global.COLOR.PRIMARY_DARK },
-                }}
-                underlineColor="transparent"
-                label="Phone Number"
-                value={phoneNumber}
-                onChangeText={(phoneNumber) => this.setState({ phoneNumber })}
-                // maxLength={9}
-                returnKeyType={"next"}
-                keyboardType={"number-pad"}
-              />
-            </View>
-          </>
-        </ScrollView>
+        <View style={styles.containerMybooking}>
+          <KeyboardAwareScrollView
+            enableOnAndroid
+            // extraScrollHeight={20}
+            showsVerticalScrollIndicator={false}
+          >
+            <>
+              {/* name */}
+              <View style={styles.nameView}>
+                <Image
+                  source={global.ASSETS.USER}
+                  style={styles.sideIcon}
+                  resizeMode={"contain"}
+                />
+                <TextInput
+                  ref={(ref) => {
+                    this.name_input = ref;
+                  }}
+                  style={styles.nameInputSignup}
+                  label="Name"
+                  underlineColor="transparent"
+                  selectionColor={global.COLOR.PRIMARY_LIGHT}
+                  theme={{
+                    colors: { primary: global.COLOR.PRIMARY_DARK },
+                  }}
+                  returnKeyType={"next"}
+                  onSubmitEditing={() => this.email_input.focus()}
+                  value={name}
+                  onChangeText={(name) => this.setState({ name })}
+                />
+              </View>
+              {/* email */}
+              <View style={styles.nameView}>
+                <Image
+                  source={global.ASSETS.EMAIL}
+                  style={styles.sideIcon}
+                  resizeMode={"contain"}
+                />
+                <TextInput
+                  style={styles.nameInputSignup}
+                  label="Email"
+                  ref={(ref) => {
+                    this.email_input = ref;
+                  }}
+                  onSubmitEditing={() => {
+                    this.phone_input.focus();
+                  }}
+                  returnKeyType={"next"}
+                  selectionColor={global.COLOR.PRIMARY_LIGHT}
+                  theme={{
+                    colors: { primary: global.COLOR.PRIMARY_DARK },
+                  }}
+                  underlineColor="transparent"
+                  value={email}
+                  onChangeText={(email) => this.setState({ email })}
+                />
+              </View>
+              {/* phone */}
+              <View style={styles.nameView}>
+                <CountryPicker
+                  countryCode={country}
+                  withFilter
+                  withFlag
+                  withFlagButton
+                  withCallingCode
+                  withCallingCodeButton
+                  withAlphaFilter
+                  onSelect={(c) => {
+                    this.setState({
+                      country_code: c.callingCode[0],
+                      country: c.cca2,
+                    });
+                  }}
+                />
+                <TextInput
+                  style={styles.nameInputSignup}
+                  ref={(ref) => {
+                    this.phone_input = ref;
+                  }}
+                  onSubmitEditing={() => this.pass_input.focus()}
+                  selectionColor={global.COLOR.PRIMARY_LIGHT}
+                  theme={{
+                    colors: { primary: global.COLOR.PRIMARY_DARK },
+                  }}
+                  underlineColor="transparent"
+                  label="Phone Number"
+                  value={phoneNumber}
+                  onChangeText={(phoneNumber) => this.setState({ phoneNumber })}
+                  // maxLength={9}
+                  returnKeyType={"next"}
+                  keyboardType={"number-pad"}
+                />
+              </View>
+            </>
+          </KeyboardAwareScrollView>
+        </View>
         <TouchableOpacity
           onPress={() => this.validate()}
           style={styles.touchlogin}

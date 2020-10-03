@@ -244,6 +244,8 @@ export async function api_register(d) {
       password: d.password,
       mobile: d.country_code + d.phoneNumber,
       first_name: d.name,
+      country_code: d.country_code,
+      country_short_code: d.country,
       last_name: " ",
       language: "eng",
       device_type: global.CONSTANT.DEVICETYPE,
@@ -1286,6 +1288,8 @@ export async function api_update_profile(d) {
   data.append("device_type", global.CONSTANT.DEVICETYPE);
   data.append("email", d.email);
   data.append("mobile", d.phoneNumber);
+  data.append("country_short_code", d.country);
+  data.append("country_code", d.country_code);
   data.append("latitude", "");
   data.append("longitude", "");
   data.append("device_id", global.CONSTANT.DEVICETOKEN);

@@ -16,6 +16,7 @@ import * as GoogleSignIn from "expo-google-sign-in";
 import jwtDecode from "jwt-decode";
 import { showMessage } from "react-native-flash-message";
 import { TextInput } from "react-native-paper";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 export default class Login extends Component {
   constructor(props) {
     super(props);
@@ -92,173 +93,179 @@ export default class Login extends Component {
           backgroundColor={"transparent"}
           statusBarProps={{ backgroundColor: global.COLOR.PRIMARY_LIGHT }}
         />
-        <ScrollView style={{ flex: 1 }}>
-          {/* logo image */}
-          <>
-            <Image
-              style={styles.logo_image}
-              source={global.ASSETS.LOGO}
-              resizeMode={"center"}
-            />
-          </>
-          {/* social signup button */}
-          <>
-            <View style={styles.social_container}>
-              <Icon
-                name="google"
-                type="font-awesome"
-                reverse
-                reverseColor="#fff"
-                color="#DB4437"
-                size={20}
-                onPress={() => {
-                  this.GoogleAuth();
-                }}
+        <View style={{ flex: 1 }}>
+          <KeyboardAwareScrollView
+            enableOnAndroid
+            // extraScrollHeight={30}
+            showsVerticalScrollIndicator={false}
+          >
+            {/* logo image */}
+            <>
+              <Image
+                style={styles.logo_image}
+                source={global.ASSETS.LOGO}
+                resizeMode={"center"}
               />
-              <Icon
-                name="facebook"
-                type="font-awesome"
-                reverse
-                reverseColor="#fff"
-                color="#4267B2"
-                size={20}
-                onPress={() => {
-                  FBAuth();
-                }}
-              />
-              {global.CONSTANT.DEVICETYPE === "ios" && (
+            </>
+            {/* social signup button */}
+            <>
+              <View style={styles.social_container}>
                 <Icon
-                  name="apple"
+                  name="google"
                   type="font-awesome"
                   reverse
                   reverseColor="#fff"
-                  color="black"
+                  color="#DB4437"
                   size={20}
-                  onPress={async () => {
-                    try {
-                      // let credential = await AppleAuthentication.signOutAsync();
-                      let credential = await AppleAuthentication.signInAsync({
-                        requestedScopes: [
-                          AppleAuthentication.AppleAuthenticationScope.EMAIL,
-                          AppleAuthentication.AppleAuthenticationScope
-                            .FULL_NAME,
-                        ],
-                      });
-                      var token = credential.identityToken;
-                      var decoded = await jwtDecode(token);
-                      SocialLogin({
-                        email: decoded.email,
-                        name: decoded.email.split("@")[0],
-                        social_type: "Apple",
-                        social_id: decoded.c_hash,
-                      });
-                    } catch (e) {
-                      if (e.code === "ERR_CANCELED") {
-                        // handle that the user canceled the sign-in flow
-                      } else {
-                        // handle other errors
-                      }
-                    }
+                  onPress={() => {
+                    this.GoogleAuth();
                   }}
                 />
-              )}
-            </View>
-          </>
+                <Icon
+                  name="facebook"
+                  type="font-awesome"
+                  reverse
+                  reverseColor="#fff"
+                  color="#4267B2"
+                  size={20}
+                  onPress={() => {
+                    FBAuth();
+                  }}
+                />
+                {global.CONSTANT.DEVICETYPE === "ios" && (
+                  <Icon
+                    name="apple"
+                    type="font-awesome"
+                    reverse
+                    reverseColor="#fff"
+                    color="black"
+                    size={20}
+                    onPress={async () => {
+                      try {
+                        // let credential = await AppleAuthentication.signOutAsync();
+                        let credential = await AppleAuthentication.signInAsync({
+                          requestedScopes: [
+                            AppleAuthentication.AppleAuthenticationScope.EMAIL,
+                            AppleAuthentication.AppleAuthenticationScope
+                              .FULL_NAME,
+                          ],
+                        });
+                        var token = credential.identityToken;
+                        var decoded = await jwtDecode(token);
+                        SocialLogin({
+                          email: decoded.email,
+                          name: decoded.email.split("@")[0],
+                          social_type: "Apple",
+                          social_id: decoded.c_hash,
+                        });
+                      } catch (e) {
+                        if (e.code === "ERR_CANCELED") {
+                          // handle that the user canceled the sign-in flow
+                        } else {
+                          // handle other errors
+                        }
+                      }
+                    }}
+                  />
+                )}
+              </View>
+            </>
 
-          <Text style={styles.already}>
-            Already a user? Enter your registered email & password below.
-          </Text>
-
-          {/* email */}
-          <View style={styles.nameView}>
-            <Image
-              source={global.ASSETS.EMAIL}
-              style={styles.sideIcon}
-              resizeMode={"contain"}
-            />
-            <TextInput
-              style={styles.nameInputSignup}
-              textContentType="emailAddress"
-              keyboardType="email-address"
-              label="Email"
-              ref={(ref) => {
-                this.email = ref;
-              }}
-              onSubmitEditing={() => {
-                this.password.focus();
-              }}
-              returnKeyType={"next"}
-              selectionColor={global.COLOR.PRIMARY_LIGHT}
-              theme={{
-                colors: { primary: global.COLOR.PRIMARY_DARK },
-              }}
-              underlineColor="transparent"
-              value={email}
-              onChangeText={(email) => this.setState({ email })}
-            />
-          </View>
-
-          {/* pass */}
-          <View style={styles.nameView}>
-            <Image
-              source={global.ASSETS.LOCK}
-              style={styles.sideIcon}
-              resizeMode={"contain"}
-            />
-            <TextInput
-              style={styles.nameInputSignup}
-              label="Password"
-              secureTextEntry
-              ref={(ref) => {
-                this.password = ref;
-              }}
-              onSubmitEditing={() => {
-                this.validate();
-              }}
-              returnKeyType="done"
-              selectionColor={global.COLOR.PRIMARY_LIGHT}
-              theme={{
-                colors: { primary: global.COLOR.PRIMARY_DARK },
-              }}
-              underlineColor="transparent"
-              value={password}
-              onChangeText={(v) => this.setState({ password: v })}
-            />
-          </View>
-
-          {/* forgot password  */}
-          <>
-            <Text
-              style={styles.forgot_pass}
-              onPress={() => {
-                this.props.navigation.navigate("Forgot");
-              }}
-            >
-              Forgot Password ?
+            <Text style={styles.already}>
+              Already a user? Enter your registered email & password below.
             </Text>
-          </>
 
-          <TouchableOpacity
-            activeOpacity={0.8}
-            style={styles.login_button}
-            onPress={() => this.validate()}
-          >
-            <Text style={styles.loginText}>Log In</Text>
-          </TouchableOpacity>
-          <View style={styles.dontAcView}>
-            <Text style={styles.dontAccount}>
-              Don't have an account?{" "}
+            {/* email */}
+            <View style={styles.nameView}>
+              <Image
+                source={global.ASSETS.EMAIL}
+                style={styles.sideIcon}
+                resizeMode={"contain"}
+              />
+              <TextInput
+                style={styles.nameInputSignup}
+                textContentType="emailAddress"
+                keyboardType="email-address"
+                label="Email"
+                ref={(ref) => {
+                  this.email = ref;
+                }}
+                onSubmitEditing={() => {
+                  this.password.focus();
+                }}
+                returnKeyType={"next"}
+                selectionColor={global.COLOR.PRIMARY_LIGHT}
+                theme={{
+                  colors: { primary: global.COLOR.PRIMARY_DARK },
+                }}
+                underlineColor="transparent"
+                value={email}
+                onChangeText={(email) => this.setState({ email })}
+              />
+            </View>
+
+            {/* pass */}
+            <View style={styles.nameView}>
+              <Image
+                source={global.ASSETS.LOCK}
+                style={styles.sideIcon}
+                resizeMode={"contain"}
+              />
+              <TextInput
+                style={styles.nameInputSignup}
+                label="Password"
+                secureTextEntry
+                ref={(ref) => {
+                  this.password = ref;
+                }}
+                onSubmitEditing={() => {
+                  this.validate();
+                }}
+                returnKeyType="done"
+                selectionColor={global.COLOR.PRIMARY_LIGHT}
+                theme={{
+                  colors: { primary: global.COLOR.PRIMARY_DARK },
+                }}
+                underlineColor="transparent"
+                value={password}
+                onChangeText={(v) => this.setState({ password: v })}
+              />
+            </View>
+
+            {/* forgot password  */}
+            <>
               <Text
-                style={styles.dontAccount}
+                style={styles.forgot_pass}
                 onPress={() => {
-                  this.props.navigation.navigate("Signup");
+                  this.props.navigation.navigate("Forgot");
                 }}
               >
-                Sign Up
+                Forgot Password ?
               </Text>
-            </Text>
-          </View>
-        </ScrollView>
+            </>
+
+            <TouchableOpacity
+              activeOpacity={0.8}
+              style={styles.login_button}
+              onPress={() => this.validate()}
+            >
+              <Text style={styles.loginText}>Log In</Text>
+            </TouchableOpacity>
+            <View style={styles.dontAcView}>
+              <Text style={styles.dontAccount}>
+                Don't have an account?{" "}
+                <Text
+                  style={styles.dontAccount}
+                  onPress={() => {
+                    this.props.navigation.navigate("Signup");
+                  }}
+                >
+                  Sign Up
+                </Text>
+              </Text>
+            </View>
+          </KeyboardAwareScrollView>
+        </View>
       </ImageBackground>
     );
   }
