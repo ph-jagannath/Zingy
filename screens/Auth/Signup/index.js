@@ -104,11 +104,7 @@ export default class SignUp extends Component {
             showsVerticalScrollIndicator={false}
           >
             <View style={styles.imgViewSignup}>
-              <Image
-                style={styles.logo_image}
-                source={global.ASSETS.LOGO}
-                resizeMode={"center"}
-              />
+              <Image style={styles.logo_image} source={global.ASSETS.LOGO} />
             </View>
             <View style={styles.welcomeView}>
               <Text style={styles.welcomeSignup}>Welcome</Text>

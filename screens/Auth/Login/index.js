@@ -101,11 +101,7 @@ export default class Login extends Component {
           >
             {/* logo image */}
             <>
-              <Image
-                style={styles.logo_image}
-                source={global.ASSETS.LOGO}
-                resizeMode={"center"}
-              />
+              <Image style={styles.logo_image} source={global.ASSETS.LOGO} />
             </>
             {/* social signup button */}
             <>
