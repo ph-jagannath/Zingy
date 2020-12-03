@@ -141,7 +141,7 @@ export default StyleSheet.create({
     shadowRadius: 2.62,
     elevation: 1,
     marginTop: hp(0.5),
-    backgroundColor: global.COLOR.PRIMARY_LIGHT,
+
     width: wp(50),
   },
   standrd: {
@@ -150,12 +150,12 @@ export default StyleSheet.create({
     marginRight: wp(5),
     marginLeft: wp(1),
     fontWeight: "bold",
-    color: global.COLOR.white,
+    // color: global.COLOR.white,
   },
   priceDacwash: {
     // alignSelf: "flex-end",
     // right: 10,
-    color: global.COLOR.white,
+    // color: global.COLOR.white,
     fontSize: wp(3.5),
     marginLeft: wp(1),
     marginVertical: hp(0.5),

@@ -58,11 +58,11 @@ export default class SelectPackage extends Component {
         message: "Please select a package.",
         type: "warning",
       });
-    } else if (remark == "") {
-      showMessage({
-        message: "Please enter additional information.",
-        type: "warning",
-      });
+      // } else if (remark == "") {
+      //   showMessage({
+      //     message: "Please enter additional information.",
+      //     type: "warning",
+      //   });
     } else {
       this.props.navigation.navigate("pay_card");
     }

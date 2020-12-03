@@ -4,5 +4,6 @@
   "dev": true,
   "minify": false,
   "urlRandomness": "st-crj",
-  "https": false
+  "https": false,
+  "scheme": null
 }

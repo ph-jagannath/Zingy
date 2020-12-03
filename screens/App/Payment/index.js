@@ -1,6 +1,12 @@
 import React, { Component } from "react";
-import { Image, Text, ImageBackground, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import {
+  Image,
+  Text,
+  ImageBackground,
+  View,
+  TouchableWithoutFeedback,
+} from "react-native";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import { Icon, Header } from "react-native-elements";
 import styles from "./styles";
 import global from "../../../utils/global";
@@ -19,24 +25,31 @@ export default class Payment extends Component {
       icon: false,
       content: false,
       payment_mode: 1,
+      package_id: "",
     };
   }
 
   validate(p) {
     global.ADD_BOOKING_4_DATA[7] = this.state.payment_mode;
-    if (this.state.payment_mode == 1) {
+    const { payment_mode, package_id } = this.state;
+    if (payment_mode == 1) {
       if (global.ADD_BOOKING_4_DATA[16] == "") {
         api_booking_4_save();
       } else {
         api_booking_2_save();
       }
-    } else if (this.state.payment_mode == 2) {
+    } else if (payment_mode == 2) {
       this.props.navigation.navigate("pay_card");
-      console.log(" card ", global.ADD_BOOKING_4_DATA);
-    } else if (this.state.payment_mode == 3) {
-      global.ADD_BOOKING_4_DATA[9] = p;
-      api_booking_4_save();
-      console.log("package ", global.ADD_BOOKING_4_DATA);
+    } else if (payment_mode == 3) {
+      if (package_id == "") {
+        showMessage({
+          message: "No package selected.",
+          type: "warning",
+        });
+      } else {
+        global.ADD_BOOKING_4_DATA[9] = package_id;
+        api_booking_4_save();
+      }
     }
   }
 
@@ -53,12 +66,15 @@ export default class Payment extends Component {
 
   render() {
     const { navigation } = this.props;
-    const { payment_mode } = this.state;
+    const { payment_mode, package_id } = this.state;
     const p =
       global.MY_PACKAGES.length > 0
         ? global.MY_PACKAGES.filter(
             (p) =>
-              p.UserPackage.user_vehicle_id == global.ADD_BOOKING_4_DATA[0].id
+              p.UserPackage.user_vehicle_id ==
+                global.ADD_BOOKING_4_DATA[0].id &&
+              (p.UserPackage.no_of_interior_wash != 0 ||
+                p.UserPackage.no_of_exterior_wash != 0)
           )
         : global.MY_PACKAGES;
     return (
@@ -154,22 +170,66 @@ export default class Payment extends Component {
                 <Text style={styles.cardText}>{t("payment_package")}</Text>
               </TouchableOpacity>
             )}
-            <View>
-              {p.length > 0 && payment_mode == 3 && (
-                <View style={styles.touchAppClrView}>
-                  <Text style={styles.standrd}>
-                    {p[0].Package.monthly_yearly} {p[0].Package.name}
-                  </Text>
-                  {/* cost */}
-                  <Text style={styles.priceDacwash}>
-                    {p[0].UserPackage.no_of_exterior_wash} X Exterior Wash
-                  </Text>
-                  <Text style={styles.priceDacwash}>
-                    {p[0].UserPackage.no_of_interior_wash} X Interior Wash
-                  </Text>
-                </View>
-              )}
-            </View>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+              {p.length > 0 &&
+                payment_mode == 3 &&
+                p.map((e) => (
+                  <TouchableWithoutFeedback
+                    onPress={() => {
+                      this.setState({
+                        package_id: e.UserPackage.id,
+                      });
+                    }}
+                  >
+                    <View
+                      style={[
+                        styles.touchAppClrView,
+                        {
+                          backgroundColor:
+                            package_id == e.UserPackage.id
+                              ? global.COLOR.PRIMARY_LIGHT
+                              : "#fff",
+                        },
+                      ]}
+                    >
+                      <Text
+                        style={[
+                          styles.standrd,
+                          {
+                            color:
+                              package_id == e.UserPackage.id ? "#fff" : "#000",
+                          },
+                        ]}
+                      >
+                        {e.Package.monthly_yearly} {e.Package.name}
+                      </Text>
+                      {/* cost */}
+                      <Text
+                        style={[
+                          styles.priceDacwash,
+                          {
+                            color:
+                              package_id == e.UserPackage.id ? "#fff" : "#000",
+                          },
+                        ]}
+                      >
+                        {e.UserPackage.no_of_exterior_wash} X Exterior Wash
+                      </Text>
+                      <Text
+                        style={[
+                          styles.priceDacwash,
+                          {
+                            color:
+                              package_id == e.UserPackage.id ? "#fff" : "#000",
+                          },
+                        ]}
+                      >
+                        {e.UserPackage.no_of_interior_wash} X Interior Wash
+                      </Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+                ))}
+            </ScrollView>
           </View>
         </View>
         <View style={styles.roundViewPayment}>
@@ -187,9 +247,7 @@ export default class Payment extends Component {
           <Text style={styles.allPrice}>{t("payment_priceInclude")}</Text>
           <TouchableOpacity
             style={styles.add_button}
-            onPress={() =>
-              this.validate(p.length > 0 ? p[0].UserPackage.id : "")
-            }
+            onPress={() => this.validate()}
           >
             <Text style={styles.add_button_Text}>{t("payment_pNow")}</Text>
           </TouchableOpacity>
