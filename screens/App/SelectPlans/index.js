@@ -117,7 +117,7 @@ export default class SelectPlans extends Component {
   validate(t) {
     const { selected_plan, address, lat, lng } = this.state;
     const { navigation } = this.props;
-    if (global.NEARBY_SP.length == 0) {
+    if (t == 1 && global.NEARBY_SP.length == 0) {
       showMessage({
         message: "No Nearby Service Provider Available.",
         type: "danger",
