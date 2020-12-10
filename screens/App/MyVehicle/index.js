@@ -130,7 +130,6 @@ export default class MyVehicle extends Component {
                     >
                       <Image
                         source={global.ASSETS.DELETE}
-                        resizeMode={"center"}
                         style={styles.deleteIcon}
                       />
                     </TouchableOpacity>
