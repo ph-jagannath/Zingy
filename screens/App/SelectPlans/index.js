@@ -119,7 +119,8 @@ export default class SelectPlans extends Component {
     const { navigation } = this.props;
     if (t == 1 && global.NEARBY_SP.length == 0) {
       showMessage({
-        message: "No Nearby Service Provider Available.",
+        message:
+          "Our washers are not available at the moment or are busy in other washes ....",
         type: "danger",
       });
     } else if (selected_plan == "") {
