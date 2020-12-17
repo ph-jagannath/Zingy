@@ -69,7 +69,7 @@ export default class Contact extends Component {
               <Image
                 source={global.ASSETS.FB}
                 style={styles.imgContact}
-                resizeMode={"center"}
+                // resizeMode={"center"}
               />
             </TouchableOpacity>
             <Text style={styles.numberContact}>Facebook</Text>
@@ -82,7 +82,7 @@ export default class Contact extends Component {
               <Image
                 source={global.ASSETS.INSTA}
                 style={styles.imgContact}
-                resizeMode={"center"}
+                // resizeMode={"center"}
               />
             </TouchableOpacity>
             <Text style={styles.numberContact}>Instagram</Text>
@@ -95,7 +95,7 @@ export default class Contact extends Component {
               <Image
                 source={global.ASSETS.EMAIL}
                 style={styles.imgContact}
-                resizeMode={"center"}
+                // resizeMode={"center"}
               />
             </TouchableOpacity>
             <Text style={styles.numberContact}>info@DacWash.com</Text>

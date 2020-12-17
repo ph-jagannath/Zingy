@@ -67,6 +67,7 @@ export default StyleSheet.create({
     height: hp(6),
     width: wp(6),
     tintColor: global.COLOR.PRIMARY_LIGHT,
+    resizeMode: "contain",
   },
   numberContact: {
     alignSelf: "center",
