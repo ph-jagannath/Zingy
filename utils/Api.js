@@ -175,12 +175,16 @@ export async function helper_my_location() {
   if (status == "granted") {
     Loading.show();
     try {
-      let location = await Location.getCurrentPositionAsync();
+      let location = await Location.getCurrentPositionAsync({
+        accuracy: Location.Accuracy.Highest,
+        enableHighAccuracy: true,
+      });
       global.CONSTANT.LAT = location.coords.latitude;
       global.CONSTANT.LNG = location.coords.longitude;
       Loading.hide();
       return global.CONSTANT;
     } catch (e) {
+      console.log("Location", e);
       Loading.hide();
       showMessage({
         message: "Permission to access location was denied.",

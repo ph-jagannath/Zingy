@@ -234,6 +234,7 @@ export default StyleSheet.create({
   },
   list_empty_text: {
     fontSize: wp(4),
+    width: wp(85),
     color: global.COLOR.PRIMARY_DARK,
   },
   add_location_container: {

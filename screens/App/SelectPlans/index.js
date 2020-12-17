@@ -383,7 +383,9 @@ export default class SelectPlans extends Component {
                 ListEmptyComponent={
                   <View style={styles.list_empty_container}>
                     <Text style={styles.list_empty_text}>
-                      No Plans Found. Try changing the location.
+                      {package_avail
+                        ? "No Plans Found. Try changing the location."
+                        : "Dacwash services are not available in this area, we will cover it soon."}
                     </Text>
                   </View>
                 }

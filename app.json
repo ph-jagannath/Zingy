@@ -2,7 +2,7 @@
   "expo": {
     "name": "Dacwash",
     "slug": "Dacwash",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -16,10 +16,10 @@
     "assetBundlePatterns": ["**/*"],
     "facebookAppId": "684971658901113",
     "facebookDisplayName": "DacWash",
-    "facebookScheme": "fb570696010280160",
+
     "ios": {
       "bundleIdentifier": "com.app.dacwash.customer",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "infoPlist": {
         "UIUserInterfaceStyle": "Light",
         "LSApplicationQueriesSchemes": ["comgooglemaps"],
