@@ -18,7 +18,7 @@ export default class Forgot extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
+      email: "Rachitsharma2203@gmail.com",
     };
   }
 

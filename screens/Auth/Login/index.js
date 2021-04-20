@@ -17,13 +17,16 @@ import jwtDecode from "jwt-decode";
 import { showMessage } from "react-native-flash-message";
 import { TextInput } from "react-native-paper";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import CountryPicker from "react-native-country-picker-modal";
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: "",
       password: "",
       isLoading: false,
+      country: "IT",
+      country_code: "39",
+      phoneNumber: "",
     };
   }
   componentDidMount() {
@@ -58,35 +61,16 @@ export default class Login extends Component {
 
   // Validate
   validate = () => {
-    if (this.state.email.trim() == "") {
+    if (this.state.phoneNumber.trim() == "") {
       showMessage({
-        message: "Please enter e-mail address.",
+        message: "Please enter your phonr number.",
         type: "warning",
       });
-    } else if (
-      !this.state.email.match(/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/)
-    ) {
-      showMessage({
-        message: "Invalid e-mail address.",
-        type: "warning",
-      });
-    } else if (this.state.password.trim() == "") {
-      showMessage({
-        message: "Please enter password.",
-        type: "warning",
-      });
-    } else if (this.state.password.length < 6) {
-      showMessage({
-        message: "Password field should not be less than 6 characters.",
-        type: "warning",
-      });
-    } else {
-      api_login(this.state);
     }
   };
 
   render() {
-    const { email, password } = this.state;
+    const { email, password, country, country_code, phoneNumber } = this.state;
     return (
       <ImageBackground source={global.ASSETS.BGIMAGE} style={styles.container}>
         <Header
@@ -167,41 +151,48 @@ export default class Login extends Component {
               </View>
             </>
 
-            <Text style={styles.already}>
+            {/* <Text style={styles.already}>
               Already a user? Enter your registered email & password below.
-            </Text>
+            </Text> */}
 
-            {/* email */}
+            {/* number */}
             <View style={styles.nameView}>
-              <Image
-                source={global.ASSETS.EMAIL}
-                style={styles.sideIcon}
-                resizeMode={"contain"}
+              <CountryPicker
+                countryCode={country}
+                withFilter
+                withFlag
+                withFlagButton
+                withCallingCode
+                withCallingCodeButton
+                withAlphaFilter
+                onSelect={(c) => {
+                  this.setState({
+                    country_code: c.callingCode[0],
+                    country: c.cca2,
+                  });
+                }}
               />
               <TextInput
                 style={styles.nameInputSignup}
-                textContentType="emailAddress"
-                keyboardType="email-address"
-                label="Email"
                 ref={(ref) => {
-                  this.email = ref;
+                  this.phone_input = ref;
                 }}
-                onSubmitEditing={() => {
-                  this.password.focus();
-                }}
-                returnKeyType={"next"}
+                onSubmitEditing={() => this.pass_input.focus()}
                 selectionColor={global.COLOR.PRIMARY_LIGHT}
                 theme={{
                   colors: { primary: global.COLOR.PRIMARY_DARK },
                 }}
                 underlineColor="transparent"
-                value={email}
-                onChangeText={(email) => this.setState({ email })}
+                label="Phone Number"
+                value={phoneNumber}
+                onChangeText={(phoneNumber) => this.setState({ phoneNumber })}
+                // maxLength={9}
+                returnKeyType={"next"}
+                keyboardType={"number-pad"}
               />
             </View>
-
             {/* pass */}
-            <View style={styles.nameView}>
+            {/* <View style={styles.nameView}>
               <Image
                 source={global.ASSETS.LOCK}
                 style={styles.sideIcon}
@@ -226,7 +217,7 @@ export default class Login extends Component {
                 value={password}
                 onChangeText={(v) => this.setState({ password: v })}
               />
-            </View>
+            </View> */}
 
             {/* forgot password  */}
             <>
@@ -245,7 +236,7 @@ export default class Login extends Component {
               style={styles.login_button}
               onPress={() => this.validate()}
             >
-              <Text style={styles.loginText}>Log In</Text>
+              <Text style={styles.loginText}>GET OTP</Text>
             </TouchableOpacity>
             <View style={styles.dontAcView}>
               <Text style={styles.dontAccount}>

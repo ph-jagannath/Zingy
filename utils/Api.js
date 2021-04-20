@@ -207,35 +207,35 @@ export async function helper_my_location() {
  */
 
 // login api
-export async function api_login(d) {
-  Loading.show();
-  Axios({
-    method: "post",
-    url: "login",
-    data: {
-      email: d.email,
-      password: d.password,
-      device_id: global.CONSTANT.DEVICETOKEN,
-      device_type: global.CONSTANT.DEVICETYPE,
-    },
-    validateStatus: () => {
-      return true;
-    },
-  }).then(
-    function (response) {
-      if (response.data.response.status) {
-        StoreToken(response.data.response.data[0].user_id);
-        GetToken(response.data.response.data[0]);
-      } else {
-        Loading.hide();
-        showMessage({
-          message: response.data.response.message,
-          type: "danger",
-        });
-      }
-    }.bind(this)
-  );
-}
+// export async function api_login(d) {
+//   Loading.show();
+//   Axios({
+//     method: "post",
+//     url: "login",
+//     data: {
+//       email: d.email,
+//       password: d.password,
+//       device_id: global.CONSTANT.DEVICETOKEN,
+//       device_type: global.CONSTANT.DEVICETYPE,
+//     },
+//     validateStatus: () => {
+//       return true;
+//     },
+//   }).then(
+//     function (response) {
+//       if (response.data.response.status) {
+//         StoreToken(response.data.response.data[0].user_id);
+//         GetToken(response.data.response.data[0]);
+//       } else {
+//         Loading.hide();
+//         showMessage({
+//           message: response.data.response.message,
+//           type: "danger",
+//         });
+//       }
+//     }.bind(this)
+//   );
+// }
 
 // signup api
 export async function api_register(d) {
@@ -416,7 +416,7 @@ export async function api_logout() {
 }
 
 /**
- * Get USer Vehicles
+ * Get USer Vehicles  ---not done
  */
 
 export async function api_get_vehicle() {
@@ -477,7 +477,7 @@ export async function api_get_make() {
 }
 
 /**
- * Add new vehicle
+ * Add new vehicle  ---not done
  */
 
 export async function api_add_vehicle() {
@@ -530,7 +530,7 @@ export async function api_add_vehicle() {
 }
 
 /**
- * Edit vehicle
+ * Edit vehicle   ----not done
  */
 
 export async function api_edit_vehicle(d) {

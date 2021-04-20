@@ -3,7 +3,8 @@
   "lanType": "ip",
   "dev": true,
   "minify": false,
-  "urlRandomness": "st-crj",
+  "urlRandomness": "ru-s4n",
   "https": false,
-  "scheme": null
+  "scheme": null,
+  "devClient": false
 }

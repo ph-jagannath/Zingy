@@ -98,7 +98,7 @@ export default class Contact extends Component {
                 // resizeMode={"center"}
               />
             </TouchableOpacity>
-            <Text style={styles.numberContact}>info@DacWash.com</Text>
+            <Text style={styles.numberContact}>info@Zingy.com</Text>
           </View>
         </ScrollView>
       </View>

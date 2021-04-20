@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Dacwash",
-    "slug": "Dacwash",
+    "name": "Zingy",
+    "slug": "Zingy",
     "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -40,7 +40,7 @@
       "googleServicesFile": "./GoogleService-Info.plist"
     },
     "web": {
-      "favicon": "./assets/icon.png"
+      "favicon": "./assets/LOGO.png"
     },
     "android": {
       "package": "com.app.dacwash.customer",
@@ -53,14 +53,14 @@
       "googleServicesFile": "./google-services.json"
     },
     "notification": {
-      "icon": "./assets/noti_icon.png",
-      "color": "#006937",
+      "icon": "./assets/icon.png",
+      "color": "#0E94DC",
       "iosDisplayInForeground": true,
       "androidMode": "default"
     },
     "androidNavigationBar": {
       "barStyle": "dark-content",
-      "backgroundColor": "#6ABC45"
+      "backgroundColor": "#0E94DC"
     }
   }
 }
